@@ -8,13 +8,8 @@ const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateRouter authentication={false} />}>
-          <Route path="/" element={<Login />} />
-        </Route>
-
-        <Route element={<PrivateRouter authentication={true} />}>
-          <Route path="*" element={<MainLayoutRoutes />} />
-        </Route>
+        <Route path="/" element={<Login />} />
+        <Route path="*" element={<MainLayoutRoutes />} />
       </Routes>
     </BrowserRouter>
   )
