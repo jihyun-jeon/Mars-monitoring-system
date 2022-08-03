@@ -1,0 +1,8 @@
+.page {
+  color: skyblue;
+}
+
+[disabled] {
+  cursor: revert;
+  transform: revert;
+}

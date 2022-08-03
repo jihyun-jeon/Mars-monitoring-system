@@ -1,5 +1,7 @@
+import List from '../list/List'
+
 const DeviceList = () => {
-  return <div>Device List</div>
+  return <List />
 }
 
 export default DeviceList

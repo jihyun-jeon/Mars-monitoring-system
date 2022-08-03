@@ -1,0 +1,250 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "company": "AAE",
+      "equipmentId": 6,
+      "equipmentType": "welding machine",
+      "device": [
+        {
+          "statusId": 2,
+          "status": "Power off"
+        }
+      ],
+      "isPower": false,
+      "originalId": "eq-1234",
+      "driver": [
+        {
+          "name": "Luca"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "company": "AAE",
+      "equipmentId": 6,
+      "equipmentType": "welding machine",
+      "device": [
+        {
+          "statusId": 2,
+          "status": "Power off"
+        }
+      ],
+      "isPower": true,
+      "originalId": "eq-1235",
+      "driver": [
+        {
+          "name": "Jayden"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "company": "AAE",
+      "equipmentId": 5,
+      "equipmentType": "Conveyor belt",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1236",
+      "driver": [
+        {
+          "name": "River"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "company": "AAE",
+      "equipmentId": 5,
+      "equipmentType": "Conveyor belt",
+      "device": [
+        {
+          "statusId": 2,
+          "status": "Power off"
+        }
+      ],
+      "isPower": true,
+      "originalId": "eq-1237",
+      "driver": [
+        {
+          "name": "Alex"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "company": "AAE",
+      "equipmentId": 4,
+      "equipmentType": "Scissors lift",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1238",
+      "driver": []
+    },
+    {
+      "id": 6,
+      "company": "AAE",
+      "equipmentId": 4,
+      "equipmentType": "Scissors lift",
+      "device": [
+        {
+          "statusId": 1,
+          "status": "Power on"
+        }
+      ],
+      "isPower": true,
+      "originalId": "eq-1239",
+      "driver": []
+    },
+    {
+      "id": 7,
+      "company": "AAE",
+      "equipmentId": 2,
+      "equipmentType": "Verti boring machine",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1240",
+      "driver": []
+    },
+    {
+      "id": 8,
+      "company": "AAE",
+      "equipmentId": 2,
+      "equipmentType": "Verti boring machine",
+      "device": [],
+      "isPower": true,
+      "originalId": "eq-1241",
+      "driver": []
+    },
+    {
+      "id": 9,
+      "company": "AAE",
+      "equipmentId": 6,
+      "equipmentType": "welding machine",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1242",
+      "driver": []
+    },
+    {
+      "id": 10,
+      "company": "AAE",
+      "equipmentId": 6,
+      "equipmentType": "welding machine",
+      "device": [],
+      "isPower": true,
+      "originalId": "eq-1243",
+      "driver": []
+    },
+    {
+      "id": 11,
+      "company": "SECL",
+      "equipmentId": 5,
+      "equipmentType": "Conveyor belt",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1244",
+      "driver": []
+    },
+    {
+      "id": 12,
+      "company": "SECL",
+      "equipmentId": 5,
+      "equipmentType": "Conveyor belt",
+      "device": [],
+      "isPower": true,
+      "originalId": "eq-1245",
+      "driver": []
+    },
+    {
+      "id": 13,
+      "company": "SECL",
+      "equipmentId": 4,
+      "equipmentType": "Scissors lift",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1246",
+      "driver": []
+    },
+    {
+      "id": 14,
+      "company": "SECL",
+      "equipmentId": 4,
+      "equipmentType": "Scissors lift",
+      "device": [],
+      "isPower": true,
+      "originalId": "eq-1247",
+      "driver": []
+    },
+    {
+      "id": 15,
+      "company": "SECL",
+      "equipmentId": 2,
+      "equipmentType": "Verti boring machine",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1248",
+      "driver": []
+    },
+    {
+      "id": 16,
+      "company": "SECL",
+      "equipmentId": 2,
+      "equipmentType": "Verti boring machine",
+      "device": [],
+      "isPower": true,
+      "originalId": "eq-1249",
+      "driver": []
+    },
+    {
+      "id": 17,
+      "company": "SECL",
+      "equipmentId": 6,
+      "equipmentType": "welding machine",
+      "device": [
+        {
+          "statusId": 1,
+          "status": "Power on"
+        }
+      ],
+      "isPower": false,
+      "originalId": "eq-1250",
+      "driver": []
+    },
+    {
+      "id": 18,
+      "company": "SECL",
+      "equipmentId": 6,
+      "equipmentType": "welding machine",
+      "device": [],
+      "isPower": true,
+      "originalId": "eq-1251",
+      "driver": []
+    },
+    {
+      "id": 19,
+      "company": "SECL",
+      "equipmentId": 5,
+      "equipmentType": "Conveyor belt",
+      "device": [],
+      "isPower": false,
+      "originalId": "eq-1252",
+      "driver": []
+    },
+    {
+      "id": 20,
+      "company": "SECL",
+      "equipmentId": 5,
+      "equipmentType": "Conveyor belt",
+      "device": [
+        {
+          "statusId": 2,
+          "status": "Power off"
+        }
+      ],
+      "isPower": true,
+      "originalId": "eq-1253",
+      "driver": []
+    }
+  ]
+}

@@ -13,7 +13,7 @@ import Home from './pages/home/Home'
 const MainLayoutRoutes = () => {
   return (
     <>
-      <div className="flex">
+      <div className="flex h-screen">
         <SideNav />
         <div className="flex w-full flex-col">
           <TopNav />

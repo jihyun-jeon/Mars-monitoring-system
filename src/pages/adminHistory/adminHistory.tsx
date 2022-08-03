@@ -1,5 +1,7 @@
+import List from '../list/List'
+
 const AdminHistory = () => {
-  return <div>AdminHistory</div>
+  return <List />
 }
 
 export default AdminHistory
