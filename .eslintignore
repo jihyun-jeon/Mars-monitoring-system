@@ -1,3 +1,6 @@
 src/graphql/**
+<<<<<<< HEAD
 postcss.config.js
+=======
+>>>>>>> 1055a80... s
 tailwind.config.js
