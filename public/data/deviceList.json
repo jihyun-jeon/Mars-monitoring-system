@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [
+        {
+          "matchedEquipmentId": "eq-9879",
+          "matchedEquipmentCategory": "Boring machine"
+        }
+      ],
+      "status": false
+    },
+    {
+      "id": 2,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [
+        {
+          "matchedEquipmentId": "eq-9878",
+          "matchedEquipmentCategory": "Boring machine"
+        }
+      ],
+      "status": false
+    },
+    {
+      "id": 3,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    },
+    {
+      "id": 4,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    },
+    {
+      "id": 5,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    },
+    {
+      "id": 6,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    },
+    {
+      "id": 7,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    },
+    {
+      "id": 8,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    },
+    {
+      "id": 9,
+      "serialNumber": "",
+      "deviceCategory": "Device",
+      "company": "AAE",
+      "matchedEquipment": [],
+      "status": false
+    }
+  ]
+}
