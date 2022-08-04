@@ -17,6 +17,7 @@ const MainLayoutRoutes = () => {
         <SideNav />
         <div className="flex w-full flex-col">
           <TopNav />
+          {/* <div className="px-8 pt-10"> */}
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/equipmentList" element={<EquipmentList />} />
@@ -26,6 +27,7 @@ const MainLayoutRoutes = () => {
             <Route path="/adminMapping" element={<AdminMapping />} />
             <Route path="/adminHistory" element={<AdminHistory />} />
           </Routes>
+          {/* </div> */}
         </div>
       </div>
     </>
