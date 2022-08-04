@@ -1,6 +1,5 @@
-import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
 
 import useStore from '../../useStore'
@@ -13,19 +12,16 @@ const List = observer(() => {
   const location = useLocation()
   const pathName = location.pathname.slice(1)
 
-  const { listDatas } = useStore()
-  const { isLoading } = listDatas
+  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    console.log(toJS(listDatas.equipmentListData))
-  }, [])
+  console.log(isLoading)
 
-  if (isLoading) return <div>Loading...</div>
+  // if (isLoading) return <div>Loading...</div>
 
   return (
     <div className="listWrapper h-screen overflow-y-scroll bg-bgDefault">
-      <NestingFilter pathName={pathName} />
-      <ListBoard pathName={pathName} />
+      <NestingFilter pathName={pathName} setIsLoading={setIsLoading} />
+      <ListBoard pathName={pathName} isLoading={isLoading} />
     </div>
   )
 })
