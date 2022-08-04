@@ -10,9 +10,10 @@ import Pagination from '../pagination/Pagination'
 
 type Props = {
   pathName: string
+  isLoading: boolean
 }
 
-const ListBoard = observer(({ pathName }: Props) => {
+const ListBoard = observer(({ pathName, isLoading }: Props) => {
   const pathCheckerOptionData: any = () => {
     switch (pathName) {
       case 'equipmentList':
@@ -87,12 +88,11 @@ const ListBoard = observer(({ pathName }: Props) => {
     }
   }
 
-  if (pathCheckerOptionData() === undefined) return <div>Loading...</div>
+  if (isLoading) return <div>Loading...</div>
 
   return (
     <>
-      <div>{pathCheckerOptionData()?.results[0].company}</div>
-      {/* <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Equipment(${
+      <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Equipment(${
         pathCheckerOptionData().results.length
       }EA)`}</h2>
       <table className="mb-8 table-auto border-collapse">
@@ -147,7 +147,7 @@ const ListBoard = observer(({ pathName }: Props) => {
           setPage={setPage}
           setLimit={setLimit}
         />
-      </div> */}
+      </div>
     </>
   )
 })

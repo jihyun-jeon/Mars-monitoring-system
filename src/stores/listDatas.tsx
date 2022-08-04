@@ -34,8 +34,8 @@ const listDatas = observable({
     return (this._adminHistoryListData = value)
   },
 
-  setIsLoading(value: boolean) {
-    return (this._isLoading = value)
+  setIsLoading() {
+    return !this._isLoading
   },
 })
 

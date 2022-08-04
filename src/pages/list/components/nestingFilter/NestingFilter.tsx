@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
 import {
   EQUIPMENT_LIST_ADDRESS,
@@ -15,9 +15,10 @@ import equipmentOptionData from '../data/equipmentOptionData'
 
 type Props = {
   pathName: string
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
-const NestingFilter = observer(({ pathName }: Props) => {
+const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
   const pathCheckerOptionData: any = () => {
     switch (pathName) {
       case 'equipmentList':
@@ -99,6 +100,7 @@ const NestingFilter = observer(({ pathName }: Props) => {
           listDatas.setAdminHistoryData(response.data)
           break
       }
+      setIsLoading(false)
     } catch (err) {
       alert(err)
     }
