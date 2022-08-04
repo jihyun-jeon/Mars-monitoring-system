@@ -3,7 +3,7 @@ import { observable } from 'mobx'
 const usersInfo = observable({
   _userName: '',
   _isLocationControl: false,
-  _isEquipmentControl: false,
+  _isEquipmentControl: true,
 
   get userName() {
     return this._userName

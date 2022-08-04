@@ -76,18 +76,6 @@ const DetailNav = observer(({ isArrowToggle, handleArrowToggle }: Props) => {
                     List
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    to="/equipmentTrand"
-                    className={({ isActive }) =>
-                      isActive
-                        ? 'activeDetailNavLink'
-                        : 'flex w-full cursor-pointer items-center rounded-lg p-2 pl-11 text-base font-normal text-white transition duration-75 hover:bg-[#ffffff1a]'
-                    }
-                  >
-                    Trand
-                  </NavLink>
-                </li>
               </ul>
             )}
           </li>
