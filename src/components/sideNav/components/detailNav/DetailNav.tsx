@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react'
 import { AiFillAppstore } from 'react-icons/ai'
 import { GiMineTruck } from 'react-icons/gi'
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft } from 'react-icons/md'
@@ -6,16 +7,20 @@ import { VscTools } from 'react-icons/vsc'
 import { NavLink } from 'react-router-dom'
 
 import { useToggle } from '../../../../hooks/useHandleToggle'
+import useStore from '../../../../useStore'
 
 type Props = {
   isArrowToggle: boolean
   handleArrowToggle: () => void
 }
 
-const DetailNav = ({ isArrowToggle, handleArrowToggle }: Props) => {
+const DetailNav = observer(({ isArrowToggle, handleArrowToggle }: Props) => {
   const [isEquipmentDropDown, handleEquipmentDropDown] = useToggle(false)
   const [isDeviceDropDown, handleDeviceDropDown] = useToggle(false)
   const [isAdminDropDown, handleAdminDropDown] = useToggle(false)
+
+  const { usersInfo } = useStore()
+  const { isEquipmentControl } = usersInfo
 
   return (
     <aside className="mr-4 h-screen w-64">
@@ -104,7 +109,7 @@ const DetailNav = ({ isArrowToggle, handleArrowToggle }: Props) => {
               <ul className="space-y-2 py-2">
                 <li>
                   <NavLink
-                    to="/DeviceList"
+                    to="/deviceList"
                     className={({ isActive }) =>
                       isActive
                         ? 'activeDetailNavLink'
@@ -118,23 +123,25 @@ const DetailNav = ({ isArrowToggle, handleArrowToggle }: Props) => {
             )}
           </li>
           <li>
-            <button
-              onClick={handleAdminDropDown}
-              type="button"
-              className="group relative flex w-full items-center rounded-lg p-2 text-base font-normal text-bgPaper transition duration-75 hover:bg-[#ffffff1a] "
-            >
-              <VscTools className="text-2xl" />
-              <span className="ml-3 flex-1 whitespace-nowrap text-left">Admin</span>
-              {isAdminDropDown ? (
-                <MdOutlineKeyboardArrowDown className="absolute -top-3 right-5 translate-x-1/2 translate-y-1/2 text-3xl" />
-              ) : (
-                <MdOutlineKeyboardArrowDown className="absolute -top-3 right-5 translate-x-1/2 translate-y-1/2 rotate-180 text-3xl" />
-              )}
-            </button>
+            {isEquipmentControl && (
+              <button
+                onClick={handleAdminDropDown}
+                type="button"
+                className="group relative flex w-full items-center rounded-lg p-2 text-base font-normal text-bgPaper transition duration-75 hover:bg-[#ffffff1a] "
+              >
+                <VscTools className="text-2xl" />
+                <span className="ml-3 flex-1 whitespace-nowrap text-left">Admin</span>
+                {isAdminDropDown ? (
+                  <MdOutlineKeyboardArrowDown className="absolute -top-3 right-5 translate-x-1/2 translate-y-1/2 text-3xl" />
+                ) : (
+                  <MdOutlineKeyboardArrowDown className="absolute -top-3 right-5 translate-x-1/2 translate-y-1/2 rotate-180 text-3xl" />
+                )}
+              </button>
+            )}
             {isAdminDropDown && (
               <ul className="space-y-2 py-2">
                 <NavLink
-                  to="/AdminMapping"
+                  to="/adminMapping"
                   className={({ isActive }) =>
                     isActive
                       ? 'activeDetailNavLink'
@@ -145,7 +152,7 @@ const DetailNav = ({ isArrowToggle, handleArrowToggle }: Props) => {
                 </NavLink>
                 <li>
                   <NavLink
-                    to="/AdminHistory"
+                    to="/adminHistory"
                     className={({ isActive }) =>
                       isActive
                         ? 'activeDetailNavLink'
@@ -162,6 +169,6 @@ const DetailNav = ({ isArrowToggle, handleArrowToggle }: Props) => {
       </div>
     </aside>
   )
-}
+})
 
 export default DetailNav
