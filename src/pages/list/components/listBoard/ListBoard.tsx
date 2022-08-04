@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { EQUIPMENT_LIST_ADDRESS } from '../../../../config'
 import { useToggle } from '../../../../hooks/useHandleToggle'
@@ -14,17 +14,6 @@ type Props = {
 }
 
 const ListBoard = observer(({ pathName, isLoading }: Props) => {
-  const pathCheckerOptionData: any = () => {
-    switch (pathName) {
-      case 'equipmentList':
-        return equipmentData
-      case 'deviceList':
-        return deviceData
-      case 'adminHistory':
-        return adminHistoryData
-    }
-  }
-
   const { usersInfo, listDatas } = useStore()
   const { isEquipmentControl } = usersInfo
   const { equipmentListData, deviceListData, adminHistoryListData } = listDatas
@@ -36,6 +25,17 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
   }
 
   const { equipmentData, deviceData, adminHistoryData } = renderData
+
+  const pathCheckerOptionData: any = () => {
+    switch (pathName) {
+      case 'equipmentList':
+        return equipmentData
+      case 'deviceList':
+        return deviceData
+      case 'adminHistory':
+        return adminHistoryData
+    }
+  }
 
   const [isModalToggle, handleModalToggled] = useToggle(false)
 
@@ -92,7 +92,11 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
 
   return (
     <>
+<<<<<<< HEAD
       <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Equipment(${
+=======
+      <h2 className="mb-2 text-2xl font-semibold text-black">{`Search ${pathName.slice(0, -4)}(${
+>>>>>>> 456bf61 (FIX: 경로에 따라 리스트가 보이도록)
         pathCheckerOptionData().results.length
       }EA)`}</h2>
       <table className="mb-8 table-auto border-collapse">
@@ -122,11 +126,28 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                     />
                   )}
                 </td>
-                <td className="py-1.5 text-center">{data.equipmentType}</td>
-                <td className="py-1.5 text-center">{data.device[0]?.status}</td>
-                <td className="py-1.5 text-center">{data.isPower}</td>
-                <td className="py-1.5 text-center">{data.originalId}</td>
-                <td className="py-1.5 text-center">{data.driver[0]?.name}</td>
+                {pathName === 'equipmentList' && (
+                  <>
+                    <td className="py-1.5 text-center">{data.equipmentType}</td>
+                    <td className="py-1.5 text-center">{data.device[0]?.status}</td>
+                    <td className="py-1.5 text-center">{data.isPower}</td>
+                    <td className="py-1.5 text-center">{data.originalId}</td>
+                    <td className="py-1.5 text-center">{data.driver[0]?.name}</td>
+                  </>
+                )}
+                {pathName === 'deviceList' && (
+                  <>
+                    <td className="py-1.5 text-center">{data.company}</td>
+                    <td className="py-1.5 text-center">
+                      {data.matchedEquipment[0]?.matchedEquipmentId}
+                    </td>
+                    <td className="py-1.5 text-center">{data.serialNumber}</td>
+                    <td className="py-1.5 text-center">{data.deviceCategory}</td>
+                    <td className="py-1.5 text-center">
+                      {data.matchedEquipment[0]?.matchedEquipmentCategory}
+                    </td>
+                  </>
+                )}
               </tr>
             </tbody>
           ))}
