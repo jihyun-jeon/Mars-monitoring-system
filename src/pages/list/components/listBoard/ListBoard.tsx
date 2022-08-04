@@ -92,11 +92,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Equipment(${
-=======
       <h2 className="mb-2 text-2xl font-semibold text-black">{`Search ${pathName.slice(0, -4)}(${
->>>>>>> 456bf61 (FIX: 경로에 따라 리스트가 보이도록)
         pathCheckerOptionData().results.length
       }EA)`}</h2>
       <table className="mb-8 table-auto border-collapse">

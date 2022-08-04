@@ -1,9 +1,5 @@
 import { observer } from 'mobx-react'
-<<<<<<< HEAD
-import { useState, useEffect } from 'react'
-=======
 import { useState } from 'react'
->>>>>>> 456bf61 (FIX: 경로에 따라 리스트가 보이도록)
 import { useLocation } from 'react-router'
 
 import ListBoard from './components/listBoard/ListBoard'
