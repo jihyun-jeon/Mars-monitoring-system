@@ -15,10 +15,10 @@ const Toast = ({ toastMessage, setToastMessage }: messageType) => {
         if (divEl.current) {
           divEl.current.classList.add('opacity-25')
         }
-      }, 1000)
+      }, 2000)
       setTimeout(() => {
         setToastMessage([])
-      }, 1100)
+      }, 2100)
     }
   }, [toastMessage])
 

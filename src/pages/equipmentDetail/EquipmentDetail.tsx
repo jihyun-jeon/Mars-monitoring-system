@@ -1,19 +1,34 @@
+import { useLoadScript } from '@react-google-maps/api'
 import { toJS } from 'mobx'
-import { Observer, observer } from 'mobx-react'
-import { useEffect, useState } from 'react'
+import { Observer } from 'mobx-react'
+import { useEffect, useState, useMemo } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 import { CgTrash } from 'react-icons/cg'
 import { Link } from 'react-router-dom'
 
+import GoogleMap_ from '../../../src/components/googleMap/GoogleMap_'
 import Modal from '../../components/modal/modal'
 import useStore from '../../useStore'
 import EquipEdit from './components/EquipEdit'
 import EquipLogAdd from './components/EquipLogAdd'
 
+const mapData = [
+  { lat: 33.440689, lng: 126.920708, name: 'welding', active: true, error: true },
+  { lat: 33.349512, lng: 126.611391, name: 'dump', active: false, error: false },
+  { lat: 33.494913, lng: 126.897931, name: 'conveyer', active: true, error: true }, //
+  { lat: 33.242565, lng: 126.553494, name: 'crain', active: true, error: false },
+  { lat: 33.476915, lng: 126.805685, name: 'welding', active: false, error: false },
+  { lat: 33.338557, lng: 126.459511, name: 'dump', active: true, error: true },
+  { lat: 33.462374, lng: 126.742381, name: 'conveyer', active: true, error: false },
+  { lat: 33.246541, lng: 126.401018, name: 'crain', active: false, error: false }, //
+]
+
 const EquipmentDetail = () => {
   const [equipmentData, setEquipmentData] = useState({})
   const [onModal, setOnModal] = useState({ clicked: false, content: '' })
   const [tapClicked, setTapClicked] = useState(true)
+
+  const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
 
   const { usersInfo } = useStore()
 
@@ -23,10 +38,14 @@ const EquipmentDetail = () => {
       .then((result) => setEquipmentData(result))
   }, [])
 
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyA-14N8FNLXVKB9NeF1eSnYYq8pItkBUaI',
+  })
+
   return (
     <Observer>
       {() => (
-        <div className="h-screen w-full overflow-scroll p-10">
+        <div className="h-screen w-full overflow-scroll px-10 pt-5">
           <div>
             <p className="mb-3 flex">
               <button
@@ -41,13 +60,29 @@ const EquipmentDetail = () => {
             </p>
             <div className="flex justify-between">
               <img src="/public/imgs/equip.png" className="h-90 w-[33%] rounded-xl" />
-              <img src="/public/imgs/mapImg.png" className="h-90 w-[63%] rounded-xl" />
+              <p>
+                {!isLoaded ? (
+                  'Loading...'
+                ) : (
+                  <GoogleMap_
+                    mapData={mapData}
+                    center={center}
+                    mapOption={google.maps.MapTypeId.ROADMAP}
+                    mapContainerStyle={{
+                      width: '67rem',
+                      height: '23rem',
+                      borderRadius: '10px',
+                      marginRight: '40px',
+                    }}
+                  />
+                )}
+              </p>
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative mt-5">
             {toJS(usersInfo)._isEquipmentControl && (
-              <p className="absolute right-0">
+              <p className="absolute right-10">
                 <button
                   type="button"
                   className="mt-4 mr-3 h-10 w-32 rounded-lg bg-primary text-xl text-white"
@@ -167,7 +202,7 @@ const EquipmentDetail = () => {
                 <button
                   type="button"
                   name="add"
-                  className="mb-5 h-10 w-32 rounded-lg bg-primary text-xl text-white"
+                  className="mb-5 mr-2 h-10 w-32 rounded-lg bg-primary text-xl text-white"
                   onClick={(e) => {
                     const btnName = (e.target as HTMLButtonElement).name
                     setOnModal({ clicked: true, content: btnName })
@@ -216,7 +251,14 @@ const EquipmentDetail = () => {
                   <td>body</td>
                   <td>body</td>
                   <td>body</td>
-                  <td>body</td>
+                  <td className="relative">
+                    body
+                    {toJS(usersInfo)._isEquipmentControl && (
+                      <span className="absolute right-5">
+                        <CgTrash style={{ color: 'red' }} />
+                      </span>
+                    )}
+                  </td>
                 </tr>
 
                 <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
@@ -239,7 +281,14 @@ const EquipmentDetail = () => {
                   <td>body</td>
                   <td>body</td>
                   <td>body</td>
-                  <td>body</td>
+                  <td className="relative">
+                    body
+                    {toJS(usersInfo)._isEquipmentControl && (
+                      <span className="absolute right-5">
+                        <CgTrash style={{ color: 'red' }} />
+                      </span>
+                    )}
+                  </td>
                 </tr>
 
                 <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
@@ -277,6 +326,17 @@ const EquipmentDetail = () => {
 
             {/* page nation */}
             <div className="flexCenter relative w-full py-5">
+              {/* page select */}
+              <div className="absolute right-5">
+                <span className="mr-5">Rows per page</span>
+                <select className="mr-5 w-12">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
               <div className="flex">
                 <button type="button" className="mx-5">
                   &lt;
@@ -291,17 +351,6 @@ const EquipmentDetail = () => {
                 <button type="button" className="mx-5">
                   &gt;
                 </button>
-              </div>
-              {/* page select */}
-              <div className="absolute right-5">
-                <span className="mr-5">Rows per page</span>
-                <select className="mr-5 w-12">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
               </div>
             </div>
           </div>

@@ -61,7 +61,7 @@ const Home = () => {
   }, [])
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAv5ugOyjFpWdsT4-R65zs7sszvF_1C58w',
+    googleMapsApiKey: 'AIzaSyA-14N8FNLXVKB9NeF1eSnYYq8pItkBUaI',
   })
 
   return (

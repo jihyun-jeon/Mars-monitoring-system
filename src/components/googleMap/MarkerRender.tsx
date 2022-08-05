@@ -5,7 +5,7 @@ import { Clusterer } from '@react-google-maps/marker-clusterer'
 interface MarkerPropType {
   el: { lat: number; lng: number; name: string; active: boolean; error: boolean }
   clusterer?: Clusterer | MarkerClusterer
-  markerClick: (el: any) => void
+  markerClick?: (el: any) => void
 }
 
 const MarkerRender = ({ el, clusterer, markerClick }: MarkerPropType) => {
