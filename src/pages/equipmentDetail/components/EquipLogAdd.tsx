@@ -6,7 +6,7 @@ const EquipLogAdd = ({ setOnModal }) => {
   const appContext = useContext(AppContext)
 
   return (
-    <div className="bg-slate-200">
+    <div className="relative h-[34rem] w-[60rem] rounded-lg  bg-white px-16 pt-5">
       <h1 className="flexCenter pb-8 text-2xl">Equipment 수리내역 ADD</h1>
 
       <div className=" flex flex-col">

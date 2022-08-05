@@ -6,7 +6,7 @@ const EquipEdit = ({ setOnModal }) => {
   const appContext = useContext(AppContext)
 
   return (
-    <div>
+    <div className="relative h-[34rem] w-[60rem] rounded-lg  bg-white px-16 pt-5">
       <h1 className="flexCenter pb-8 text-2xl">Equipment Edit</h1>
       <h3 className="pb-8 text-2xl">eq-78900</h3>
 
