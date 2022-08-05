@@ -7,7 +7,7 @@ const EquipLogAdd = ({ setOnModal }) => {
 
   return (
     <div className="relative h-[34rem] w-[60rem] rounded-lg  bg-white px-16 pt-5">
-      <h1 className="flexCenter pb-8 text-2xl">Equipment 수리내역 ADD</h1>
+      <h1 className="flexCenter pb-10 text-2xl"> Create Repair log</h1>
 
       <div className=" flex flex-col">
         <div className="mb-10 flex justify-between">
@@ -21,7 +21,7 @@ const EquipLogAdd = ({ setOnModal }) => {
 
           <label className="mb-2 flex  w-44 flex-col ">
             Manufacture Date
-            <input type="text" className="rounded-md border-2 pl-2 " value="2022-04-26" />
+            <input type="text" className="rounded-md border-2 pl-2 " value="2022-04-26" readOnly />
           </label>
 
           <label className="mb-2 flex  w-44 flex-col">
@@ -97,7 +97,7 @@ const EquipLogAdd = ({ setOnModal }) => {
             setOnModal({ clicked: false, content: '' })
           }}
         >
-          Edit
+          Add
         </button>
       </div>
     </div>

@@ -70,7 +70,7 @@ const Home = () => {
 
       <div className="w-full overflow-x-auto">
         {hourlyWeathers && (
-          <div className="mb-7 flex flex-col rounded-xl bg-slate-300">
+          <div className="mb-7 flex flex-col rounded-xl bg-[#e7e3e3]">
             <ul className=" flex border-b border-slate-400">
               <li className="flexCenter w-20">
                 <img
