@@ -7,6 +7,7 @@ import { CgTrash } from 'react-icons/cg'
 import { Link } from 'react-router-dom'
 
 import GoogleMap_ from '../../../src/components/googleMap/GoogleMap_'
+import DeleteCheck from '../../components/modal/components/DeleteCheck'
 import Modal from '../../components/modal/modal'
 import useStore from '../../useStore'
 import EquipEdit from './components/EquipEdit'
@@ -23,9 +24,14 @@ const mapData = [
   { lat: 33.246541, lng: 126.401018, name: 'crain', active: false, error: false }, //
 ]
 
+interface onModalType {
+  clicked: boolean
+  childrun: null | any
+}
+
 const EquipmentDetail = () => {
   const [equipmentData, setEquipmentData] = useState({})
-  const [onModal, setOnModal] = useState({ clicked: false, content: '' })
+  const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
   const [tapClicked, setTapClicked] = useState(true)
 
   const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
@@ -94,8 +100,7 @@ const EquipmentDetail = () => {
                   name="edit"
                   className="mb-5 h-10 w-32 rounded-lg  bg-primary text-xl text-white"
                   onClick={(e) => {
-                    const btnName = (e.target as HTMLButtonElement).name
-                    setOnModal({ clicked: true, content: btnName })
+                    setOnModal({ clicked: true, childrun: <EquipEdit setOnModal={setOnModal} /> })
                   }}
                 >
                   Edit
@@ -204,8 +209,7 @@ const EquipmentDetail = () => {
                   name="add"
                   className="mb-5 mr-2 h-10 w-32 rounded-lg bg-primary text-xl text-white"
                   onClick={(e) => {
-                    const btnName = (e.target as HTMLButtonElement).name
-                    setOnModal({ clicked: true, content: btnName })
+                    setOnModal({ clicked: true, childrun: <EquipLogAdd setOnModal={setOnModal} /> })
                   }}
                 >
                   Add
@@ -231,9 +235,23 @@ const EquipmentDetail = () => {
                   <td className="relative">
                     CargoTruck
                     {toJS(usersInfo)._isEquipmentControl && (
-                      <span className="absolute right-5">
+                      <button
+                        type="button"
+                        className="absolute right-5"
+                        onClick={(e) => {
+                          const deleteApi = () =>
+                            fetch('/public/data/equipmentList.json')
+                              .then((res) => res.json())
+                              .then((result) => console.log(result))
+
+                          setOnModal({
+                            clicked: true,
+                            childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
+                          })
+                        }}
+                      >
                         <CgTrash style={{ color: 'red' }} />
-                      </span>
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -252,11 +270,25 @@ const EquipmentDetail = () => {
                   <td>body</td>
                   <td>body</td>
                   <td className="relative">
-                    body
+                    body4
                     {toJS(usersInfo)._isEquipmentControl && (
-                      <span className="absolute right-5">
+                      <button
+                        type="button"
+                        className="absolute right-5"
+                        onClick={(e) => {
+                          const deleteApi = () =>
+                            fetch('/public/data/equipmentList.json')
+                              .then((res) => res.json())
+                              .then((result) => console.log(result))
+
+                          setOnModal({
+                            clicked: true,
+                            childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
+                          })
+                        }}
+                      >
                         <CgTrash style={{ color: 'red' }} />
-                      </span>
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -284,9 +316,23 @@ const EquipmentDetail = () => {
                   <td className="relative">
                     body
                     {toJS(usersInfo)._isEquipmentControl && (
-                      <span className="absolute right-5">
+                      <button
+                        type="button"
+                        className="absolute right-5"
+                        onClick={(e) => {
+                          const deleteApi = () =>
+                            fetch('/public/data/equipmentList.json')
+                              .then((res) => res.json())
+                              .then((result) => console.log(result))
+
+                          setOnModal({
+                            clicked: true,
+                            childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
+                          })
+                        }}
+                      >
                         <CgTrash style={{ color: 'red' }} />
-                      </span>
+                      </button>
                     )}
                   </td>
                 </tr>
@@ -354,18 +400,7 @@ const EquipmentDetail = () => {
               </div>
             </div>
           </div>
-          {onModal.clicked && (
-            <Modal
-              setOnModal={setOnModal}
-              contents={
-                onModal.content === 'edit' ? (
-                  <EquipEdit setOnModal={setOnModal} />
-                ) : (
-                  <EquipLogAdd setOnModal={setOnModal} />
-                )
-              }
-            />
-          )}
+          {onModal.clicked && <Modal contents={onModal.childrun} />}
         </div>
       )}
     </Observer>
