@@ -2,21 +2,27 @@ import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import { Marker } from '@react-google-maps/api'
 import { Clusterer } from '@react-google-maps/marker-clusterer'
 
-interface MarkerPropType {
-  el: { lat: number; lng: number; name: string; active: boolean; error: boolean }
-  clusterer?: Clusterer | MarkerClusterer
-  markerClick?: (el: any) => void
-}
+// interface MarkerPropType {
+//   el: {
+//     latitude: number
+//     longitude: number
+//     equipmentType: string
+//     active: boolean
+//     error: boolean
+//   }
+//   clusterer?: Clusterer | MarkerClusterer
+//   markerClick?: (el: any) => void
+// }
 
-const MarkerRender = ({ el, clusterer, markerClick }: MarkerPropType) => {
+const MarkerRender = ({ el, active, clusterer, markerClick }: any) => {
   return (
     <div>
       <Marker
         clusterer={clusterer}
-        position={{ lat: el.lat, lng: el.lng }}
+        position={{ lat: el.latitude, lng: el.longitude }}
         icon={{
-          url: `/public/assets/${el.name}_${
-            el.active === true ? (el.error ? 'red' : 'blue') : 'gray'
+          url: `/public/assets/${el.equipmentType}_${
+            active === 'powerOn' ? 'blue' : active === 'networkOff' ? 'gray' : 'red'
           }.svg`,
           scaledSize: new google.maps.Size(50, 50),
         }}

@@ -2,22 +2,20 @@ import { useMemo, useState } from 'react'
 
 import GoogleMap_ from '../../../../src/components/googleMap/GoogleMap_'
 
-function Map() {
+function Map({ mapData }) {
   const [mapType, setMapType] = useState(true)
   const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
 
   const mapOption = mapType ? google.maps.MapTypeId.ROADMAP : google.maps.MapTypeId.SATELLITE
 
   const [onShow, setOnShow] = useState<{
-    lat: number
-    lng: number
-    name: string
-    active: boolean
-    error: boolean
+    latitude: number
+    longitude: number
+    equipmentType: string
   } | null>(null)
 
   const markerClick = (el) => {
-    if (el.lat === onShow?.lat && el.lng === onShow?.lng) {
+    if (el.latitude === onShow?.latitude && el.longitude === onShow?.longitude) {
       setOnShow(null)
       return
     }
@@ -68,14 +66,3 @@ function Map() {
 }
 
 export default Map
-
-const mapData = [
-  { lat: 33.440689, lng: 126.920708, name: 'welding', active: true, error: true },
-  { lat: 33.349512, lng: 126.611391, name: 'dump', active: false, error: false },
-  { lat: 33.494913, lng: 126.897931, name: 'conveyer', active: true, error: true }, //
-  { lat: 33.242565, lng: 126.553494, name: 'crain', active: true, error: false },
-  { lat: 33.476915, lng: 126.805685, name: 'welding', active: false, error: false },
-  { lat: 33.338557, lng: 126.459511, name: 'dump', active: true, error: true },
-  { lat: 33.462374, lng: 126.742381, name: 'conveyer', active: true, error: false },
-  { lat: 33.246541, lng: 126.401018, name: 'crain', active: false, error: false }, //
-]
