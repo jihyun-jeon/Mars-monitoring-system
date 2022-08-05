@@ -1,13 +1,19 @@
 import { toJS } from 'mobx'
 import { Observer } from 'mobx-react'
 import { useState } from 'react'
-import { CgTrash } from 'react-icons/cg'
+import { useLocation } from 'react-router-dom'
 
+import EquipInstallLog from '../../pages/equipmentDetail/components/EquipInstallLog'
 import EquipLogAdd from '../../pages/equipmentDetail/components/EquipLogAdd'
-import DeleteCheck from '../modal/components/DeleteCheck'
+import EquipRepairLog from '../../pages/equipmentDetail/components/EquipRepairLog'
+import useStore from '../../useStore'
 
-const DetailList = ({ usersInfo, setOnModal }) => {
-  const [tapClicked, setTapClicked] = useState(true)
+const DetailList = ({ setOnModal }) => {
+  let [clicked, setClicked] = useState('0')
+  const location = useLocation().pathname
+  const nowPage = location.includes('equipment')
+
+  const { usersInfo } = useStore()
 
   return (
     <Observer>
@@ -15,22 +21,26 @@ const DetailList = ({ usersInfo, setOnModal }) => {
         <div className="px-10">
           <div className="flex justify-between">
             <div className="flex">
-              <button
-                onClick={() => setTapClicked(true)}
-                className={`${
-                  tapClicked ? 'bg-[#EFF2F5]' : ''
-                } border-gray my-auto mx-0 rounded-t-lg border-[1px]  px-8 py-4 text-lg`}
-              >
-                수리
-              </button>
-              <button
-                onClick={() => setTapClicked(false)}
-                className={`${
-                  tapClicked ? '' : 'bg-[#EFF2F5]'
-                } border-gray my-auto mx-0 rounded-t-lg border-[1px] px-8 py-4 text-lg`}
-              >
-                설치
-              </button>
+              {titleArr.map((el, idx) => {
+                if (nowPage && idx === titleArr.length - 1) {
+                  return
+                }
+                return (
+                  <button
+                    key={idx}
+                    value={idx}
+                    onClick={(e) => {
+                      clicked = `${(e.target as HTMLButtonElement).value}`
+                      setClicked(clicked)
+                    }}
+                    className={`${
+                      `${idx}` === clicked ? 'bg-[#EFF2F5]' : ''
+                    } border-gray my-auto mx-0 rounded-t-lg border-[1px] px-8 py-4 text-lg`}
+                  >
+                    {el}
+                  </button>
+                )
+              })}
             </div>
             {toJS(usersInfo)._isEquipmentControl && (
               <button
@@ -46,161 +56,14 @@ const DetailList = ({ usersInfo, setOnModal }) => {
             )}
           </div>
 
-          <table className="w-full  border-2">
-            <tbody>
-              <tr className="flexCenter grid  h-10 grid-cols-5 border-b bg-[#EFF2F5]">
-                <th className="">Device ID</th>
-                <th className="">Matched Equipment</th>
-                <th className="">Company</th>
-                <th className="">Equipment Name</th>
-                <th className="">Equipment Type</th>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>SE-VL-011-0000</td>
-                <td>DUMMY-012-000</td>
-                <td>AAE</td>
-                <td>TruckCar</td>
-                <td className="relative">
-                  CargoTruck
-                  {toJS(usersInfo)._isEquipmentControl && (
-                    <button
-                      type="button"
-                      className="absolute right-5"
-                      onClick={(e) => {
-                        const deleteApi = () =>
-                          fetch('/public/data/equipmentList.json')
-                            .then((res) => res.json())
-                            .then((result) => console.log(result))
-
-                        setOnModal({
-                          clicked: true,
-                          childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
-                        })
-                      }}
-                    >
-                      <CgTrash style={{ color: 'red' }} />
-                    </button>
-                  )}
-                </td>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body1</td>
-                <td>body1</td>
-                <td>body1</td>
-                <td>body1</td>
-                <td>body1</td>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td className="relative">
-                  body4
-                  {toJS(usersInfo)._isEquipmentControl && (
-                    <button
-                      type="button"
-                      className="absolute right-5"
-                      onClick={(e) => {
-                        const deleteApi = () =>
-                          fetch('/public/data/equipmentList.json')
-                            .then((res) => res.json())
-                            .then((result) => console.log(result))
-
-                        setOnModal({
-                          clicked: true,
-                          childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
-                        })
-                      }}
-                    >
-                      <CgTrash style={{ color: 'red' }} />
-                    </button>
-                  )}
-                </td>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-              </tr>
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td className="relative">
-                  body
-                  {toJS(usersInfo)._isEquipmentControl && (
-                    <button
-                      type="button"
-                      className="absolute right-5"
-                      onClick={(e) => {
-                        const deleteApi = () =>
-                          fetch('/public/data/equipmentList.json')
-                            .then((res) => res.json())
-                            .then((result) => console.log(result))
-
-                        setOnModal({
-                          clicked: true,
-                          childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
-                        })
-                      }}
-                    >
-                      <CgTrash style={{ color: 'red' }} />
-                    </button>
-                  )}
-                </td>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-              </tr>
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-              </tr>
-
-              <tr className="flexCenter grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-              </tr>
-
-              <tr className="flexCente grid h-10 grid-cols-5 border-b text-center">
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-                <td>body</td>
-              </tr>
-            </tbody>
-          </table>
+          {clicked === '0' ? (
+            <EquipRepairLog setOnModal={setOnModal} />
+          ) : (
+            <EquipInstallLog setOnModal={setOnModal} />
+          )}
 
           {/* page nation */}
-          <div className="flexCenter relative w-full py-5">
+          <div className="flexCenter relative w-full pb-28 pt-10">
             {/* page select */}
             <div className="absolute right-5">
               <span className="mr-5">Rows per page</span>
@@ -235,3 +98,5 @@ const DetailList = ({ usersInfo, setOnModal }) => {
 }
 
 export default DetailList
+
+const titleArr = ['수리', '설치', '교체']

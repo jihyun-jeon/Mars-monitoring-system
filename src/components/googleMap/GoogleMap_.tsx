@@ -94,7 +94,7 @@ const GoogleMap_ = ({
 
       {mapType && (
         <GroundOverlay
-          url="/public/imgs/drawing.jpg"
+          url="/public/imgs/LSPPlotPlanMain.png"
           bounds={{
             north: 33.494916,
             south: 33.246541,
