@@ -7,8 +7,8 @@ type Props = {
 
 const AlarmInterface = ({ handleToggle }: Props) => {
   return (
-    <div className="relative flex items-center">
-      <p className="text-lg font-semibold text-dot4">이상 징후 알람이 전송되었습니다</p>
+    <div className="relative left-4 flex items-center">
+      <p className="text-lg font-semibold text-dot4"></p>
       <div className="relative">
         <BsFillBellFill onClick={handleToggle} className="ml-4 cursor-pointer text-2xl" />
         {/* boolean값 자리에 message 유무 변수 */}

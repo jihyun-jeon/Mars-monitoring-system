@@ -11,7 +11,7 @@ const TopNav = () => {
 
   return (
     <>
-      <nav className="relative top-0 left-0 right-0 mb-7 flex h-20 justify-between bg-bgPaper px-12">
+      <nav className="relative top-1 left-0 right-0 mb-7 flex h-20 justify-between bg-bgPaper px-12">
         <div className="relative right-[1rem] flex items-center">
           <NavLink to="/home">
             <AiFillHome className="mr-2 text-2xl text-primary" />
