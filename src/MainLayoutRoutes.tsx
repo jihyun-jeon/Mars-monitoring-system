@@ -20,7 +20,7 @@ const MainLayoutRoutes = () => {
     <>
       <div className="flex h-screen">
         <SideNav />
-        <div className="flex w-full flex-col">
+        <div className="flex w-full flex-col pr-4">
           <TopNav />
           <AppContext.Provider value={{ toastMessage, setToastMessage }}>
             <Routes>

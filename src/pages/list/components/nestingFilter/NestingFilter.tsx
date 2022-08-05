@@ -119,10 +119,10 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
   return (
     <>
       <h2 className="mb-2 text-2xl font-semibold text-black">{pathCheckerOptionData()[0].title}</h2>
-      <div className="mb-8 flex flex-col rounded border border-textDisabled bg-bgPaper py-4 px-12">
-        <div className="mb-4 flex justify-center">
+      <div className="mb-8 flex w-full flex-col rounded border border-textDisabled bg-bgPaper py-4 px-12">
+        <div className="mb-4 flex flex-wrap justify-center gap-4">
           {pathCheckerOptionData().map((data: any, idx: number) => (
-            <div className="mr-12" key={idx}>
+            <div key={idx}>
               <h3 className="mb-1 block text-sm font-semibold text-gray-900 dark:text-gray-400">
                 {data.name}
               </h3>

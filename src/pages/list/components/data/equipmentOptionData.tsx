@@ -1,7 +1,7 @@
 const equipmentOptionData = [
   {
     title: 'Equipment List',
-    name: 'EquipmentType',
+    name: 'Equipment Type',
     option: [
       {
         queryTitle: 'All',
@@ -22,7 +22,7 @@ const equipmentOptionData = [
     ],
   },
   {
-    name: 'DeviceStatus',
+    name: 'Device Status',
     option: [
       {
         queryTitle: 'All',
@@ -56,7 +56,7 @@ const equipmentOptionData = [
     ],
   },
   {
-    name: 'ActiveStatus',
+    name: 'Active Status',
     option: [
       {
         queryTitle: 'All',
@@ -69,6 +69,23 @@ const equipmentOptionData = [
       {
         queryTitle: false,
         optionTitle: `InActive`,
+      },
+    ],
+  },
+  {
+    name: 'Matched Status',
+    option: [
+      {
+        queryTitle: 'All',
+        optionTitle: 'All',
+      },
+      {
+        queryTitle: true,
+        optionTitle: 'Matched',
+      },
+      {
+        queryTitle: false,
+        optionTitle: `UnMatched`,
       },
     ],
   },

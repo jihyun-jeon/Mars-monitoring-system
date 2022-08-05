@@ -1,7 +1,7 @@
 const adminOptionData = [
   {
     title: 'History List',
-    name: 'Type',
+    name: 'Item',
     option: [
       {
         queryTitle: 'All',
@@ -9,20 +9,20 @@ const adminOptionData = [
       },
       {
         queryTitle: 1,
-        optionTitle: 'Bulldozer',
+        optionTitle: 'Repair',
       },
       {
         queryTitle: 2,
-        optionTitle: 'Crane',
+        optionTitle: 'Installation',
       },
       {
         queryTitle: 3,
-        optionTitle: 'Fork Crane',
+        optionTitle: 'Replace',
       },
     ],
   },
   {
-    name: 'Status',
+    name: 'Original Number',
     option: [
       {
         queryTitle: 'All',
@@ -30,45 +30,28 @@ const adminOptionData = [
       },
       {
         queryTitle: 1,
-        optionTitle: 'Offline',
+        optionTitle: '1',
       },
       {
         queryTitle: 2,
-        optionTitle: 'Online',
+        optionTitle: '2',
       },
       {
         queryTitle: 3,
-        optionTitle: 'Error',
+        optionTitle: '3',
       },
     ],
   },
   {
-    name: 'Battery',
+    name: 'Company',
     option: [
       {
         queryTitle: 'All',
         optionTitle: 'All',
       },
       {
-        queryTitle: 'battrey=20',
-        optionTitle: 'less than 20%',
-      },
-    ],
-  },
-  {
-    name: 'ActiveStatus',
-    option: [
-      {
-        queryTitle: 'All',
-        optionTitle: 'All',
-      },
-      {
-        queryTitle: true,
-        optionTitle: 'Active',
-      },
-      {
-        queryTitle: false,
-        optionTitle: `InActive`,
+        queryTitle: 1,
+        optionTitle: 'AAE',
       },
     ],
   },
