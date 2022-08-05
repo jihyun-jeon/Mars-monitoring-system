@@ -13,8 +13,6 @@ const List = observer(() => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  //
-
   return (
     <div className="listWrapper h-screen overflow-y-scroll bg-bgDefault">
       <NestingFilter pathName={pathName} setIsLoading={setIsLoading} />

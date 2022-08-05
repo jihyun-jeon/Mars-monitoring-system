@@ -6,6 +6,9 @@ import React, { useState } from 'react'
 import { EQUIPMENT_LIST_ADDRESS } from '../../../../config'
 import { useToggle } from '../../../../hooks/useHandleToggle'
 import useStore from '../../../../useStore'
+import adminItemData from '../data/adminItemData'
+import deviceItemData from '../data/deviceItemData'
+import equipmentItemData from '../data/equipmentItemData'
 import Pagination from '../pagination/Pagination'
 
 type Props = {
@@ -39,7 +42,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
 
   const [isModalToggle, handleModalToggled] = useToggle(false)
 
-  // 전역적 모달이 생성되면 거기에 연결
+  // 제인님 모달이 생성되면 거기에 연결
   const requestToServerDeleteId = async () => {
     try {
       const queryAddress = `${EQUIPMENT_LIST_ADDRESS}equipment/list?${checkedValue.join('&')}`
@@ -53,7 +56,6 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
     }
   }
 
-  // pagination
   const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
   const offset = (page - 1) * limit
@@ -92,61 +94,143 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
 
   return (
     <>
-      <h2 className="mb-2 text-2xl font-semibold text-black">{`Search ${pathName.slice(0, -4)}(${
-        pathCheckerOptionData().results.length
-      }EA)`}</h2>
+      {(() => {
+        if (pathName === 'equipmentList')
+          return (
+            <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Equipment(${
+              pathCheckerOptionData().results.length
+            }EA)`}</h2>
+          )
+        if (pathName === 'deviceList')
+          return (
+            <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Device(${
+              pathCheckerOptionData().results.length
+            }EA)`}</h2>
+          )
+        if (pathName === 'adminHistory')
+          return (
+            <h2 className="mb-2 text-2xl font-semibold text-black">{`Search History(${
+              pathCheckerOptionData().results.equipment.length
+            }EA)`}</h2>
+          )
+      })()}
       <table className="mb-8 table-auto border-collapse">
         <thead>
           <tr>
-            <th className="w-72 border-2 px-14 py-2">Company</th>
-            <th className="w-72 border-2 px-14 py-2">Equipment type</th>
-            <th className="w-72 border-2 px-14 py-2">Device status</th>
-            <th className="w-72 border-2 px-14 py-2">Power</th>
-            <th className="w-72 border-2 px-14 py-2">Original number</th>
-            <th className="w-72 border-2 px-14 py-2">Driver name</th>
+            {(() => {
+              if (pathName === 'equipmentList')
+                return equipmentItemData.map((item: any, idx) => (
+                  <th key={idx} className="w-72 border-2 px-14 py-2">
+                    {item}
+                  </th>
+                ))
+              if (pathName === 'deviceList')
+                return deviceItemData.map((item: any, idx) => (
+                  <th key={idx} className="w-72 border-2 px-14 py-2">
+                    {item}
+                  </th>
+                ))
+              if (pathName === 'adminHistory')
+                return adminItemData.map((item: any, idx) => (
+                  <th key={idx} className="w-72 border-2 px-14 py-2">
+                    {item}
+                  </th>
+                ))
+            })()}
           </tr>
         </thead>
-        {pathCheckerOptionData()
-          .results.slice(offset, offset + limit)
-          .map((data: any, idx: number) => (
-            <tbody className="border" key={idx}>
-              <tr>
-                <td className="relative py-1.5 text-center">
-                  {data.company}
-                  {isEquipmentControl && (
-                    <input
-                      onChange={checkHandler}
-                      value={data.id}
-                      type="checkbox"
-                      className="absolute left-1/2 top-1/2 -translate-x-20 -translate-y-1/2"
-                    />
-                  )}
-                </td>
-                {pathName === 'equipmentList' && (
-                  <>
-                    <td className="py-1.5 text-center">{data.equipmentType}</td>
-                    <td className="py-1.5 text-center">{data.device[0]?.status}</td>
-                    <td className="py-1.5 text-center">{data.isPower}</td>
-                    <td className="py-1.5 text-center">{data.originalId}</td>
-                    <td className="py-1.5 text-center">{data.driver[0]?.name}</td>
-                  </>
-                )}
-                {pathName === 'deviceList' && (
-                  <>
-                    <td className="py-1.5 text-center">{data.company}</td>
-                    <td className="py-1.5 text-center">
-                      {data.matchedEquipment[0]?.matchedEquipmentId}
-                    </td>
-                    <td className="py-1.5 text-center">{data.serialNumber}</td>
-                    <td className="py-1.5 text-center">{data.deviceCategory}</td>
-                    <td className="py-1.5 text-center">
-                      {data.matchedEquipment[0]?.matchedEquipmentCategory}
-                    </td>
-                  </>
-                )}
-              </tr>
-            </tbody>
-          ))}
+        {(() => {
+          if (pathName === 'equipmentList' || pathName === 'deviceList')
+            return (
+              <>
+                {pathCheckerOptionData()
+                  .results.slice(offset, offset + limit)
+                  .map((data: any, idx: number) => (
+                    <tbody className="border" key={idx}>
+                      <tr>
+                        {(() => {
+                          if (pathName === 'equipmentList')
+                            return (
+                              <>
+                                <td className="relative py-1.5 text-center">
+                                  {data.company}
+                                  {isEquipmentControl && (
+                                    <input
+                                      onChange={checkHandler}
+                                      value={data.id}
+                                      type="checkbox"
+                                      className="absolute left-1/2 top-1/2 -translate-x-20 -translate-y-1/2"
+                                    />
+                                  )}
+                                </td>
+                                <td className="py-1.5 text-center">{data.equipmentType}</td>
+                                <td className="py-1.5 text-center">{data.device[0]?.status}</td>
+                                <td className="py-1.5 text-center">{data.isPower}</td>
+                                <td className="py-1.5 text-center">{data.originalId}</td>
+                                <td className="py-1.5 text-center">{data.driver[0]?.name}</td>
+                              </>
+                            )
+                          if (pathName === 'deviceList')
+                            return (
+                              <>
+                                <td className="relative py-1.5 text-center">
+                                  {data.company}
+                                  {isEquipmentControl && (
+                                    <input
+                                      onChange={checkHandler}
+                                      value={data.id}
+                                      type="checkbox"
+                                      className="absolute left-1/2 top-1/2 -translate-x-20 -translate-y-1/2"
+                                    />
+                                  )}
+                                </td>
+                                <td className="py-1.5 text-center">
+                                  {data.matchedEquipment[0]?.matchedEquipmentId}
+                                </td>
+                                <td className="py-1.5 text-center">{data.serialNumber}</td>
+                                <td className="py-1.5 text-center">{data.deviceCategory}</td>
+                                <td className="py-1.5 text-center">
+                                  {data.matchedEquipment[0]?.matchedEquipmentCategory}
+                                </td>
+                              </>
+                            )
+                        })()}
+                      </tr>
+                    </tbody>
+                  ))}
+              </>
+            )
+          if (pathName === 'adminHistory')
+            return (
+              <>
+                {pathCheckerOptionData()
+                  .results.equipment.slice(offset, offset + limit)
+                  .map((data: any, idx: number) => (
+                    <tbody className="border" key={idx}>
+                      <tr>
+                        <>
+                          <td className="relative py-1.5 text-center">
+                            {data.companyName}
+                            {isEquipmentControl && (
+                              <input
+                                onChange={checkHandler}
+                                value={data.id}
+                                type="checkbox"
+                                className="absolute left-1/2 top-1/2 -translate-x-20 -translate-y-1/2"
+                              />
+                            )}
+                          </td>
+                          <td className="py-1.5 text-center">{data.originalId}</td>
+                          <td className="py-1.5 text-center">{data.equipmentType}</td>
+                          <td className="py-1.5 text-center">{data.isMatched[0]?.isMatched}</td>
+                          <td className="py-1.5 text-center">{data.originalId}</td>
+                        </>
+                      </tr>
+                    </tbody>
+                  ))}
+              </>
+            )
+        })()}
       </table>
       <div className="relative flex justify-center">
         {isEquipmentControl && (
@@ -157,13 +241,28 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
             Delete
           </button>
         )}
-        <Pagination
-          total={pathCheckerOptionData().results.length}
-          limit={limit}
-          page={page}
-          setPage={setPage}
-          setLimit={setLimit}
-        />
+        {(() => {
+          if (pathName === 'equipmentList' || pathName === 'deviceList')
+            return (
+              <Pagination
+                total={pathCheckerOptionData().results.length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+                setLimit={setLimit}
+              />
+            )
+          if (pathName === 'adminHistory')
+            return (
+              <Pagination
+                total={pathCheckerOptionData().results.equipment.length}
+                limit={limit}
+                page={page}
+                setPage={setPage}
+                setLimit={setLimit}
+              />
+            )
+        })()}
       </div>
     </>
   )
