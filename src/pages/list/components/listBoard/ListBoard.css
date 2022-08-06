@@ -4,3 +4,15 @@
   border-top: 2px solid #dbdfe6;
   color: #000;
 }
+
+#activeSelect {
+  background-color: skyblue;
+}
+
+.checkCursor {
+  cursor: url(/public/imgs/redCursor.cur), auto;
+}
+
+.checkCursor:hover {
+  cursor: url(/public/imgs/redCursor.cur), auto;
+}

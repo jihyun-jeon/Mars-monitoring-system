@@ -1,8 +1,12 @@
 const deviceOptionData = [
   {
     title: 'Device List',
-    name: 'Battery',
+    name: 'BatteryStatus',
     option: [
+      {
+        queryTitle: '',
+        optionTitle: 'All',
+      },
       {
         queryTitle: 'lowBattery',
         optionTitle: 'lowBattery',
@@ -17,11 +21,11 @@ const deviceOptionData = [
     name: 'Company',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
-        queryTitle: '1',
+        queryTitle: 1,
         optionTitle: 'AAE',
       },
     ],
@@ -30,15 +34,15 @@ const deviceOptionData = [
     name: 'MatchedStatus',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
-        queryTitle: '1',
+        queryTitle: 1,
         optionTitle: 'matched',
       },
       {
-        queryTitle: '2',
+        queryTitle: 2,
         optionTitle: 'unMatched',
       },
     ],
@@ -47,15 +51,15 @@ const deviceOptionData = [
     name: 'Status',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
-        queryTitle: '1',
+        queryTitle: 1,
         optionTitle: 'offline',
       },
       {
-        queryTitle: '2',
+        queryTitle: 2,
         optionTitle: 'online',
       },
     ],

@@ -4,7 +4,7 @@ const adminOptionData = [
     name: 'Item',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
@@ -18,40 +18,6 @@ const adminOptionData = [
       {
         queryTitle: 3,
         optionTitle: 'Replace',
-      },
-    ],
-  },
-  {
-    name: 'Original Number',
-    option: [
-      {
-        queryTitle: 'All',
-        optionTitle: 'All',
-      },
-      {
-        queryTitle: 1,
-        optionTitle: '1',
-      },
-      {
-        queryTitle: 2,
-        optionTitle: '2',
-      },
-      {
-        queryTitle: 3,
-        optionTitle: '3',
-      },
-    ],
-  },
-  {
-    name: 'Company',
-    option: [
-      {
-        queryTitle: 'All',
-        optionTitle: 'All',
-      },
-      {
-        queryTitle: 1,
-        optionTitle: 'AAE',
       },
     ],
   },

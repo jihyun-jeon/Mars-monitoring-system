@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
 
+import useStore from '../../../../useStore'
+
 const CurrentPath = () => {
+  const { pathNumbers } = useStore()
+  const { equipmentNumber } = pathNumbers
+
   const location = useLocation()
   const pathData = location.pathname.slice(1)
 
@@ -11,10 +16,9 @@ const CurrentPath = () => {
   const pathValidator = {
     home: pathData.indexOf('home') !== -1,
     equipmentList: pathData.indexOf('equipmentList') !== -1,
-    equipmentDetail: pathData.indexOf('equipmentList/equipmentDetail') !== -1,
-    equipmentTrand: pathData.indexOf('equipmentTrand') !== -1,
+    equipmentDetail: pathData.indexOf('equipmentDetail') !== -1,
     deviceList: pathData.indexOf('deviceList') !== -1,
-    deviceDetail: pathData.indexOf('deviceList/deviceDetail') !== -1,
+    deviceDetail: pathData.indexOf('deviceDetail') !== -1,
     adminMapping: pathData.indexOf('adminMapping') !== -1,
     adminHistory: pathData.indexOf('adminHistory') !== -1,
   }
@@ -24,7 +28,6 @@ const CurrentPath = () => {
       home,
       equipmentList,
       equipmentDetail,
-      equipmentTrand,
       deviceList,
       deviceDetail,
       adminMapping,
@@ -38,9 +41,6 @@ const CurrentPath = () => {
     } else if (equipmentList) {
       setFrontPathName('Equipment')
       setMidPathName('List')
-    } else if (equipmentTrand) {
-      setFrontPathName('Equipment')
-      setMidPathName('Trand')
     } else if (deviceDetail) {
       setFrontPathName('Device')
       setMidPathName('List')
@@ -69,13 +69,12 @@ const CurrentPath = () => {
           <span className="mx-2 cursor-default text-[#BAC7D5]">&gt;</span>
           <span className="cursor-default text-xl">{midPathName}</span>
           {(!pathValidator.equipmentList || pathValidator.equipmentDetail) &&
-            !pathValidator.equipmentTrand &&
             (!pathValidator.deviceList || pathValidator.deviceDetail) &&
             !pathValidator.adminMapping &&
             !pathValidator.adminHistory && (
               <>
                 <span className="mx-2 cursor-default text-[#BAC7D5]">&gt;</span>
-                <span className="cursor-default text-xl">Detail</span>
+                <span className="cursor-default text-xl">{equipmentNumber}</span>
               </>
             )}
         </>

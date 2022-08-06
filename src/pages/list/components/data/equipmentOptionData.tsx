@@ -1,52 +1,82 @@
 const equipmentOptionData = [
   {
     title: 'Equipment List',
-    name: 'Equipment Type',
+    name: 'EquipmentType',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
         queryTitle: 1,
-        optionTitle: 'Bulldozer',
+        optionTitle: '',
       },
       {
         queryTitle: 2,
-        optionTitle: 'Crane',
+        optionTitle: 'Verti Boring Machine',
       },
       {
         queryTitle: 3,
-        optionTitle: 'Fork Crane',
+        optionTitle: '',
+      },
+      {
+        queryTitle: 4,
+        optionTitle: 'Scissors Lift',
+      },
+      {
+        queryTitle: 5,
+        optionTitle: 'Conveyor Belt',
+      },
+      {
+        queryTitle: 6,
+        optionTitle: 'Welding Machine',
       },
     ],
   },
   {
-    name: 'Device Status',
+    name: 'PowerStatus',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
+        optionTitle: 'All',
+      },
+      {
+        queryTitle: true,
+        optionTitle: 'ON',
+      },
+      {
+        queryTitle: false,
+        optionTitle: `OFF`,
+      },
+    ],
+  },
+  {
+    name: 'DeviceStatus',
+    option: [
+      {
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
         queryTitle: 1,
-        optionTitle: 'Offline',
+        optionTitle: 'Power On',
       },
       {
         queryTitle: 2,
-        optionTitle: 'Online',
+        optionTitle: 'Power Off',
       },
       {
         queryTitle: 3,
-        optionTitle: 'Error',
+        optionTitle: 'Network Error',
       },
     ],
   },
+
   {
-    name: 'Battery',
+    name: 'BatteryPercentage',
     option: [
       {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {
@@ -55,28 +85,12 @@ const equipmentOptionData = [
       },
     ],
   },
+
   {
-    name: 'Active Status',
+    name: 'MatchedStatus',
     option: [
       {
-        queryTitle: 'All',
-        optionTitle: 'All',
-      },
-      {
-        queryTitle: true,
-        optionTitle: 'Active',
-      },
-      {
-        queryTitle: false,
-        optionTitle: `InActive`,
-      },
-    ],
-  },
-  {
-    name: 'Matched Status',
-    option: [
-      {
-        queryTitle: 'All',
+        queryTitle: '',
         optionTitle: 'All',
       },
       {

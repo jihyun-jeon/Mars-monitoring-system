@@ -83,7 +83,7 @@ const LoginForm = () => {
   const navigate = useNavigate()
 
   const goToHome = () => {
-    navigate('/')
+    navigate('/home')
   }
 
   const requestUserInfoCheckToServer = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -96,6 +96,8 @@ const LoginForm = () => {
       if (response.data.accessToken) {
         localStorage.setItem('access_token', response.data.accessToken)
         localStorage.setItem('isAuthenticated', 'true')
+        usersInfo.getAuthLocation(response.data.isLocationControl)
+        usersInfo.getAuthEquipment(response.data.isEquipmentControl)
         usersInfo.getUserName(response.data.name)
         goToHome()
       }

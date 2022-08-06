@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { observer } from 'mobx-react'
 import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
 import {
@@ -17,7 +16,7 @@ type Props = {
   setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
-const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
+const NestingFilter = ({ pathName, setIsLoading }: Props) => {
   const pathCheckerOptionData: any = () => {
     switch (pathName) {
       case 'equipmentList':
@@ -32,12 +31,20 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
   const [searchInfo, setSearchInfo] = useState({
     EquipmentType: '',
     DeviceStatus: '',
-    Battery: '',
-    ActiveStatus: '',
-    statusBattery: 'lowBattery',
+    BatteryPercentage: '',
+    PowerStatus: '',
+    MatchedStatus: '',
+    BatteryStatus: 'lowBattery',
   })
 
-  const { EquipmentType, DeviceStatus, Battery, ActiveStatus, statusBattery } = searchInfo
+  const {
+    EquipmentType,
+    DeviceStatus,
+    BatteryPercentage,
+    PowerStatus,
+    MatchedStatus,
+    BatteryStatus,
+  } = searchInfo
 
   const handleUserSelector = (e: any) => {
     const { value, name } = e.target
@@ -48,37 +55,46 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
       case 'DeviceStatus':
         setSearchInfo((data) => ({ ...data, [name]: value }))
         break
-      case 'Battery':
+      case 'BatteryPercentage':
         setSearchInfo((data) => ({ ...data, [name]: value }))
         break
-      case 'ActiveStatus':
+      case 'PowerStatus':
         setSearchInfo((data) => ({ ...data, [name]: value }))
         break
-      case 'statusBattery':
+      case 'MatchedStatus':
+        setSearchInfo((data) => ({ ...data, [name]: value }))
+        break
+      case 'BatteryStatus':
         setSearchInfo((data) => ({ ...data, [name]: value }))
         break
     }
   }
 
-  const collectiveQuery = {
-    equipment: EquipmentType && `type_id=[${EquipmentType}]`.concat('&'),
-    device: DeviceStatus && `status_id=[${DeviceStatus}]`.concat('&'),
-    battery: Battery && `battery=20`.concat('&'),
-    activeStatus: ActiveStatus && `is_power=${ActiveStatus}`.concat('&'),
-    lowBattery: statusBattery,
-  }
-
-  const { equipment, device, battery, activeStatus, lowBattery } = collectiveQuery
-
-  const { listDatas } = useStore()
-
   const requestToServerSearch = async () => {
+    const collectiveQuery = {
+      equipmentTypeId: EquipmentType && `type_id=[${EquipmentType}]`.concat('&'),
+      deviceStatusId: DeviceStatus && `status_id=[${DeviceStatus}]`.concat('&'),
+      batteryPercentage: BatteryPercentage && `battery=20`.concat('&'),
+      equipmentPowerStatus: PowerStatus && `is_power=${PowerStatus}`.concat('&'),
+      matchedStatus: MatchedStatus && `is_matched=${MatchedStatus}`.concat('&'),
+      batteryStatus: BatteryStatus,
+    }
+
+    const {
+      equipmentTypeId,
+      deviceStatusId,
+      batteryPercentage,
+      equipmentPowerStatus,
+      matchedStatus,
+      batteryStatus,
+    } = collectiveQuery
+
     const equipmentQueryAddress =
-      `${EQUIPMENT_LIST_ADDRESS}equipment/list?${equipment}${device}${battery}${activeStatus}`.slice(
+      `${EQUIPMENT_LIST_ADDRESS}equipment/list?${equipmentTypeId}${deviceStatusId}${batteryPercentage}${equipmentPowerStatus}${matchedStatus}`.slice(
         0,
         -1,
       )
-    const deviceQueryAddress = `${DEVICE_LIST_ADDRESS}device/list?order=${lowBattery}`
+    const deviceQueryAddress = `${DEVICE_LIST_ADDRESS}device/list?order=${batteryStatus}`
     const adminHistoryAddress = `${ADMIN_HISTORY_ADDRESS}/equipment/match`
     let response
     try {
@@ -105,16 +121,32 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
     }
   }
 
-  const [resetItem, setResetItem] = useState(false)
-
-  const resetSearchInfo = () => {
-    setResetItem(true)
+  const resetInfo = () => {
+    switch (pathName) {
+      case 'equipmentList':
+        setSearchInfo((data) => ({
+          ...data,
+          ['EquipmentType']: '',
+          ['DeviceStatus']: '',
+          ['Battery']: '',
+          ['ActiveStatus']: '',
+          ['MatchedStatus']: '',
+        }))
+        break
+      case 'deviceList':
+        setSearchInfo((data) => ({ ...data, ['BatteryStatus']: 'lowBattery' }))
+        break
+    }
+    window.location.reload()
     requestToServerSearch()
   }
 
+  const { listDatas } = useStore()
+  const { equipmentListData, deviceListData, adminHistoryListData } = listDatas
+
   useEffect(() => {
     requestToServerSearch()
-  }, [])
+  }, [equipmentListData, deviceListData, adminHistoryListData])
 
   return (
     <>
@@ -129,15 +161,15 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
               <select
                 name={data.name}
                 onChange={handleUserSelector}
-                className="block w-52 rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                className="block w-52 rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
               >
                 {data.option.map((el: any, idx: number) => (
                   <option value={el.queryTitle} key={idx}>
                     {
                       {
-                        equipmentList: resetItem ? 'All' : el.optionTitle,
-                        deviceList: resetItem ? 'lowBattery' : el.optionTitle,
-                        adminHistory: resetItem ? 'All' : el.optionTitle,
+                        equipmentList: el.optionTitle,
+                        deviceList: el.optionTitle,
+                        adminHistory: el.optionTitle,
                       }[pathName]
                     }
                   </option>
@@ -148,7 +180,7 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
         </div>
         <div className="flex justify-center">
           <button
-            onClick={resetSearchInfo}
+            onClick={resetInfo}
             className="mr-12 rounded-lg border-2 border-primary px-[7rem]  py-1 text-primary"
           >
             Reset
@@ -163,6 +195,6 @@ const NestingFilter = observer(({ pathName, setIsLoading }: Props) => {
       </div>
     </>
   )
-})
+}
 
 export default NestingFilter

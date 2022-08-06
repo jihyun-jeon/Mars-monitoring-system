@@ -1,10 +1,15 @@
 import axios from 'axios'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { FaSortDown } from 'react-icons/fa'
+import ReactLoading from 'react-loading'
+import { useNavigate } from 'react-router'
 
-import { EQUIPMENT_LIST_ADDRESS } from '../../../../config'
-import { useToggle } from '../../../../hooks/useHandleToggle'
+import AppContext from '../../../../AppContext'
+import DeleteCheck from '../../../../components/modal/components/DeleteCheck'
+import Modal from '../../../../components/modal/modal'
+import { EQUIPMENT_LIST_ADDRESS, DEVICE_LIST_ADDRESS } from '../../../../config'
 import useStore from '../../../../useStore'
 import adminItemData from '../data/adminItemData'
 import deviceItemData from '../data/deviceItemData'
@@ -18,8 +23,18 @@ type Props = {
   isLoading: boolean
 }
 
+interface onModalType {
+  clicked: boolean
+  childrun: null | any
+}
+
 const ListBoard = observer(({ pathName, isLoading }: Props) => {
-  const { usersInfo, listDatas } = useStore()
+  const navigate = useNavigate()
+
+  const appContext = useContext(AppContext)
+
+  const { usersInfo, listDatas, pathNumbers } = useStore()
+
   const { isEquipmentControl } = usersInfo
 
   const renderData = {
@@ -46,8 +61,8 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
     device: '',
   })
 
-  const handleTab = (event: any) => {
-    const { innerText } = event.target
+  const handleTab = (event: React.MouseEvent<HTMLElement>) => {
+    const { innerText } = event.target as HTMLElement
     if (innerText === 'Equipment') {
       setTabName((text) => ({ ...text, ['equipment']: innerText, device: '' }))
     } else if (innerText === 'Device') {
@@ -55,19 +70,32 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
     }
   }
 
-  const [isModalToggle, handleModalToggled] = useToggle(false)
-
-  // 제인님 모달이 생성되면 거기에 연결
   const requestToServerDeleteId = async () => {
+    const equipmentQueryAddress = `${EQUIPMENT_LIST_ADDRESS}equipment/list/delete?ids=[${checkedValue}]`
+    const deviceQueryAddress = `${DEVICE_LIST_ADDRESS}device?ids=[${checkedValue}]`
     try {
-      const queryAddress = `${EQUIPMENT_LIST_ADDRESS}equipment/list?${checkedValue.join('&')}`
-      const response = await axios.delete(queryAddress)
-      if (response.status === 204) {
-        alert(response)
-        // message 찾기
+      switch (pathName) {
+        case 'equipmentList':
+          await axios.delete(equipmentQueryAddress, {
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+            },
+          })
+          await appContext.setToastMessage(['삭제가 완료되었습니다'])
+          break
+        case 'deviceList':
+          await axios.delete(deviceQueryAddress, {
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+            },
+          })
+          await appContext.setToastMessage(['삭제가 완료되었습니다'])
+          break
       }
-    } catch (err) {
-      alert(err)
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response)
+      }
     }
   }
 
@@ -83,10 +111,10 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
     if (isChecked) {
-      checkedItems.add('id=' + id)
+      checkedItems.add(id)
       setCheckedItems(checkedItems)
-    } else if (!isChecked && checkedItems.has('id=' + id)) {
-      checkedItems.delete('id=' + id)
+    } else if (!isChecked && checkedItems.has(id)) {
+      checkedItems.delete(id)
       setCheckedItems(checkedItems)
     }
   }
@@ -97,40 +125,45 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
     checkedItemHandler(target.value, target.checked)
   }
 
+  const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
+
   const authorityChecker = () => {
     if (checkedValue.length === 0) {
       alert('None selected')
     } else {
-      handleModalToggled
+      setOnModal({
+        clicked: true,
+        childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={requestToServerDeleteId} />,
+      })
     }
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading)
+    return (
+      <div className="fixed top-0 left-0 h-screen w-screen bg-slate-200 opacity-60">
+        <ReactLoading
+          width={'10%'}
+          height={'1%'}
+          color={'#036DB7'}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
+      </div>
+    )
 
   return (
     <>
-      {/* titleName: 현재 경로에 따라 변경됩니다. */}
+      {/* titleName: 현재 경로에 따라 title이 변경됩니다. */}
       {(() => {
-        if (pathName === 'equipmentList')
-          return (
-            <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Equipment(${
-              pathCheckerOptionData().results.length
-            }EA)`}</h2>
-          )
-        if (pathName === 'deviceList')
-          return (
-            <h2 className="mb-2 text-2xl font-semibold text-black">{`Search Device(${
-              pathCheckerOptionData().results.length
-            }EA)`}</h2>
-          )
-        if (pathName === 'adminHistory')
-          return (
-            <h2 className="mb-2 text-2xl font-semibold text-black">{`Search History(${
-              pathCheckerOptionData().results.equipment.length
-            }EA)`}</h2>
-          )
+        switch (pathName) {
+          case 'equipmentList':
+            return <h2 className="mb-2 text-2xl font-semibold text-black">Search Equipment</h2>
+          case 'deviceList':
+            return <h2 className="mb-2 text-2xl font-semibold text-black">Search Device</h2>
+          case 'adminHistory':
+            return <h2 className="mb-2 text-2xl font-semibold text-black">Search History</h2>
+        }
       })()}
-      {/* tabName: 클릭한 탭의 이름에 따라 버튼의 스타일 변경됩니다 */}
+      {/* tabName: 현재 경로가 adminHistory일때만, 클릭한 탭의 이름에 따라 버튼의 스타일 변경됩니다 */}
       {pathName === 'adminHistory' && (
         <div className="flex">
           <button
@@ -149,26 +182,26 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
           </button>
         </div>
       )}
-      <table className="mb-8 w-full table-auto border-collapse">
+      <table className="mb-8 w-full table-auto border-collapse bg-bgPaper">
         <thead>
           <tr>
             {/* listItem: 현재 경로에 따라 항목들이 변경됩니다 */}
             {(() => {
               if (pathName === 'equipmentList')
                 return equipmentItemData.map((item: any, idx) => (
-                  <th key={idx} className="border-2 py-2">
+                  <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
                     {item}
                   </th>
                 ))
               if (pathName === 'deviceList')
                 return deviceItemData.map((item: any, idx) => (
-                  <th key={idx} className="border-2 py-2">
+                  <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
                     {item}
                   </th>
                 ))
               if (pathName === 'adminHistory')
                 return adminItemData.map((item: any, idx) => (
-                  <th key={idx} className="border-2 py-2">
+                  <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
                     {item}
                   </th>
                 ))
@@ -184,62 +217,92 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                   .results.slice(offset, offset + limit)
                   .map((data: any, idx: number) => (
                     <tbody className="border" key={idx}>
-                      <tr>
+                      <tr
+                        className="cursor-pointer"
+                        onClick={() => {
+                          navigate(`/${pathName.slice(0, -4) + 'Detail'}/${data.id}`)
+                          if (pathName === 'equipmentList') {
+                            pathNumbers.setEquipmentNumber(data.originalId)
+                          } else {
+                            pathNumbers.setDeviceListNumber(data.serialNumber)
+                          }
+                        }}
+                      >
                         {(() => {
                           if (pathName === 'equipmentList')
                             return (
                               <>
                                 <td className="relative py-1.5 text-center">
-                                  {data.company}
+                                  {data.originalId}
                                   {isEquipmentControl && (
-                                    <input
-                                      onChange={checkHandler}
-                                      value={data.id}
-                                      type="checkbox"
-                                      className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                    />
+                                    <label
+                                      htmlFor={`1${idx}`}
+                                      className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <input
+                                        id={`1${idx}`}
+                                        onChange={checkHandler}
+                                        value={data.id}
+                                        type="checkbox"
+                                        className="checkCursor"
+                                      />
+                                    </label>
                                   )}
                                 </td>
                                 <td className="py-1.5 text-center">{data.equipmentType}</td>
                                 <td className="py-1.5 text-center">
-                                  {data.device[0]?.status ? data.device[0]?.status : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
                                   {data.isPower ? 'ON' : 'OFF'}
                                 </td>
-                                <td className="py-1.5 text-center">{data.originalId}</td>
-                                <td className="py-1.5 text-center">
-                                  {data.driver[0]?.name ? data.driver[0]?.name : '-'}
+                                {/* <td className="py-1.5 text-center">
+                                  {data.deviceStatus[0]?.statusContent
+                                    ? data.deviceStatus[0]?.statusContent
+                                    : '-'}
+                                </td> */}
+                                {/* <td className="py-1.5 text-center">
+                                  {data.deviceStatus[0]?.battery
+                                    ? data.deviceStatus[0]?.battery
+                                    : '-'}
                                 </td>
-                                <td className="py-1.5 text-center">12가 3456</td>
+                                <td className="py-1.5 text-center">
+                                  {data.deviceMatched[0]?.isMatched ? 'Matched' : 'UnMatched'}
+                                </td> */}
+                                <td className="py-1.5 text-center">{data.company}</td>
                               </>
                             )
                           if (pathName === 'deviceList')
                             return (
                               <>
                                 <td className="relative py-1.5 text-center">
-                                  {data.id}
+                                  {data.serialNumber}
                                   {isEquipmentControl && (
-                                    <input
-                                      onChange={checkHandler}
-                                      value={data.id}
-                                      type="checkbox"
-                                      className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                    />
+                                    <label
+                                      htmlFor={`1${idx}`}
+                                      className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <input
+                                        id={`1${idx}`}
+                                        onChange={checkHandler}
+                                        value={data.id}
+                                        type="checkbox"
+                                        className="checkCursor"
+                                      />
+                                    </label>
                                   )}
                                 </td>
+                                {/* 데이터 보고 수정 */}
+                                <td className="py-1.5 text-center">low</td>
                                 <td className="py-1.5 text-center">
-                                  {data.matchedEquipment[0]?.matchedEquipmentId
-                                    ? data.matchedEquipment[0]?.matchedEquipmentId
+                                  {data.matchedEquipment[0]?.matchedEquipmentCategory
+                                    ? data.matchedEquipment[0]?.matchedEquipmentCategory
                                     : '-'}
                                 </td>
-                                <td className="py-1.5 text-center">2323-3231</td>
-                                <td className="py-1.5 text-center">{data.company}</td>
-                                <td className="py-1.5 text-center">low</td>
-                                <td className="py-1.5 text-center">{data.status ? 'ON' : 'OFF'}</td>
                                 <td className="py-1.5 text-center">
                                   {data.status ? 'Matched' : 'UnMatched'}
                                 </td>
+                                <td className="py-1.5 text-center">{data.status ? 'ON' : 'OFF'}</td>
+                                <td className="py-1.5 text-center">{data.company}</td>
                               </>
                             )
                         })()}
@@ -258,17 +321,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                       <tbody className="border" key={idx}>
                         <tr>
                           <>
-                            <td className="relative py-1.5 text-center">
-                              Replace
-                              {isEquipmentControl && (
-                                <input
-                                  onChange={checkHandler}
-                                  value={data.id}
-                                  type="checkbox"
-                                  className="absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                />
-                              )}
-                            </td>
+                            <td className="relative py-1.5 text-center">Replace</td>
                             <td className="py-1.5 text-center">{data.originalId}</td>
                             <td className="py-1.5 text-center">{data.companyName}</td>
                             <td className="py-1.5 text-center">2022.01.02</td>
@@ -287,17 +340,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                       <tbody className="border" key={idx}>
                         <tr>
                           <>
-                            <td className="relative py-1.5 text-center">
-                              Repair
-                              {isEquipmentControl && (
-                                <input
-                                  onChange={checkHandler}
-                                  value={data.id}
-                                  type="checkbox"
-                                  className="absolute left-6 top-1/2 -translate-x-0 -translate-y-1/2"
-                                />
-                              )}
-                            </td>
+                            <td className="relative py-1.5 text-center">Repair</td>
                             <td className="py-1.5 text-center">{data.serialNumber}</td>
                             <td className="py-1.5 text-center">{data.companyName}</td>
                             <td className="py-1.5 text-center">2022-03-20</td>
@@ -311,7 +354,8 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
         })()}
       </table>
       <div className="relative flex justify-center">
-        {isEquipmentControl && (
+        {/* deleteButton: 현재 경로에 따라 버튼이 있거나 없습니다 */}
+        {(pathName === 'equipmentList' || pathName === 'deviceList') && isEquipmentControl && (
           <button
             onClick={authorityChecker}
             className="absolute left-0 rounded bg-primary px-20 py-1 text-bgPaper"
@@ -319,6 +363,8 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
             Delete
           </button>
         )}
+        {onModal.clicked && <Modal contents={onModal.childrun} />}
+
         {/* pagination: 현재 경로에 따라 pagination이 변경됩니다 */}
         {(() => {
           if (pathName === 'equipmentList' || pathName === 'deviceList')

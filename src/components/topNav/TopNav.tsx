@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react'
 import { AiFillHome } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
 
@@ -6,7 +7,7 @@ import AlarmInterface from './components/alarmInterface/AlarmInterface'
 import AlarmModal from './components/alarmModal/AlarmModal'
 import CurrentPath from './components/currentPath/CurrentPath'
 
-const TopNav = () => {
+const TopNav = observer(() => {
   const [isToggle, handleToggle] = useToggle(false)
 
   return (
@@ -24,6 +25,6 @@ const TopNav = () => {
       <div className="absolute top-20 right-0 w-screen border-t-4" />
     </>
   )
-}
+})
 
 export default TopNav
