@@ -4,7 +4,6 @@ const listDatas = observable({
   _equipmentListData: [],
   _deviceListData: [],
   _adminHistoryListData: [],
-  _isLoading: true,
 
   get equipmentListData() {
     return this._equipmentListData
@@ -18,10 +17,6 @@ const listDatas = observable({
     return this._adminHistoryListData
   },
 
-  get isLoading() {
-    return this._isLoading
-  },
-
   setEquipmentListData(value: []) {
     return (this._equipmentListData = value)
   },
@@ -32,10 +27,6 @@ const listDatas = observable({
 
   setAdminHistoryData(value: []) {
     return (this._adminHistoryListData = value)
-  },
-
-  setIsLoading() {
-    return !this._isLoading
   },
 })
 

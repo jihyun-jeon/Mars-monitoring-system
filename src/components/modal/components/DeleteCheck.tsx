@@ -36,7 +36,8 @@ const DeleteCheck = ({ setOnModal, deleteApi }: deleteCheckType) => {
           className="h-10 w-[44%] rounded-xl border   bg-primary text-[white]"
           onClick={() => {
             setOnModal(false)
-            deleteApi()
+            // () 제거했는데 이거 확인해보고 모달창 통해서 삭제하지 말고 그냥 딜리트로 삭제해볼 것
+            deleteApi
           }}
         >
           삭제

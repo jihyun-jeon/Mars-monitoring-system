@@ -1,11 +1,11 @@
 const equipmentItemData = [
-  'Company',
-  'Equipment Type',
-  'Device Status',
-  'Power',
   'Original Number',
-  'Driver Name',
-  'Plate Number',
+  'Equipment Type',
+  'Power',
+  'Device Status',
+  'Battery Status',
+  'Device Matched',
+  'Company',
 ]
 
 export default equipmentItemData

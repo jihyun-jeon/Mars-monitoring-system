@@ -18,7 +18,7 @@ const Pagination = ({ total, limit, page, setPage, setLimit }: PaginationProps) 
     },
 
     doublePrevMoveButton() {
-      setPage((prev) => prev - 10)
+      setPage(1)
     },
 
     nextMoveButton() {
@@ -26,7 +26,7 @@ const Pagination = ({ total, limit, page, setPage, setLimit }: PaginationProps) 
     },
 
     doubleNextMoveButton() {
-      setPage((next) => next + 10)
+      setPage(numPages)
     },
 
     currentMoveButton() {
@@ -52,7 +52,7 @@ const Pagination = ({ total, limit, page, setPage, setLimit }: PaginationProps) 
           onChange={({ target: { value } }) => setLimit(Number(value))}
           onClick={currentMoveButton}
         >
-          <option value="10">10</option>
+          <option value="10">1</option>
           <option value="20">20</option>
           <option value="30">30</option>
         </select>
