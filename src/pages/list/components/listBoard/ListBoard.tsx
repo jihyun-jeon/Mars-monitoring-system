@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import React, { useState, useContext } from 'react'
-import { FaSortDown } from 'react-icons/fa'
+import React, { useState, useContext, Dispatch, SetStateAction } from 'react'
 import ReactLoading from 'react-loading'
 import { useNavigate } from 'react-router'
 
@@ -18,17 +17,19 @@ import Pagination from '../pagination/Pagination'
 
 import './ListBoard.css'
 
-type Props = {
-  pathName: string
-  isLoading: boolean
-}
-
 interface onModalType {
   clicked: boolean
   childrun: null | any
 }
 
-const ListBoard = observer(({ pathName, isLoading }: Props) => {
+type Props = {
+  pathName: string
+  isLoading: boolean
+  onModal: { clicked: boolean; childrun: null | any }
+  setOnModal: Dispatch<SetStateAction<onModalType>>
+}
+
+const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props) => {
   const navigate = useNavigate()
 
   const appContext = useContext(AppContext)
@@ -94,7 +95,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
       }
     } catch (error: any) {
       if (error.response) {
-        alert(error.response)
+        console.log(error.response)
       }
     }
   }
@@ -124,8 +125,6 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
     setIsChecked(!isChecked)
     checkedItemHandler(target.value, target.checked)
   }
-
-  const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 
   const authorityChecker = () => {
     if (checkedValue.length === 0) {
@@ -254,19 +253,19 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                                 <td className="py-1.5 text-center">
                                   {data.isPower ? 'ON' : 'OFF'}
                                 </td>
-                                {/* <td className="py-1.5 text-center">
+                                <td className="py-1.5 text-center">
                                   {data.deviceStatus[0]?.statusContent
                                     ? data.deviceStatus[0]?.statusContent
                                     : '-'}
-                                </td> */}
-                                {/* <td className="py-1.5 text-center">
+                                </td>
+                                <td className="py-1.5 text-center">
                                   {data.deviceStatus[0]?.battery
                                     ? data.deviceStatus[0]?.battery
                                     : '-'}
                                 </td>
                                 <td className="py-1.5 text-center">
                                   {data.deviceMatched[0]?.isMatched ? 'Matched' : 'UnMatched'}
-                                </td> */}
+                                </td>
                                 <td className="py-1.5 text-center">{data.company}</td>
                               </>
                             )

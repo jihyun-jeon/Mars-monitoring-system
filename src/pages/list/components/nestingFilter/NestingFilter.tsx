@@ -14,9 +14,12 @@ import equipmentOptionData from '../data/equipmentOptionData'
 type Props = {
   pathName: string
   setIsLoading: Dispatch<SetStateAction<boolean>>
+  onModal: { clicked: boolean; childrun: null | any }
 }
 
-const NestingFilter = ({ pathName, setIsLoading }: Props) => {
+const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
+  const { listDatas } = useStore()
+
   const pathCheckerOptionData: any = () => {
     switch (pathName) {
       case 'equipmentList':
@@ -72,8 +75,8 @@ const NestingFilter = ({ pathName, setIsLoading }: Props) => {
 
   const requestToServerSearch = async () => {
     const collectiveQuery = {
-      equipmentTypeId: EquipmentType && `type_id=[${EquipmentType}]`.concat('&'),
-      deviceStatusId: DeviceStatus && `status_id=[${DeviceStatus}]`.concat('&'),
+      equipmentTypeId: EquipmentType && `type_id=${EquipmentType}`.concat('&'),
+      deviceStatusId: DeviceStatus && `status_id=${DeviceStatus}`.concat('&'),
       batteryPercentage: BatteryPercentage && `battery=20`.concat('&'),
       equipmentPowerStatus: PowerStatus && `is_power=${PowerStatus}`.concat('&'),
       matchedStatus: MatchedStatus && `is_matched=${MatchedStatus}`.concat('&'),
@@ -100,8 +103,8 @@ const NestingFilter = ({ pathName, setIsLoading }: Props) => {
     try {
       switch (pathName) {
         case 'equipmentList':
-          response = await axios.get('/data/equipmentList.json')
-          // response = await axios.get(equipmentQueryAddress)
+          // response = await axios.get('/data/equipmentList.json')
+          response = await axios.get(equipmentQueryAddress)
           listDatas.setEquipmentListData(response.data)
           break
         case 'deviceList':
@@ -116,8 +119,10 @@ const NestingFilter = ({ pathName, setIsLoading }: Props) => {
           break
       }
       setIsLoading(false)
-    } catch (err) {
-      alert(err)
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response)
+      }
     }
   }
 
@@ -141,12 +146,9 @@ const NestingFilter = ({ pathName, setIsLoading }: Props) => {
     requestToServerSearch()
   }
 
-  const { listDatas } = useStore()
-  const { equipmentListData, deviceListData, adminHistoryListData } = listDatas
-
   useEffect(() => {
     requestToServerSearch()
-  }, [equipmentListData, deviceListData, adminHistoryListData])
+  }, [onModal.clicked])
 
   return (
     <>
