@@ -3,7 +3,7 @@ const equipmentItemData = [
   'Equipment Type',
   'Power',
   'Device Status',
-  'Battery Status',
+  'Battery Percentage',
   'Device Matched',
   'Company',
 ]

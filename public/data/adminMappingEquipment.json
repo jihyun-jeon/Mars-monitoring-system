@@ -1,0 +1,198 @@
+{
+  "results": {
+    "equipment": [
+      {
+        "id": 1,
+        "originalId": "eq-1234",
+        "companyName": "AAE",
+        "equipmentType": "welding machine",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "originalId": "eq-1235",
+        "companyName": "AAE",
+        "equipmentType": "welding machine",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "originalId": "eq-1236",
+        "companyName": "AAE",
+        "equipmentType": "Conveyor belt",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "originalId": "eq-1237",
+        "companyName": "AAE",
+        "equipmentType": "Conveyor belt",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "originalId": "eq-1238",
+        "companyName": "AAE",
+        "equipmentType": "Scissors lift",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "originalId": "eq-1239",
+        "companyName": "AAE",
+        "equipmentType": "Scissors lift",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "originalId": "eq-1241",
+        "companyName": "AAE",
+        "equipmentType": "Verti boring machine",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "originalId": "eq-1244",
+        "companyName": "SECL",
+        "equipmentType": "Conveyor belt",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "originalId": "eq-1245",
+        "companyName": "SECL",
+        "equipmentType": "Conveyor belt",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "originalId": "eq-1246",
+        "companyName": "SECL",
+        "equipmentType": "Scissors lift",
+        "isMatched": [
+          {
+            "isMatched": true
+          }
+        ]
+      }
+    ],
+    "equipmentGpsTracker": [
+      {
+        "id": 113,
+        "battery": "26.18",
+        "status": "Network error",
+        "serialNumber": "dv-1234",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 114,
+        "battery": "12.98",
+        "status": "Power on",
+        "serialNumber": "dv-1232",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 115,
+        "battery": "47.52",
+        "status": "Network error",
+        "serialNumber": "dv-1237",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 116,
+        "battery": "13.15",
+        "status": "Power off",
+        "serialNumber": "dv-1238",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 117,
+        "battery": "39.58",
+        "status": "Network error",
+        "serialNumber": "dv-1289",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 118,
+        "battery": "29.20",
+        "status": "Power on",
+        "serialNumber": "dv-12789",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 119,
+        "battery": "48.92",
+        "status": "Power off",
+        "serialNumber": "dv-6789",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 120,
+        "battery": "40.55",
+        "status": "Power on",
+        "serialNumber": "dv-6765",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 121,
+        "battery": "26.42",
+        "status": "Power on",
+        "serialNumber": "dv-4562",
+        "companyName": "AAE",
+        "isMatched": true
+      },
+      {
+        "id": 122,
+        "battery": "35.52",
+        "status": "Power on",
+        "serialNumber": "dv-789854",
+        "companyName": "SECL",
+        "isMatched": true
+      }
+    ]
+  }
+}
