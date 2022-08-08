@@ -1,10 +1,11 @@
 const deviceItemData = [
   'Serial Number',
-  'Battery Status',
-  'Matched Equipment',
-  'Matched Status',
-  'Status',
+  'Power Status',
   'Company',
+  'Battery Status',
+  'Matched Status',
+  'Matched Equipment Type',
+  'Matched Equipment',
 ]
 
 export default deviceItemData

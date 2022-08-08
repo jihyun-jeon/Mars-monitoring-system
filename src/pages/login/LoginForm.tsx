@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { AiOutlineEye, AiFillEye } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 
-import { LOGIN_ADDRESS } from '../../config'
+import { SERVER_ADDRESS } from '../../config'
 import useStore from '../../useStore'
 
 const LoginForm = () => {
@@ -89,7 +89,7 @@ const LoginForm = () => {
   const requestUserInfoCheckToServer = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const response = await axios.post(`${LOGIN_ADDRESS}user/signin`, {
+      const response = await axios.post(`${SERVER_ADDRESS}user/signin`, {
         identity: userId,
         password: userPw,
       })

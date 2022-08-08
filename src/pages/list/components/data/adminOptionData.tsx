@@ -1,7 +1,7 @@
 const adminOptionData = [
   {
     title: 'History List',
-    name: 'Item',
+    name: 'Category',
     option: [
       {
         queryTitle: '',
@@ -13,7 +13,7 @@ const adminOptionData = [
       },
       {
         queryTitle: 2,
-        optionTitle: 'Installation',
+        optionTitle: 'Matched',
       },
       {
         queryTitle: 3,

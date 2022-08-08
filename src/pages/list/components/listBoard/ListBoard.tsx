@@ -1,16 +1,18 @@
 import axios from 'axios'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import React, { useState, useContext, Dispatch, SetStateAction } from 'react'
+import React, { useState, useContext } from 'react'
+import { IoPowerSharp } from 'react-icons/io5'
 import ReactLoading from 'react-loading'
 import { useNavigate } from 'react-router'
 
 import AppContext from '../../../../AppContext'
 import DeleteCheck from '../../../../components/modal/components/DeleteCheck'
 import Modal from '../../../../components/modal/modal'
-import { EQUIPMENT_LIST_ADDRESS, DEVICE_LIST_ADDRESS } from '../../../../config'
+import { SERVER_ADDRESS } from '../../../../config'
 import useStore from '../../../../useStore'
-import adminItemData from '../data/adminItemData'
+import adminDeviceItemData from '../../components/data/adminDeviceItemData'
+import adminEquipmentItemData from '../../components/data/adminEquipmentItemData'
 import deviceItemData from '../data/deviceItemData'
 import equipmentItemData from '../data/equipmentItemData'
 import Pagination from '../pagination/Pagination'
@@ -25,11 +27,9 @@ interface onModalType {
 type Props = {
   pathName: string
   isLoading: boolean
-  onModal: { clicked: boolean; childrun: null | any }
-  setOnModal: Dispatch<SetStateAction<onModalType>>
 }
 
-const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props) => {
+const ListBoard = observer(({ pathName, isLoading }: Props) => {
   const navigate = useNavigate()
 
   const appContext = useContext(AppContext)
@@ -38,6 +38,8 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
 
   const { isEquipmentControl } = usersInfo
 
+  const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
+
   const renderData = {
     equipmentData: toJS(listDatas.equipmentListData),
     deviceData: toJS(listDatas.deviceListData),
@@ -45,6 +47,10 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
   }
 
   const { equipmentData, deviceData, adminHistoryData } = renderData
+
+  const adminHistoryCombineData = adminHistoryData.results?.equipment_repaired.concat(
+    adminHistoryData.results?.equipment_matched,
+  )
 
   const pathCheckerOptionData: any = () => {
     switch (pathName) {
@@ -68,35 +74,6 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
       setTabName((text) => ({ ...text, ['equipment']: innerText, device: '' }))
     } else if (innerText === 'Device') {
       setTabName((text) => ({ ...text, ['device']: innerText, equipment: '' }))
-    }
-  }
-
-  const requestToServerDeleteId = async () => {
-    const equipmentQueryAddress = `${EQUIPMENT_LIST_ADDRESS}equipment/list/delete?ids=[${checkedValue}]`
-    const deviceQueryAddress = `${DEVICE_LIST_ADDRESS}device?ids=[${checkedValue}]`
-    try {
-      switch (pathName) {
-        case 'equipmentList':
-          await axios.delete(equipmentQueryAddress, {
-            headers: {
-              Authorization: `${localStorage.getItem('access_token')}`,
-            },
-          })
-          await appContext.setToastMessage(['삭제가 완료되었습니다'])
-          break
-        case 'deviceList':
-          await axios.delete(deviceQueryAddress, {
-            headers: {
-              Authorization: `${localStorage.getItem('access_token')}`,
-            },
-          })
-          await appContext.setToastMessage(['삭제가 완료되었습니다'])
-          break
-      }
-    } catch (error: any) {
-      if (error.response) {
-        console.log(error.response)
-      }
     }
   }
 
@@ -137,7 +114,43 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
     }
   }
 
-  if (isLoading)
+  const requestToServerDeleteId = async () => {
+    const equipmentGetAddress = `${SERVER_ADDRESS}equipment/list`
+    const equipmentDeleteQueryAddress = `${SERVER_ADDRESS}equipment/list/delete?ids=[${checkedValue}]`
+    const deviceGetAddress = `${SERVER_ADDRESS}device/list`
+    const deviceDeleteQueryAddress = `${SERVER_ADDRESS}device/list/delete?ids=[${checkedValue}]`
+    let response
+    try {
+      switch (pathName) {
+        case 'equipmentList':
+          await axios.delete(equipmentDeleteQueryAddress, {
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+            },
+          })
+          response = await axios.get(equipmentGetAddress)
+          listDatas.setEquipmentListData(response.data)
+          await appContext.setToastMessage(['Complete Delete'])
+          break
+        case 'deviceList':
+          await axios.delete(deviceDeleteQueryAddress, {
+            headers: {
+              Authorization: `${localStorage.getItem('access_token')}`,
+            },
+          })
+          response = await axios.get(deviceGetAddress)
+          listDatas.setDeviceListData(response.data)
+          await appContext.setToastMessage(['Complete Delete'])
+          break
+      }
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response)
+      }
+    }
+  }
+
+  if (isLoading) {
     return (
       <div className="fixed top-0 left-0 h-screen w-screen bg-slate-200 opacity-60">
         <ReactLoading
@@ -148,6 +161,7 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
         />
       </div>
     )
+  }
 
   return (
     <>
@@ -162,7 +176,7 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
             return <h2 className="mb-2 text-2xl font-semibold text-black">Search History</h2>
         }
       })()}
-      {/* tabName: 현재 경로가 adminHistory일때만, 클릭한 탭의 이름에 따라 버튼의 스타일 변경됩니다 */}
+      {/* tabName: 현재 경로가 adminHistory일때만, 탭이 생성되며 클릭한 탭의 이름에 따라 버튼의 스타일 변경됩니다 */}
       {pathName === 'adminHistory' && (
         <div className="flex">
           <button
@@ -186,163 +200,203 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
           <tr>
             {/* listItem: 현재 경로에 따라 항목들이 변경됩니다 */}
             {(() => {
-              if (pathName === 'equipmentList')
+              if (pathName === 'equipmentList') {
                 return equipmentItemData.map((item: any, idx) => (
                   <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
                     {item}
                   </th>
                 ))
-              if (pathName === 'deviceList')
+              }
+
+              if (pathName === 'deviceList') {
                 return deviceItemData.map((item: any, idx) => (
                   <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
                     {item}
                   </th>
                 ))
-              if (pathName === 'adminHistory')
-                return adminItemData.map((item: any, idx) => (
-                  <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
-                    {item}
-                  </th>
-                ))
+              }
+
+              if (pathName === 'adminHistory') {
+                if (tabName.equipment === 'Equipment') {
+                  return adminEquipmentItemData.map((item: any, idx) => (
+                    <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
+                      {item}
+                    </th>
+                  ))
+                } else {
+                  return adminDeviceItemData.map((item: any, idx) => (
+                    <th key={idx} className="border-2 bg-[#EFF2F5] py-2">
+                      {item}
+                    </th>
+                  ))
+                }
+              }
             })()}
           </tr>
         </thead>
-        {/* item: 현재 경로에 따라 장비,디바이스가 변경됩니다 */}
+        {/* item: 현재 경로에 따라 장비,디바이스 아이템이 변경됩니다 */}
         {(() => {
           if (pathName === 'equipmentList' || pathName === 'deviceList')
             return (
-              <>
+              <tbody className="border">
                 {pathCheckerOptionData()
                   .results.slice(offset, offset + limit)
                   .map((data: any, idx: number) => (
-                    <tbody className="border" key={idx}>
-                      <tr
-                        className="cursor-pointer"
-                        onClick={() => {
-                          navigate(`/${pathName.slice(0, -4) + 'Detail'}/${data.id}`)
-                          if (pathName === 'equipmentList') {
-                            pathNumbers.setEquipmentNumber(data.originalId)
-                          } else {
-                            pathNumbers.setDeviceListNumber(data.serialNumber)
-                          }
-                        }}
-                      >
-                        {(() => {
-                          if (pathName === 'equipmentList')
-                            return (
-                              <>
-                                <td className="relative py-1.5 text-center">
-                                  {data.originalId}
-                                  {isEquipmentControl && (
-                                    <label
-                                      htmlFor={`1${idx}`}
-                                      className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <input
-                                        id={`1${idx}`}
-                                        onChange={checkHandler}
-                                        value={data.id}
-                                        type="checkbox"
-                                        className="checkCursor"
-                                      />
-                                    </label>
-                                  )}
-                                </td>
-                                <td className="py-1.5 text-center">{data.equipmentType}</td>
-                                <td className="py-1.5 text-center">
-                                  {data.isPower ? 'ON' : 'OFF'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.deviceStatus[0]?.statusContent
-                                    ? data.deviceStatus[0]?.statusContent
-                                    : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.deviceStatus[0]?.battery
-                                    ? data.deviceStatus[0]?.battery
-                                    : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.deviceMatched[0]?.isMatched ? 'Matched' : 'UnMatched'}
-                                </td>
-                                <td className="py-1.5 text-center">{data.company}</td>
-                              </>
-                            )
-                          if (pathName === 'deviceList')
-                            return (
-                              <>
-                                <td className="relative py-1.5 text-center">
-                                  {data.serialNumber}
-                                  {isEquipmentControl && (
-                                    <label
-                                      htmlFor={`1${idx}`}
-                                      className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <input
-                                        id={`1${idx}`}
-                                        onChange={checkHandler}
-                                        value={data.id}
-                                        type="checkbox"
-                                        className="checkCursor"
-                                      />
-                                    </label>
-                                  )}
-                                </td>
-                                {/* 데이터 보고 수정 */}
-                                <td className="py-1.5 text-center">low</td>
-                                <td className="py-1.5 text-center">
-                                  {data.matchedEquipment[0]?.matchedEquipmentCategory
-                                    ? data.matchedEquipment[0]?.matchedEquipmentCategory
-                                    : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.status ? 'Matched' : 'UnMatched'}
-                                </td>
-                                <td className="py-1.5 text-center">{data.status ? 'ON' : 'OFF'}</td>
-                                <td className="py-1.5 text-center">{data.company}</td>
-                              </>
-                            )
-                        })()}
-                      </tr>
-                    </tbody>
+                    <tr
+                      key={data.id}
+                      className={
+                        checkedValue.includes(data.id.toString() as never)
+                          ? 'cursor-pointer bg-sky-100'
+                          : 'cursor-pointer'
+                      }
+                      onClick={() => {
+                        navigate(`/${pathName.slice(0, -4) + 'Detail'}/${data.id}`)
+                        if (pathName === 'equipmentList') {
+                          pathNumbers.setEquipmentNumber(data.originalId)
+                        } else {
+                          pathNumbers.setDeviceListNumber(data.serialNumber)
+                        }
+                      }}
+                    >
+                      {(() => {
+                        if (pathName === 'equipmentList')
+                          return (
+                            <>
+                              <td className="relative py-1.5 text-center">
+                                {data.originalId}
+                                {isEquipmentControl && (
+                                  <label
+                                    htmlFor={`1${idx}`}
+                                    className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <input
+                                      id={`1${idx}`}
+                                      onChange={checkHandler}
+                                      value={data.id}
+                                      type="checkbox"
+                                      className="checkCursor"
+                                    />
+                                  </label>
+                                )}
+                              </td>
+                              <td className="py-1.5 text-center">{data.equipmentType}</td>
+                              <td className="py-1.5 text-center">{data.company}</td>
+                              <td className="py-1.5 text-center">
+                                {data.driver[0]?.name ? data.driver[0]?.name : '-'}
+                              </td>
+                              <td className="py-1.5 text-center">
+                                {data.deviceStatus[0]?.battery.length > 0
+                                  ? data.deviceStatus[0]?.battery.slice(0, -3) + '%'
+                                  : '-'}
+                              </td>
+                              <td className="py-1.5 text-center">
+                                {data.deviceMatched[0]?.isMatched ? 'Matched' : 'UnMatched'}
+                              </td>
+                              <td className="py-1.5 text-center">
+                                {data.deviceStatus[0]?.statusContent
+                                  ? data.deviceStatus[0]?.statusContent
+                                  : '-'}
+                              </td>
+                              <td className="flex justify-center py-1.5 text-center text-xl">
+                                {data.isPower ? (
+                                  <IoPowerSharp className="text-[#00d300]" />
+                                ) : (
+                                  <IoPowerSharp className="text-[#ff0000]" />
+                                )}
+                              </td>
+                            </>
+                          )
+                        if (pathName === 'deviceList')
+                          return (
+                            <>
+                              <td className="relative py-1.5 text-center">
+                                {data.serialNumber}
+                                {isEquipmentControl && (
+                                  <label
+                                    htmlFor={`1${idx}`}
+                                    className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <input
+                                      id={`1${idx}`}
+                                      onChange={checkHandler}
+                                      value={data.id}
+                                      type="checkbox"
+                                      className="checkCursor"
+                                    />
+                                  </label>
+                                )}
+                              </td>
+                              <td className="flex justify-center py-1.5 text-center">
+                                {data.status ? (
+                                  <IoPowerSharp className="text-[#00d300]" />
+                                ) : (
+                                  <IoPowerSharp className="text-[#ff0000]" />
+                                )}
+                              </td>
+                              <td className="py-1.5 text-center">{data.company}</td>
+                              <td className="py-1.5 text-center">
+                                {data.battery.length > 0 ? data.battery.slice(0, -3) + '%' : '-'}
+                              </td>
+                              {/* 데이터 수정 대기 (Matched Status)  */}
+                              <td className="py-1.5 text-center">
+                                {data.status ? 'Matched' : 'UnMatched'}
+                              </td>
+                              <td className="py-1.5 text-center">
+                                {data.matchedEquipment[0]?.matchedEquipmentCategory
+                                  ? data.matchedEquipment[0]?.matchedEquipmentCategory
+                                  : '-'}
+                              </td>
+                              <td className="py-1.5 text-center">
+                                {data.matchedEquipment[0]?.matchedEquipmentId
+                                  ? data.matchedEquipment[0]?.matchedEquipmentId
+                                  : '-'}
+                              </td>
+                            </>
+                          )
+                      })()}
+                    </tr>
                   ))}
-              </>
+              </tbody>
             )
           if (pathName === 'adminHistory')
             if (tabName.equipment === 'Equipment') {
               return (
                 <>
-                  {pathCheckerOptionData()
-                    .results.equipment.slice(offset, offset + limit)
+                  {adminHistoryCombineData
+                    .slice(offset, offset + limit)
                     .map((data: any, idx: number) => (
                       <tbody className="border" key={idx}>
                         <tr>
                           <>
-                            <td className="relative py-1.5 text-center">Replace</td>
+                            <td className="relative py-1.5 text-center">
+                              {data.sortType === 'equipment_repaired' ? 'Repaired' : 'Matched'}
+                            </td>
                             <td className="py-1.5 text-center">{data.originalId}</td>
-                            <td className="py-1.5 text-center">{data.companyName}</td>
-                            <td className="py-1.5 text-center">2022.01.02</td>
+                            <td className="py-1.5 text-center">{data.equipmentCompany}</td>
+                            <td className="py-1.5 text-center">{data.date.slice(0, -13)}</td>
                           </>
                         </tr>
                       </tbody>
                     ))}
                 </>
               )
+              // 데이터 들어오면 수정
             } else {
               return (
                 <>
-                  {pathCheckerOptionData()
-                    .results.equipmentGpsTracker.slice(offset, offset + limit)
+                  {adminHistoryCombineData
+                    .slice(offset, offset + limit)
                     .map((data: any, idx: number) => (
                       <tbody className="border" key={idx}>
                         <tr>
                           <>
-                            <td className="relative py-1.5 text-center">Repair</td>
-                            <td className="py-1.5 text-center">{data.serialNumber}</td>
-                            <td className="py-1.5 text-center">{data.companyName}</td>
-                            <td className="py-1.5 text-center">2022-03-20</td>
+                            <td className="relative py-1.5 text-center">
+                              {data.sortType === 'equipment_repaired' ? 'Repaired' : 'Matched'}
+                            </td>
+                            <td className="py-1.5 text-center">{data.originalId}</td>
+                            <td className="py-1.5 text-center">{data.date.slice(0, -13)}</td>
                           </>
                         </tr>
                       </tbody>
@@ -380,7 +434,7 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
             if (tabName.equipment === 'Equipment') {
               return (
                 <Pagination
-                  total={pathCheckerOptionData().results.equipment.length}
+                  total={adminHistoryCombineData.length}
                   limit={limit}
                   page={page}
                   setPage={setPage}
@@ -390,7 +444,7 @@ const ListBoard = observer(({ pathName, isLoading, onModal, setOnModal }: Props)
             } else {
               return (
                 <Pagination
-                  total={pathCheckerOptionData().results.equipmentGpsTracker.length}
+                  total={adminHistoryCombineData.length}
                   limit={limit}
                   page={page}
                   setPage={setPage}

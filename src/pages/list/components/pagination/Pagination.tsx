@@ -52,7 +52,7 @@ const Pagination = ({ total, limit, page, setPage, setLimit }: PaginationProps) 
           onChange={({ target: { value } }) => setLimit(Number(value))}
           onClick={currentMoveButton}
         >
-          <option value="10">1</option>
+          <option value="10">10</option>
           <option value="20">20</option>
           <option value="30">30</option>
         </select>
@@ -62,15 +62,15 @@ const Pagination = ({ total, limit, page, setPage, setLimit }: PaginationProps) 
           <li>
             <button
               onClick={doublePrevMoveButton}
-              disabled={page === 1 || page === 10 || page < 10}
-              className="bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              disabled={page === 1}
+              className="bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed"
             >
               &lt;&lt;
             </button>
             <button
               onClick={prevMoveButton}
               disabled={page === 1}
-              className="mr-6 bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="mr-6 bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed"
             >
               &lt;
             </button>
@@ -92,14 +92,14 @@ const Pagination = ({ total, limit, page, setPage, setLimit }: PaginationProps) 
             <button
               onClick={nextMoveButton}
               disabled={page === numPages}
-              className="ml-6 bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="ml-6 bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed"
             >
               &gt;
             </button>
             <button
               onClick={doubleNextMoveButton}
-              disabled={page === numPages || !(page < 10)}
-              className=" bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              disabled={page === numPages}
+              className=" bg-bgDefault py-2 px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed"
             >
               &gt;&gt;
             </button>

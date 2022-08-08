@@ -2,85 +2,131 @@
   "results": [
     {
       "id": 1,
-      "serialNumber": "",
+      "serialNumber": "dv-1234",
       "deviceCategory": "Device",
       "company": "AAE",
+      "status": false,
       "matchedEquipment": [
         {
-          "matchedEquipmentId": "eq-9879",
-          "matchedEquipmentCategory": "Boring machine"
+          "matchedEquipmentId": "eq-1234",
+          "matchedEquipmentCategory": "welding machine"
         }
       ],
-      "status": false
+      "battery": []
     },
     {
       "id": 2,
-      "serialNumber": "",
+      "serialNumber": "dv-1232",
       "deviceCategory": "Device",
       "company": "AAE",
+      "status": false,
       "matchedEquipment": [
         {
-          "matchedEquipmentId": "eq-9878",
-          "matchedEquipmentCategory": "Boring machine"
+          "matchedEquipmentId": "eq-1234",
+          "matchedEquipmentCategory": "welding machine"
+        },
+        {
+          "matchedEquipmentId": "eq-1235",
+          "matchedEquipmentCategory": "welding machine"
         }
       ],
-      "status": false
+      "battery": []
     },
     {
       "id": 3,
-      "serialNumber": "",
+      "serialNumber": "dv-1237",
       "deviceCategory": "Device",
       "company": "AAE",
-      "matchedEquipment": [],
-      "status": false
+      "status": false,
+      "matchedEquipment": [
+        {
+          "matchedEquipmentId": "eq-1234",
+          "matchedEquipmentCategory": "welding machine"
+        },
+        {
+          "matchedEquipmentId": "eq-1236",
+          "matchedEquipmentCategory": "mechanical handling equipment"
+        }
+      ],
+      "battery": []
     },
     {
       "id": 4,
-      "serialNumber": "",
+      "serialNumber": "dv-1238",
       "deviceCategory": "Device",
       "company": "AAE",
-      "matchedEquipment": [],
-      "status": false
+      "status": false,
+      "matchedEquipment": [
+        {
+          "matchedEquipmentId": "eq-1234",
+          "matchedEquipmentCategory": "welding machine"
+        }
+      ],
+      "battery": []
     },
     {
       "id": 5,
-      "serialNumber": "",
+      "serialNumber": "dv-1289",
       "deviceCategory": "Device",
       "company": "AAE",
-      "matchedEquipment": [],
-      "status": false
+      "status": false,
+      "matchedEquipment": [
+        {
+          "matchedEquipmentId": "eq-1234",
+          "matchedEquipmentCategory": "welding machine"
+        }
+      ],
+      "battery": []
     },
     {
       "id": 6,
-      "serialNumber": "",
+      "serialNumber": "dv-12789",
       "deviceCategory": "Device",
       "company": "AAE",
-      "matchedEquipment": [],
-      "status": false
+      "status": false,
+      "matchedEquipment": [
+        {
+          "matchedEquipmentId": "eq-1234",
+          "matchedEquipmentCategory": "welding machine"
+        }
+      ],
+      "battery": []
     },
     {
       "id": 7,
-      "serialNumber": "",
+      "serialNumber": "dv-6789",
       "deviceCategory": "Device",
       "company": "AAE",
+      "status": false,
       "matchedEquipment": [],
-      "status": false
+      "battery": []
     },
     {
       "id": 8,
-      "serialNumber": "",
+      "serialNumber": "dv-6765",
       "deviceCategory": "Device",
       "company": "AAE",
+      "status": false,
       "matchedEquipment": [],
-      "status": false
+      "battery": []
     },
     {
       "id": 9,
-      "serialNumber": "",
+      "serialNumber": "dv-4562",
       "deviceCategory": "Device",
       "company": "AAE",
+      "status": false,
       "matchedEquipment": [],
-      "status": false
+      "battery": []
+    },
+    {
+      "id": 10,
+      "serialNumber": "dv-789854",
+      "deviceCategory": "Device",
+      "company": "SECL",
+      "status": false,
+      "matchedEquipment": [],
+      "battery": []
     }
   ]
 }
