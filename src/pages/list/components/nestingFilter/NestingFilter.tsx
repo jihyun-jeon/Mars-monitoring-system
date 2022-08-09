@@ -1,11 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
-import {
-  EQUIPMENT_LIST_ADDRESS,
-  DEVICE_LIST_ADDRESS,
-  ADMIN_HISTORY_ADDRESS,
-} from '../../../../config'
+import { SERVER_ADDRESS } from '../../../../config'
 import useStore from '../../../../useStore'
 import adminOptionData from '../data/adminOptionData'
 import deviceOptionData from '../data/deviceOptionData'
@@ -14,10 +10,9 @@ import equipmentOptionData from '../data/equipmentOptionData'
 type Props = {
   pathName: string
   setIsLoading: Dispatch<SetStateAction<boolean>>
-  onModal: { clicked: boolean; childrun: null | any }
 }
 
-const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
+const NestingFilter = ({ pathName, setIsLoading }: Props) => {
   const { listDatas } = useStore()
 
   const pathCheckerOptionData: any = () => {
@@ -31,56 +26,72 @@ const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
     }
   }
 
-  const [searchInfo, setSearchInfo] = useState({
+  const [equipmentSearchInfos, setEquipmentSearchInfos] = useState({
     EquipmentType: '',
     DeviceStatus: '',
     BatteryPercentage: '',
     PowerStatus: '',
     MatchedStatus: '',
-    BatteryStatus: 'lowBattery',
   })
 
-  const {
-    EquipmentType,
-    DeviceStatus,
-    BatteryPercentage,
-    PowerStatus,
-    MatchedStatus,
-    BatteryStatus,
-  } = searchInfo
+  const [deviceSearchInfos, setDeviceSearchInfos] = useState({
+    BatteryStatus: '',
+    Company: '',
+    MatchedStatus: '',
+    PowerStatus: '',
+  })
 
   const handleUserSelector = (e: any) => {
     const { value, name } = e.target
-    switch (name) {
-      case 'EquipmentType':
-        setSearchInfo((data) => ({ ...data, [name]: value }))
+    switch (pathName) {
+      case 'equipmentList':
+        switch (name) {
+          case 'EquipmentType':
+            setEquipmentSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'DeviceStatus':
+            setEquipmentSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'BatteryPercentage':
+            setEquipmentSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'PowerStatus':
+            setEquipmentSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'MatchedStatus':
+            setEquipmentSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+        }
         break
-      case 'DeviceStatus':
-        setSearchInfo((data) => ({ ...data, [name]: value }))
-        break
-      case 'BatteryPercentage':
-        setSearchInfo((data) => ({ ...data, [name]: value }))
-        break
-      case 'PowerStatus':
-        setSearchInfo((data) => ({ ...data, [name]: value }))
-        break
-      case 'MatchedStatus':
-        setSearchInfo((data) => ({ ...data, [name]: value }))
-        break
-      case 'BatteryStatus':
-        setSearchInfo((data) => ({ ...data, [name]: value }))
+      case 'deviceList':
+        switch (name) {
+          case 'BatteryStatus':
+            setDeviceSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'Company':
+            setDeviceSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'MatchedStatus':
+            setDeviceSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+          case 'PowerStatus':
+            setDeviceSearchInfos((data) => ({ ...data, [name]: value }))
+            break
+        }
         break
     }
   }
 
-  const requestToServerSearch = async () => {
+  const equipmentRequestServer = async () => {
+    const { EquipmentType, DeviceStatus, BatteryPercentage, PowerStatus, MatchedStatus } =
+      equipmentSearchInfos
+
     const collectiveQuery = {
       equipmentTypeId: EquipmentType && `type_id=${EquipmentType}`.concat('&'),
       deviceStatusId: DeviceStatus && `status_id=${DeviceStatus}`.concat('&'),
       batteryPercentage: BatteryPercentage && `battery=20`.concat('&'),
       equipmentPowerStatus: PowerStatus && `is_power=${PowerStatus}`.concat('&'),
       matchedStatus: MatchedStatus && `is_matched=${MatchedStatus}`.concat('&'),
-      batteryStatus: BatteryStatus,
     }
 
     const {
@@ -89,35 +100,46 @@ const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
       batteryPercentage,
       equipmentPowerStatus,
       matchedStatus,
-      batteryStatus,
     } = collectiveQuery
 
-    const equipmentQueryAddress =
-      `${EQUIPMENT_LIST_ADDRESS}equipment/list?${equipmentTypeId}${deviceStatusId}${batteryPercentage}${equipmentPowerStatus}${matchedStatus}`.slice(
+    const queryAddress =
+      `${SERVER_ADDRESS}equipment/list?${equipmentTypeId}${deviceStatusId}${batteryPercentage}${equipmentPowerStatus}${matchedStatus}`.slice(
         0,
         -1,
       )
-    const deviceQueryAddress = `${DEVICE_LIST_ADDRESS}device/list?order=${batteryStatus}`
-    const adminHistoryAddress = `${ADMIN_HISTORY_ADDRESS}/equipment/match`
-    let response
+
     try {
-      switch (pathName) {
-        case 'equipmentList':
-          // response = await axios.get('/data/equipmentList.json')
-          response = await axios.get(equipmentQueryAddress)
-          listDatas.setEquipmentListData(response.data)
-          break
-        case 'deviceList':
-          response = await axios.get('/data/deviceList.json')
-          // response = await axios.get(deviceQueryAddress)
-          listDatas.setDeviceListData(response.data)
-          break
-        case 'adminHistory':
-          response = await axios.get('/data/adminHistory.json')
-          // response = await axios.get(adminHistoryAddress)
-          listDatas.setAdminHistoryData(response.data)
-          break
+      const response = await axios.get(queryAddress)
+      listDatas.setEquipmentListData(response.data)
+      setIsLoading(false)
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response)
       }
+    }
+  }
+
+  const deviceRequestServer = async () => {
+    const { BatteryStatus, Company, MatchedStatus, PowerStatus } = deviceSearchInfos
+
+    const collectiveQuery = {
+      batteryStatusId: BatteryStatus && `batteryStatus=${BatteryStatus}`.concat('&'),
+      companyId: Company && `company=${Company}`.concat('&'),
+      matchedStatusId: MatchedStatus && `matchedStatus=${MatchedStatus}`.concat('&'),
+      powerStatusId: PowerStatus && `powerStatus=${PowerStatus}`.concat('&'),
+    }
+
+    const { batteryStatusId, companyId, matchedStatusId, powerStatusId } = collectiveQuery
+
+    const queryAddress =
+      `${SERVER_ADDRESS}device/list?${batteryStatusId}${companyId}${matchedStatusId}${powerStatusId}`.slice(
+        0,
+        -1,
+      )
+
+    try {
+      const response = await axios.get(queryAddress)
+      listDatas.setDeviceListData(response.data)
       setIsLoading(false)
     } catch (error: any) {
       if (error.response) {
@@ -126,10 +148,25 @@ const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
     }
   }
 
+  const adminHistoryRequestServer = async () => {
+    const address = `${SERVER_ADDRESS}equipment/admin/list`
+    try {
+      const response = await axios.get(address)
+      listDatas.setAdminHistoryData(response.data)
+      setIsLoading(false)
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response)
+      }
+    }
+  }
+
+  const [resetOption, setResetOption] = useState(true)
+
   const resetInfo = () => {
     switch (pathName) {
       case 'equipmentList':
-        setSearchInfo((data) => ({
+        setEquipmentSearchInfos((data) => ({
           ...data,
           ['EquipmentType']: '',
           ['DeviceStatus']: '',
@@ -137,18 +174,34 @@ const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
           ['ActiveStatus']: '',
           ['MatchedStatus']: '',
         }))
+        setResetOption(false)
         break
       case 'deviceList':
-        setSearchInfo((data) => ({ ...data, ['BatteryStatus']: 'lowBattery' }))
+        setDeviceSearchInfos((data) => ({
+          ...data,
+          ['BatteryStatus']: '',
+          ['Company']: '',
+          ['MatchedStatus']: '',
+          ['PowerStatus']: '',
+        }))
+        setResetOption(false)
         break
     }
-    window.location.reload()
-    requestToServerSearch()
   }
 
   useEffect(() => {
-    requestToServerSearch()
-  }, [onModal.clicked])
+    switch (pathName) {
+      case 'equipmentList':
+        equipmentRequestServer()
+        break
+      case 'deviceList':
+        deviceRequestServer()
+        break
+      case 'adminHistory':
+        adminHistoryRequestServer()
+        break
+    }
+  }, [])
 
   return (
     <>
@@ -161,7 +214,9 @@ const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
                 {data.name}
               </h3>
               <select
+                value={resetOption ? data.id : '0'}
                 name={data.name}
+                onFocus={() => setResetOption(true)}
                 onChange={handleUserSelector}
                 className="block w-52 rounded border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
               >
@@ -187,12 +242,35 @@ const NestingFilter = ({ pathName, setIsLoading, onModal }: Props) => {
           >
             Reset
           </button>
-          <button
-            onClick={requestToServerSearch}
-            className="rounded-lg border-2 bg-primary px-[7rem] py-1 text-white"
-          >
-            Search
-          </button>
+          {(() => {
+            if (pathName === 'equipmentList')
+              return (
+                <button
+                  onClick={equipmentRequestServer}
+                  className="rounded-lg border-2 bg-primary px-[7rem] py-1 text-white"
+                >
+                  Search
+                </button>
+              )
+            if (pathName === 'deviceList')
+              return (
+                <button
+                  onClick={deviceRequestServer}
+                  className="rounded-lg border-2 bg-primary px-[7rem] py-1 text-white"
+                >
+                  Search
+                </button>
+              )
+            if (pathName === 'adminHistory')
+              return (
+                <button
+                  onClick={deviceRequestServer}
+                  className="rounded-lg border-2 bg-primary px-[7rem] py-1 text-white"
+                >
+                  Search
+                </button>
+              )
+          })()}
         </div>
       </div>
     </>

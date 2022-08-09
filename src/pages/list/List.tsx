@@ -13,17 +13,10 @@ const List = observer(() => {
 
   const [isLoading, setIsLoading] = useState(true)
 
-  const [onModal, setOnModal] = useState({ clicked: false, childrun: null })
-
   return (
     <div className="listWrapper h-screen overflow-y-scroll bg-bgDefault">
-      <NestingFilter pathName={pathName} setIsLoading={setIsLoading} onModal={onModal} />
-      <ListBoard
-        pathName={pathName}
-        isLoading={isLoading}
-        onModal={onModal}
-        setOnModal={setOnModal}
-      />
+      <NestingFilter pathName={pathName} setIsLoading={setIsLoading} />
+      <ListBoard pathName={pathName} isLoading={isLoading} />
     </div>
   )
 })

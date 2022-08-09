@@ -1,277 +1,284 @@
 {
   "results": {
-    "equipment": [
+    "equipment_repaired": [
       {
-        "id": 1,
-        "originalId": "eq-1234",
-        "companyName": "AAE",
-        "equipmentType": "welding machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "originalId": "eq-1235",
-        "companyName": "AAE",
-        "equipmentType": "welding machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "originalId": "eq-1236",
-        "companyName": "AAE",
-        "equipmentType": "Conveyor belt",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "originalId": "eq-1237",
-        "companyName": "AAE",
-        "equipmentType": "Conveyor belt",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "originalId": "eq-1238",
-        "companyName": "AAE",
-        "equipmentType": "Scissors lift",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "originalId": "eq-1239",
-        "companyName": "AAE",
-        "equipmentType": "Scissors lift",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "originalId": "eq-1240",
-        "companyName": "AAE",
-        "equipmentType": "Verti boring machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 8,
-        "originalId": "eq-1241",
-        "companyName": "AAE",
-        "equipmentType": "Verti boring machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
+        "sortType": "equipment_repaired",
         "id": 9,
-        "originalId": "eq-1242",
-        "companyName": "AAE",
-        "equipmentType": "welding machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-05T16:35:33.209",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1236"
       },
       {
+        "sortType": "equipment_repaired",
         "id": 10,
-        "originalId": "eq-1243",
-        "companyName": "AAE",
-        "equipmentType": "welding machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-05T16:35:36.843",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1235"
       },
       {
+        "sortType": "equipment_repaired",
         "id": 11,
-        "originalId": "eq-1244",
-        "companyName": "SECL",
-        "equipmentType": "Conveyor belt",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-05T16:35:40.623",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1234"
       },
       {
+        "sortType": "equipment_repaired",
         "id": 12,
-        "originalId": "eq-1245",
-        "companyName": "SECL",
-        "equipmentType": "Conveyor belt",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-05T16:35:43.893",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1237"
       },
       {
+        "sortType": "equipment_repaired",
         "id": 13,
-        "originalId": "eq-1246",
-        "companyName": "SECL",
-        "equipmentType": "Scissors lift",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-05T16:35:46.834",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1238"
       },
       {
+        "sortType": "equipment_repaired",
         "id": 14,
-        "originalId": "eq-1247",
-        "companyName": "SECL",
-        "equipmentType": "Scissors lift",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-06T15:28:39.372",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1239"
       },
       {
-        "id": 15,
-        "originalId": "eq-1248",
-        "companyName": "SECL",
-        "equipmentType": "Verti boring machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
+        "sortType": "equipment_repaired",
         "id": 16,
-        "originalId": "eq-1249",
-        "companyName": "SECL",
-        "equipmentType": "Verti boring machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-06T15:29:11.883",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1241"
       },
       {
-        "id": 17,
-        "originalId": "eq-1250",
-        "companyName": "SECL",
-        "equipmentType": "welding machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
-        "id": 18,
-        "originalId": "eq-1251",
-        "companyName": "SECL",
-        "equipmentType": "welding machine",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
-      },
-      {
+        "sortType": "equipment_repaired",
         "id": 19,
-        "originalId": "eq-1252",
-        "companyName": "SECL",
-        "equipmentType": "Conveyor belt",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-06T15:29:35.439",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1244"
       },
       {
+        "sortType": "equipment_repaired",
         "id": 20,
-        "originalId": "eq-1253",
-        "companyName": "SECL",
-        "equipmentType": "Conveyor belt",
-        "isMatched": [
-          {
-            "isMatched": true
-          }
-        ]
+        "date": "2022-08-06T15:29:40.542",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1245"
+      },
+      {
+        "sortType": "equipment_repaired",
+        "id": 21,
+        "date": "2022-08-06T15:30:11.140",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1246"
+      },
+      {
+        "sortType": "equipment_repaired",
+        "id": 22,
+        "date": "2022-08-06T15:30:20.699",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1248"
+      },
+      {
+        "sortType": "equipment_repaired",
+        "id": 23,
+        "date": "2022-08-06T15:30:25.209",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1249"
+      },
+      {
+        "sortType": "equipment_repaired",
+        "id": 24,
+        "date": "2022-08-06T16:25:26.699",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1250"
       }
     ],
-    "equipmentGpsTracker": [
+    "equipment_matched": [
       {
-        "id": 2,
-        "serialNumber": "dv-3478",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power on"
-      },
-      {
-        "id": 4,
-        "serialNumber": "dv-9876",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power off"
-      },
-      {
-        "id": 5,
-        "serialNumber": "dv-9871",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power off"
-      },
-      {
-        "id": 6,
-        "serialNumber": "dv-2271",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power off"
-      },
-      {
-        "id": 7,
-        "serialNumber": "dv-2451",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power off"
-      },
-      {
-        "id": 8,
-        "serialNumber": "dv-2671",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power off"
-      },
-      {
+        "sortType": "equipment_matched",
         "id": 9,
-        "serialNumber": "dv-2123",
-        "battery": "0.00",
-        "companyName": "AAE",
-        "status": "Power off"
+        "date": "2022-08-05T16:35:33.209",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1236"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 10,
+        "date": "2022-08-05T16:35:36.843",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1235"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 11,
+        "date": "2022-08-05T16:35:40.623",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1234"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 12,
+        "date": "2022-08-05T16:35:43.893",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1237"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 13,
+        "date": "2022-08-05T16:35:46.834",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1238"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 14,
+        "date": "2022-08-06T15:28:39.372",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1239"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 16,
+        "date": "2022-08-06T15:29:11.883",
+        "equipmentCompany": "AAE",
+        "originalId": "eq-1241"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 19,
+        "date": "2022-08-06T15:29:35.439",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1244"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 20,
+        "date": "2022-08-06T15:29:40.542",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1245"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 21,
+        "date": "2022-08-06T15:30:11.140",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1246"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 22,
+        "date": "2022-08-06T15:30:20.699",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1248"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 23,
+        "date": "2022-08-06T15:30:25.209",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1249"
+      },
+      {
+        "sortType": "equipment_matched",
+        "id": 24,
+        "date": "2022-08-06T16:25:26.699",
+        "equipmentCompany": "SECL",
+        "originalId": "eq-1250"
       }
-    ]
+    ],
+    "device_repaired": [
+      {
+        "sortType": "device_repaired",
+        "id": 9,
+        "date": "2022-08-05T16:35:33.209",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1236"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 10,
+        "date": "2022-08-05T16:35:36.843",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1235"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 11,
+        "date": "2022-08-05T16:35:40.623",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1234"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 12,
+        "date": "2022-08-05T16:35:43.893",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1237"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 13,
+        "date": "2022-08-05T16:35:46.834",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1238"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 14,
+        "date": "2022-08-06T15:28:39.372",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1239"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 16,
+        "date": "2022-08-06T15:29:11.883",
+        "deviceCompany": "AAE",
+        "serialNumber": "eq-1241"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 19,
+        "date": "2022-08-06T15:29:35.439",
+        "deviceCompany": "SECL",
+        "serialNumber": "eq-1244"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 20,
+        "date": "2022-08-06T15:29:40.542",
+        "deviceCompany": "SECL",
+        "serialNumber": "eq-1245"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 21,
+        "date": "2022-08-06T15:30:11.140",
+        "deviceCompany": "SECL",
+        "serialNumber": "eq-1246"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 22,
+        "date": "2022-08-06T15:30:20.699",
+        "deviceCompany": "SECL",
+        "serialNumber": "eq-1248"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 23,
+        "date": "2022-08-06T15:30:25.209",
+        "deviceCompany": "SECL",
+        "serialNumber": "eq-1249"
+      },
+      {
+        "sortType": "device_repaired",
+        "id": 24,
+        "date": "2022-08-06T16:25:26.699",
+        "equipmentCompany": "SECL",
+        "serialNumber": "eq-1250"
+      }
+    ],
+    "device_battery_repaired": []
   }
 }

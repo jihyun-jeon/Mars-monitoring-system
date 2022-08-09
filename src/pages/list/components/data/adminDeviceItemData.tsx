@@ -1,3 +1,3 @@
-const adminItemData = ['serialNumber', 'battery', 'Company', 'status']
+const adminDeviceItemData = ['Category', 'Serial Number', 'Date']
 
-export default adminItemData
+export default adminDeviceItemData

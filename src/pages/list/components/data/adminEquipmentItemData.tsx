@@ -1,3 +1,3 @@
-const adminItemData = ['OriginalNumber', 'OriginalNumber', 'Company', 'Date']
+const adminEquipmentItemData = ['Category', 'OriginalNumber', 'Company', 'Date']
 
-export default adminItemData
+export default adminEquipmentItemData

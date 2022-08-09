@@ -8,12 +8,8 @@ const deviceOptionData = [
         optionTitle: 'All',
       },
       {
-        queryTitle: 'lowBattery',
-        optionTitle: 'lowBattery',
-      },
-      {
-        queryTitle: 'highBattery',
-        optionTitle: 'highBattery',
+        queryTitle: 1,
+        optionTitle: 'Less than 20%',
       },
     ],
   },
@@ -28,6 +24,10 @@ const deviceOptionData = [
         queryTitle: 1,
         optionTitle: 'AAE',
       },
+      {
+        queryTitle: 2,
+        optionTitle: 'SECL',
+      },
     ],
   },
   {
@@ -38,29 +38,29 @@ const deviceOptionData = [
         optionTitle: 'All',
       },
       {
-        queryTitle: 1,
-        optionTitle: 'matched',
+        queryTitle: false,
+        optionTitle: 'UnMatched',
       },
       {
-        queryTitle: 2,
-        optionTitle: 'unMatched',
+        queryTitle: true,
+        optionTitle: 'Matched',
       },
     ],
   },
   {
-    name: 'Status',
+    name: 'PowerStatus',
     option: [
       {
         queryTitle: '',
         optionTitle: 'All',
       },
       {
-        queryTitle: 1,
-        optionTitle: 'offline',
+        queryTitle: true,
+        optionTitle: 'ON',
       },
       {
-        queryTitle: 2,
-        optionTitle: 'online',
+        queryTitle: false,
+        optionTitle: 'OFF',
       },
     ],
   },
