@@ -1,4 +1,4 @@
-const equipmentOptionData = [
+const equipmentFilterOption = [
   {
     title: 'Equipment',
     name: 'EquipmentType',
@@ -9,27 +9,35 @@ const equipmentOptionData = [
       },
       {
         queryTitle: 1,
-        optionTitle: '',
+        optionTitle: 'Aerial Equipment',
       },
       {
         queryTitle: 2,
-        optionTitle: 'Verti Boring Machine',
+        optionTitle: 'Assistance Equipment',
       },
       {
         queryTitle: 3,
-        optionTitle: '',
+        optionTitle: 'Lifting Equipment',
       },
       {
         queryTitle: 4,
-        optionTitle: 'Scissors Lift',
+        optionTitle: 'Transportation Equipment',
       },
       {
         queryTitle: 5,
-        optionTitle: 'Conveyor Belt',
+        optionTitle: 'Concrete Equipment',
       },
       {
         queryTitle: 6,
-        optionTitle: 'Welding Machine',
+        optionTitle: 'Earth Work Equipment',
+      },
+      {
+        queryTitle: 7,
+        optionTitle: 'Pavement Equipment',
+      },
+      {
+        queryTitle: 8,
+        optionTitle: 'Piling/Digging Equipment',
       },
     ],
   },
@@ -69,4 +77,4 @@ const equipmentOptionData = [
   },
 ]
 
-export default equipmentOptionData
+export default equipmentFilterOption

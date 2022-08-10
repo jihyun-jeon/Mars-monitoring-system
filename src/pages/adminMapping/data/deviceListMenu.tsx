@@ -1,3 +1,3 @@
-const deviceListMenu = ['Serial Number', 'Battery Percentage', 'Status', 'Company', 'Matched']
+const deviceListMenu = ['Serial Number', 'Status', 'Matched']
 
 export default deviceListMenu

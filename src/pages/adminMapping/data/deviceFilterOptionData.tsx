@@ -1,19 +1,19 @@
 const deviceOptionData = [
   {
     title: 'Device',
-    name: 'Company',
+    name: 'Matched Status',
     option: [
       {
         queryTitle: '',
         optionTitle: 'All',
       },
       {
-        queryTitle: 1,
-        optionTitle: 'AAE',
+        queryTitle: true,
+        optionTitle: 'Matched',
       },
       {
-        queryTitle: 2,
-        optionTitle: 'SECL',
+        queryTitle: false,
+        optionTitle: 'UnMatched',
       },
     ],
   },

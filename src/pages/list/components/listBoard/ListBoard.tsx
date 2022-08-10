@@ -283,7 +283,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                               <td className="py-1.5 text-center">{data.equipmentType}</td>
                               <td className="py-1.5 text-center">{data.company}</td>
                               <td className="py-1.5 text-center">
-                                {data.driver[0]?.name ? data.driver[0]?.name : '-'}
+                                {data.driver[0]?.driver_name ? data.driver[0]?.driver_name : '-'}
                               </td>
                               <td className="py-1.5 text-center">
                                 {data.deviceStatus[0]?.battery.length > 0
@@ -364,43 +364,47 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
             if (tabName.equipment === 'Equipment') {
               return (
                 <>
-                  {adminHistoryCombineData
-                    .slice(offset, offset + limit)
-                    .map((data: any, idx: number) => (
-                      <tbody className="border" key={idx}>
-                        <tr>
-                          <>
-                            <td className="relative py-1.5 text-center">
-                              {data.sortType === 'equipment_repaired' ? 'Repaired' : 'Matched'}
-                            </td>
-                            <td className="py-1.5 text-center">{data.originalId}</td>
-                            <td className="py-1.5 text-center">{data.equipmentCompany}</td>
-                            <td className="py-1.5 text-center">{data.date.slice(0, -13)}</td>
-                          </>
-                        </tr>
-                      </tbody>
-                    ))}
+                  {adminHistoryCombineData.length > 0
+                    ? adminHistoryCombineData
+                        .slice(offset, offset + limit)
+                        .map((data: any, idx: number) => (
+                          <tbody className="border" key={idx}>
+                            <tr>
+                              <>
+                                <td className="relative py-1.5 text-center">
+                                  {data.sortType === 'equipment_repaired' ? 'Repaired' : 'Matched'}
+                                </td>
+                                <td className="py-1.5 text-center">{data.originalId}</td>
+                                <td className="py-1.5 text-center">{data.equipmentCompany}</td>
+                                <td className="py-1.5 text-center">{data.date.slice(0, -13)}</td>
+                              </>
+                            </tr>
+                          </tbody>
+                        ))
+                    : null}
                 </>
               )
               // 데이터 들어오면 수정
             } else {
               return (
                 <>
-                  {adminHistoryCombineData
-                    .slice(offset, offset + limit)
-                    .map((data: any, idx: number) => (
-                      <tbody className="border" key={idx}>
-                        <tr>
-                          <>
-                            <td className="relative py-1.5 text-center">
-                              {data.sortType === 'equipment_repaired' ? 'Repaired' : 'Matched'}
-                            </td>
-                            <td className="py-1.5 text-center">{data.originalId}</td>
-                            <td className="py-1.5 text-center">{data.date.slice(0, -13)}</td>
-                          </>
-                        </tr>
-                      </tbody>
-                    ))}
+                  {adminHistoryCombineData.length > 0
+                    ? adminHistoryCombineData
+                        .slice(offset, offset + limit)
+                        .map((data: any, idx: number) => (
+                          <tbody className="border" key={idx}>
+                            <tr>
+                              <>
+                                <td className="relative py-1.5 text-center">
+                                  {data.sortType === 'equipment_repaired' ? 'Repaired' : 'Matched'}
+                                </td>
+                                <td className="py-1.5 text-center">{data.originalId}</td>
+                                <td className="py-1.5 text-center">{data.date.slice(0, -13)}</td>
+                              </>
+                            </tr>
+                          </tbody>
+                        ))
+                    : null}
                 </>
               )
             }
