@@ -79,6 +79,7 @@ interface MatchedHistory {
 }
 
 interface Driver {
+  id: string
   name: string
   level: string
   driverCompany: string
@@ -122,7 +123,7 @@ interface Equipment {
   device: Device[]
   plateNumber: string
   manufactureDate: Date
-  qr_code: string
+  qrCode: string
   isPower: boolean
   originalId: string
 }

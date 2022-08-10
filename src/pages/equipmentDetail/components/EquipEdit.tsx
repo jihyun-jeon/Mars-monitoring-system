@@ -10,8 +10,10 @@ import useStore from '../../../useStore'
 
 const EquipEdit = ({ setOnModal }) => {
   const { detailDatas } = useStore()
-  const { equipment } = detailDatas.equipment
-  const equipId = toJS(equipment).id
+  const { equipment } = detailDatas
+  const pathId = equipment?.id
+
+  console.log('Edit', toJS(equipment))
 
   const [putData, setPutData] = useState(
     equipment
@@ -29,7 +31,7 @@ const EquipEdit = ({ setOnModal }) => {
           qr_code: equipment.qrCode,
           plate_number: equipment.plateNumber,
           manufacture_date: equipment.manufactureDate,
-          driver_id: equipment.driverId,
+          driver_id: equipment.driver[0].id,
         }
       : null,
   )
@@ -62,10 +64,11 @@ const EquipEdit = ({ setOnModal }) => {
                     setPutData((prev) => ({ ...prev, equipment_type_id: value }))
                   }
                 />
+
                 <MakeInput
                   id="qr_code"
                   label="Qr code"
-                  value={equipment.qrCode}
+                  value={equipment.qrCode ? equipment.qrCode : ''}
                   onChange={(value) => setPutData((prev) => ({ ...prev, qr_code: value }))}
                 />
               </div>
@@ -174,18 +177,19 @@ const EquipEdit = ({ setOnModal }) => {
                 type="button"
                 className="h-10 w-1/2  bg-primary"
                 onClick={() => {
-                  console.log(putData)
-                  fetch(`${SERVER_ADDRESS}equipment/${equipId}/edit`, {
+                  // console.log('putData', putData)
+                  fetch(`${SERVER_ADDRESS}equipment/${pathId}/edit`, {
                     method: 'PATCH',
                     headers: { Authorization: localStorage.getItem('accessToken') },
                     body: JSON.stringify(putData),
                   })
                     .then((res) => res.json())
                     .then((result) => console.log(result))
-                  //<get요청>
-                  fetch(`${SERVER_ADDRESS}equipment/${equipId}?offset=1`)
+
+                  // // <get요청>
+                  fetch(`${SERVER_ADDRESS}equipment/${pathId}?offset=1`)
                     .then((res) => res.json())
-                    .then((result) => detailDatas.setEquipment(result))
+                    .then((result) => detailDatas.setEquipment(result.equipment))
                   appContext.setToastMessage(['수정이 완료되었습니다.'])
                   setOnModal({ clicked: false, content: '' })
                 }}
