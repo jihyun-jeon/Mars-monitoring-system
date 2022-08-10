@@ -1,284 +1,47 @@
 {
   "results": {
-    "equipment_repaired": [
+    "equipmentRepaired": [
       {
         "sortType": "equipment_repaired",
-        "id": 9,
-        "date": "2022-08-05T16:35:33.209",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1236"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 10,
-        "date": "2022-08-05T16:35:36.843",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1235"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 11,
-        "date": "2022-08-05T16:35:40.623",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1234"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 12,
-        "date": "2022-08-05T16:35:43.893",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1237"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 13,
-        "date": "2022-08-05T16:35:46.834",
-        "equipmentCompany": "AAE",
+        "equipmentId": 5,
+        "date": "2022-08-10T13:19:28.735",
+        "equipmentType": "Transportaion Equipment",
         "originalId": "eq-1238"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 14,
-        "date": "2022-08-06T15:28:39.372",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1239"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 16,
-        "date": "2022-08-06T15:29:11.883",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1241"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 19,
-        "date": "2022-08-06T15:29:35.439",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1244"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 20,
-        "date": "2022-08-06T15:29:40.542",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1245"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 21,
-        "date": "2022-08-06T15:30:11.140",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1246"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 22,
-        "date": "2022-08-06T15:30:20.699",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1248"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 23,
-        "date": "2022-08-06T15:30:25.209",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1249"
-      },
-      {
-        "sortType": "equipment_repaired",
-        "id": 24,
-        "date": "2022-08-06T16:25:26.699",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1250"
       }
     ],
-    "equipment_matched": [
+    "equipmentMatched": [
       {
         "sortType": "equipment_matched",
-        "id": 9,
-        "date": "2022-08-05T16:35:33.209",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1236"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 10,
-        "date": "2022-08-05T16:35:36.843",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1235"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 11,
-        "date": "2022-08-05T16:35:40.623",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1234"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 12,
-        "date": "2022-08-05T16:35:43.893",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1237"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 13,
-        "date": "2022-08-05T16:35:46.834",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1238"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 14,
-        "date": "2022-08-06T15:28:39.372",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1239"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 16,
-        "date": "2022-08-06T15:29:11.883",
-        "equipmentCompany": "AAE",
-        "originalId": "eq-1241"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 19,
-        "date": "2022-08-06T15:29:35.439",
+        "equipmentId": 9,
+        "date": "2022-08-10T13:19:54.738",
         "equipmentCompany": "SECL",
-        "originalId": "eq-1244"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 20,
-        "date": "2022-08-06T15:29:40.542",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1245"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 21,
-        "date": "2022-08-06T15:30:11.140",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1246"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 22,
-        "date": "2022-08-06T15:30:20.699",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1248"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 23,
-        "date": "2022-08-06T15:30:25.209",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1249"
-      },
-      {
-        "sortType": "equipment_matched",
-        "id": 24,
-        "date": "2022-08-06T16:25:26.699",
-        "equipmentCompany": "SECL",
-        "originalId": "eq-1250"
+        "originalId": "eq-9712"
       }
     ],
-    "device_repaired": [
+    "deviceRepaired": [
       {
         "sortType": "device_repaired",
-        "id": 9,
-        "date": "2022-08-05T16:35:33.209",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1236"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 10,
-        "date": "2022-08-05T16:35:36.843",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1235"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 11,
-        "date": "2022-08-05T16:35:40.623",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1234"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 12,
-        "date": "2022-08-05T16:35:43.893",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1237"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 13,
-        "date": "2022-08-05T16:35:46.834",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1238"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 14,
-        "date": "2022-08-06T15:28:39.372",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1239"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 16,
-        "date": "2022-08-06T15:29:11.883",
-        "deviceCompany": "AAE",
-        "serialNumber": "eq-1241"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 19,
-        "date": "2022-08-06T15:29:35.439",
+        "id": 1,
+        "date": "2022-08-10T13:19:14.916",
         "deviceCompany": "SECL",
-        "serialNumber": "eq-1244"
+        "serialNumber": "dv-789854"
       },
       {
         "sortType": "device_repaired",
-        "id": 20,
-        "date": "2022-08-06T15:29:40.542",
+        "id": 2,
+        "date": "2022-08-10T13:19:16.069",
         "deviceCompany": "SECL",
-        "serialNumber": "eq-1245"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 21,
-        "date": "2022-08-06T15:30:11.140",
-        "deviceCompany": "SECL",
-        "serialNumber": "eq-1246"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 22,
-        "date": "2022-08-06T15:30:20.699",
-        "deviceCompany": "SECL",
-        "serialNumber": "eq-1248"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 23,
-        "date": "2022-08-06T15:30:25.209",
-        "deviceCompany": "SECL",
-        "serialNumber": "eq-1249"
-      },
-      {
-        "sortType": "device_repaired",
-        "id": 24,
-        "date": "2022-08-06T16:25:26.699",
-        "equipmentCompany": "SECL",
-        "serialNumber": "eq-1250"
+        "serialNumber": "dv-789854"
       }
     ],
-    "device_battery_repaired": []
+    "deviceBatteryRepaired": [
+      {
+        "sortType": "device_battery_replacement",
+        "id": 4,
+        "date": "2022-08-10T13:23:03.122",
+        "deviceCompany": "AAE",
+        "serialNumber": "dv-1289"
+      }
+    ]
   }
 }
