@@ -116,13 +116,14 @@ interface ForcastData {
 // }
 
 const Home = () => {
-  const lat = '37.579617'
-  const lng = '126.977041'
-  const myKey = import.meta.env.VITE_WEATHER_KEY
   const [homeData, setHomeData] = useState<any | undefined>()
   const [weatherData, setWeatherData] = useState<ForcastData>()
 
   let day = ''
+  const lat = '37.579617'
+  const lng = '126.977041'
+  const myKey = import.meta.env.VITE_WEATHER_KEY
+  const mapKey = import.meta.env.VITE_GOOGLE_MAP_KEY
 
   const hourlyWeathers = weatherData?.list.map((obj) => {
     const date = new Date(obj.dt_txt)
@@ -163,7 +164,7 @@ const Home = () => {
   }, [])
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyA-14N8FNLXVKB9NeF1eSnYYq8pItkBUaI',
+    googleMapsApiKey: mapKey,
   })
 
   return (

@@ -94,17 +94,15 @@ const LoginForm = () => {
         password: userPw,
       })
       if (response.data.accessToken) {
-        localStorage.setItem('access_token', response.data.accessToken)
+        localStorage.setItem('accessToken', response.data.accessToken)
         localStorage.setItem('isAuthenticated', 'true')
         usersInfo.getAuthLocation(response.data.isLocationControl)
         usersInfo.getAuthEquipment(response.data.isEquipmentControl)
         usersInfo.getUserName(response.data.name)
         goToHome()
       }
-    } catch (err) {
-      if (err) {
-        alert(err)
-      }
+    } catch (error) {
+      alert(error.response)
     }
   }
 

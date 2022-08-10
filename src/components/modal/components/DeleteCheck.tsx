@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 
+import AppContext from '../../../AppContext'
 interface deleteCheckType {
   setOnModal: any
   deleteApi: () => void
 }
 
 const DeleteCheck = ({ setOnModal, deleteApi }: deleteCheckType) => {
+  const appContext = useContext(AppContext)
   return (
     <div className="h-80 w-[500px] rounded-lg bg-white ">
       <p className="relative h-1/5 w-full border-b-2 px-4 text-2xl font-bold leading-[4rem]">
@@ -14,7 +16,7 @@ const DeleteCheck = ({ setOnModal, deleteApi }: deleteCheckType) => {
           type="button"
           className="absolute right-6 text-[#667085]"
           onClick={() => {
-            setOnModal(false)
+            setOnModal({ click: false, childrun: '' })
           }}
         >
           x
@@ -35,8 +37,8 @@ const DeleteCheck = ({ setOnModal, deleteApi }: deleteCheckType) => {
           type="button"
           className="h-10 w-[44%] rounded-xl border   bg-primary text-[white]"
           onClick={() => {
-            setOnModal(false)
-            // () 제거했는데 이거 확인해보고 모달창 통해서 삭제하지 말고 그냥 딜리트로 삭제해볼 것
+            appContext.setToastMessage(['삭제가 완료되었습니다.'])
+            setOnModal({ clicked: false, content: '' })
             deleteApi()
           }}
         >

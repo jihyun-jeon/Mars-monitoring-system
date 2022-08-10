@@ -1,86 +1,75 @@
-import { useContext } from 'react'
+import { toJS, values } from 'mobx'
+import { useContext, useState } from 'react'
+import { useParams } from 'react-router'
 
 import AppContext from '../../../AppContext'
+import MakeInput from '../../../components/editBox/MakeInput'
+import MakeSelectBox from '../../../components/editBox/MakeSelectBox'
+import { SERVER_ADDRESS } from '../../../config'
+import useStore from '../../../useStore'
 
 const EquipLogAdd = ({ setOnModal }) => {
+  const {
+    detailDatas: { equipment },
+  } = useStore()
   const appContext = useContext(AppContext)
 
+  const [newLog, setNewLog] = useState({
+    content: '',
+    date: '',
+    repaired_manager_id: null,
+    repaired_purpose_id: null,
+  })
+
+  console.log(newLog)
+
   return (
-    <div className="relative h-[34rem] w-[60rem] rounded-lg  bg-white px-16 pt-5">
-      <h1 className="flexCenter pb-10 text-2xl"> Create Repair log</h1>
+    <div className="relative h-[40rem] w-[40rem] rounded-lg  bg-white px-16 pt-5">
+      <h1 className="flexCenter pb-10 text-2xl"> Add Repair log</h1>
 
-      <div className=" flex flex-col">
-        <div className="mb-10 flex justify-between">
-          <label className="mb-2 flex w-44 flex-col">
-            <span className=" ">Plate Number</span>
-            <select className="rounded-md border-2">
-              <option>DUMMY64</option>
-              <option>DUMMY64</option>
-            </select>
-          </label>
+      <div className="flexCenter mb-10 h-[70%] w-full bg-fuchsia-400">
+        <MakeInput
+          id="date"
+          label={'Date'}
+          value={''}
+          style={''}
+          type={'date'}
+          onChange={(value) => setNewLog((prev) => ({ ...prev, date: value }))}
+        />
 
-          <label className="mb-2 flex  w-44 flex-col ">
-            Manufacture Date
-            <input type="text" className="rounded-md border-2 pl-2 " value="2022-04-26" readOnly />
-          </label>
+        <MakeSelectBox
+          id="repaired_purpose_id"
+          label={'Purpose'}
+          list={PurPoseValueArr}
+          value={1}
+          style={''}
+          onChange={(value) => {
+            setNewLog((prev) => ({ ...prev, repaired_purpose_id: value.value }))
+          }}
+        />
 
-          <label className="mb-2 flex  w-44 flex-col">
-            Capacity
-            <div>
-              <select className="w-1/2 rounded-md border-2">
-                <option className="bg-yellow-400">100</option>
-                <option>100</option>
-              </select>
-              <select className="w-1/2 rounded-md border-2">
-                <option>M3</option>
-                <option>M3</option>
-              </select>
-            </div>
-          </label>
+        <MakeSelectBox
+          id="repaired_manager_id"
+          label={'Manager'}
+          list={ManagerValueArr}
+          value={1}
+          style={''}
+          onChange={(value) => {
+            setNewLog((prev) => ({ ...prev, repaired_manager_id: value.value }))
+          }}
+        />
 
-          <label className="mb-2 flex  w-44 flex-col">
-            Equipment
-            <select className="rounded-md border-2">
-              <option>Drill machine</option>
-              <option>Drill machine</option>
-            </select>
-          </label>
-        </div>
-
-        <div className="mb-10 flex justify-between">
-          <label className="mb-2 flex  w-44 flex-col">
-            Type
-            <select className="rounded-md border-2">
-              <option>Crawler drill machine</option>
-              <option>Crawler drill machine</option>
-            </select>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            QR Code
-            <select className="rounded-md border-2">
-              <option>a</option>
-              <option>aa</option>
-            </select>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            Company
-            <select className="rounded-md border-2">
-              <option>Sed</option>
-              <option>Sed</option>
-            </select>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            Maintenance_id?
-            <select className="rounded-md border-2">
-              <option>1</option>
-              <option>1</option>
-            </select>
-          </label>
-        </div>
+        <MakeInput
+          id="content"
+          label={'Content'}
+          value={''}
+          style={''}
+          type={''}
+          onChange={(value) => setNewLog((prev) => ({ ...prev, content: value }))}
+        />
       </div>
+
+      {/* button  */}
       <div className="absolute bottom-0 left-0 w-full">
         <button
           type="button"
@@ -95,6 +84,24 @@ const EquipLogAdd = ({ setOnModal }) => {
           onClick={() => {
             appContext.setToastMessage(['등록이 완료되었습니다.'])
             setOnModal({ clicked: false, content: '' })
+            // < post요청  > <- 다시 처리해야 함!!!!
+            fetch(`${SERVER_ADDRESS}equipment/1/post`, {
+              method: 'POST',
+              headers: { Authorization: localStorage.getItem('accessToken') },
+              body: JSON.stringify({
+                content: 'test5',
+                date: '2022-07-24',
+                repaired_manager_id: 1,
+                repaired_purpose_id: 3,
+              }),
+            })
+              .then((res) => res.json())
+              .then((result) => console.log(result))
+
+            //<get요청>
+            fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
+              .then((res) => res.json())
+              .then((result) => detailDatas.setEquipment(result))
           }}
         >
           Add
@@ -105,3 +112,15 @@ const EquipLogAdd = ({ setOnModal }) => {
 }
 
 export default EquipLogAdd
+
+const PurPoseValueArr = [
+  { value: 1, text: 'battery replacement' },
+  { value: 2, text: 'Replacement of parts' },
+  { value: 3, text: 'n/w err. fix' },
+]
+
+const ManagerValueArr = [
+  { value: 1, text: 'Leonard' },
+  { value: 2, text: 'Martin' },
+  { value: 3, text: 'Paul' },
+]

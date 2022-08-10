@@ -21,9 +21,14 @@ const MarkerRender = ({ el, active, clusterer, markerClick }: any) => {
         clusterer={clusterer}
         position={{ lat: el.latitude, lng: el.longitude }}
         icon={{
-          url: `/public/assets/${el.equipmentType}_${
-            active === 'powerOn' ? 'blue' : active === 'networkOff' ? 'gray' : 'red'
-          }.svg`,
+          // url: `/public/assets/${el.equipmentType}_${
+          //   active === 'powerOn' ? 'blue' : active === 'networkOff' ? 'gray' : 'red'
+          // }.svg`,
+          // url: `/public/assets/${el.name}_${
+          //   el.active === true ? (el.error ? 'red' : 'blue') : 'gray'
+          // }.svg`,
+          // scaledSize: new google.maps.Size(50, 50),
+          url: `/public/imgs/equips_color/AerialEquip_24_red.svg`,
           scaledSize: new google.maps.Size(50, 50),
         }}
         onClick={() => {

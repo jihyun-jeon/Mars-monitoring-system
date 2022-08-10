@@ -1,0 +1,86 @@
+{
+  "equipment": {
+    "id": 1,
+    "company": {
+      "id": 1,
+      "name": "AAE"
+    },
+    "maintenance_company": "AEE",
+    "maintenance_manager_name": "Max",
+    "maintenance_manager_phone_number": "010-1234-1234",
+    "maintenance_manager_department": "Management",
+    "unit": {
+      "id": 2,
+      "name": "Ton"
+    },
+    "capacity": 98,
+    "equipmentType": {
+      "id": 6,
+      "name": "Earth Work Equipment"
+    },
+    "equipmentCategory": {
+      "id": 6,
+      "name": "welding machine",
+      "imageUrl": "https://velog.velcdn.com/images/jiminnote/post/f90ffaee-f2ee-49c1-90c9-d0431c1b4bec/image.png"
+    },
+    "repaired_history": [
+      {
+        "id": 4,
+        "sort": {
+          "id": 3,
+          "content": "Repaired"
+        },
+        "manager": {
+          "id": 2,
+          "name": "Martin",
+          "company": "BBB"
+        },
+        "repairedPurpose": {
+          "id": 1,
+          "content": "Battery replacement"
+        },
+        "date": "2022-07-28T00:00:00",
+        "content": "test8"
+      }
+    ],
+    "matched_history": [
+      {
+        "id": 4,
+        "lastLogTime": "2022-08-09T15:09:57.606",
+        "serialNumber": "dv-1238",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      }
+    ],
+    "driver": [],
+    "device": [
+      {
+        "id": 4,
+        "battery": "45.28",
+        "lastLogTime": "2022-08-07T17:47:20.026",
+        "longitude": "0E-14",
+        "latitude": "0E-14",
+        "serialNumber": "dv-1238",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      }
+    ],
+    "plateNumber": "9876-01-01",
+    "manufactureDate": "2022-05-23T00:00:00",
+    "qrCode": null,
+    "isPower": false,
+    "originalId": "eq-1234"
+  }
+}

@@ -151,7 +151,11 @@ const NestingFilter = ({ pathName, setIsLoading }: Props) => {
   const adminHistoryRequestServer = async () => {
     const address = `${SERVER_ADDRESS}equipment/admin/list`
     try {
-      const response = await axios.get(address)
+      const response = await axios.get(address, {
+        headers: {
+          Authorization: `${localStorage.getItem('accessToken')}`,
+        },
+      })
       listDatas.setAdminHistoryData(response.data)
       setIsLoading(false)
     } catch (error: any) {

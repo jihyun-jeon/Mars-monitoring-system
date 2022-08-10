@@ -125,7 +125,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
         case 'equipmentList':
           await axios.delete(equipmentDeleteQueryAddress, {
             headers: {
-              Authorization: `${localStorage.getItem('access_token')}`,
+              Authorization: `${localStorage.getItem('accessToken')}`,
             },
           })
           response = await axios.get(equipmentGetAddress)
@@ -135,7 +135,7 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
         case 'deviceList':
           await axios.delete(deviceDeleteQueryAddress, {
             headers: {
-              Authorization: `${localStorage.getItem('access_token')}`,
+              Authorization: `${localStorage.getItem('accessToken')}`,
             },
           })
           response = await axios.get(deviceGetAddress)
