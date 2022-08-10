@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FcOk, FcHighPriority } from 'react-icons/fc'
 
 import AppContext from '../../../AppContext'
 interface deleteCheckType {
@@ -22,27 +23,30 @@ const DeleteCheck = ({ setOnModal, deleteApi }: deleteCheckType) => {
           x
         </button>
       </p>
-      <div className="flexCenter h-3/5 font-medium text-[#667085]">정말 삭제하시겠습니까?</div>
+      <div className="flexCenter h-3/5 text-2xl font-medium text-[#667085]">
+        Are you sure you want to delete it?
+      </div>
       <div className="mb-6 flex w-full justify-center  px-1 align-middle">
         <button
           type="button"
-          className="mr-3 h-10 w-[44%] rounded-xl  border   bg-[lightgray]"
+          className="mr-3 h-10 w-[44%] rounded-xl  border   bg-[#000] text-[white] opacity-60"
           onClick={() => {
             setOnModal(false)
           }}
         >
-          취소
+          Cansel
         </button>
         <button
           type="button"
           className="h-10 w-[44%] rounded-xl border   bg-primary text-[white]"
           onClick={() => {
-            appContext.setToastMessage(['삭제가 완료되었습니다.'])
+            appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
+            appContext.setToastMessage(['Complete Deleted'])
             setOnModal({ clicked: false, content: '' })
             deleteApi()
           }}
         >
-          삭제
+          Delete
         </button>
       </div>
     </div>
