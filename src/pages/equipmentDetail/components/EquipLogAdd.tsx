@@ -9,16 +9,15 @@ import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
 const EquipLogAdd = ({ setOnModal }) => {
-  const {
-    detailDatas: { equipment },
-  } = useStore()
+  const { detailDatas } = useStore()
   const appContext = useContext(AppContext)
+  const { id } = useParams()
 
   const [newLog, setNewLog] = useState({
     content: '',
     date: '',
-    repaired_manager_id: null,
-    repaired_purpose_id: null,
+    repaired_manager_id: 1,
+    repaired_purpose_id: 1,
   })
 
   console.log(newLog)
@@ -84,16 +83,12 @@ const EquipLogAdd = ({ setOnModal }) => {
           onClick={() => {
             appContext.setToastMessage(['등록이 완료되었습니다.'])
             setOnModal({ clicked: false, content: '' })
-            // < post요청  > <- 다시 처리해야 함!!!!
-            fetch(`${SERVER_ADDRESS}equipment/1/post`, {
+            console.log(newLog)
+            // < post요청  >
+            fetch(`${SERVER_ADDRESS}equipment/${id}/post`, {
               method: 'POST',
               headers: { Authorization: localStorage.getItem('accessToken') },
-              body: JSON.stringify({
-                content: 'test5',
-                date: '2022-07-24',
-                repaired_manager_id: 1,
-                repaired_purpose_id: 3,
-              }),
+              body: JSON.stringify(newLog),
             })
               .then((res) => res.json())
               .then((result) => console.log(result))
@@ -101,7 +96,7 @@ const EquipLogAdd = ({ setOnModal }) => {
             //<get요청>
             fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
               .then((res) => res.json())
-              .then((result) => detailDatas.setEquipment(result))
+              .then((result) => detailDatas.setEquipment(result.equipment))
           }}
         >
           Add

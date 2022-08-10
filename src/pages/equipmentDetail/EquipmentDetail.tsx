@@ -23,8 +23,6 @@ const EquipmentDetail = observer(() => {
   const { detailDatas, usersInfo } = useStore()
   const { equipment } = detailDatas
 
-  // console.log(toJS(equipment))
-
   const { _isEquipmentControl } = usersInfo
   const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 

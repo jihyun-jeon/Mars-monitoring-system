@@ -5,7 +5,7 @@ import useStore from '../../../useStore'
 const EquipmentInfo = () => {
   const { detailDatas } = useStore()
   const { equipment } = detailDatas
-  console.log(toJS(equipment))
+  // console.log(toJS(equipment))
 
   return (
     <div>
@@ -79,19 +79,19 @@ const EquipmentInfo = () => {
           <h1 className="mt-4 text-2xl font-semibold text-gray-400">Device</h1>
           <ul className="grid w-full grid-cols-3 gap-3  pb-1">
             {Title_Data.deviceTitle.map((obj, idx) => {
-              const keyData = Object.keys(obj)[0]
-              const valueData = obj[keyData]
+              const keyData = Object.keys(obj)[0] // obj 키
+              const valueData = obj[keyData] // obj 값
               // console.log(toJS(equipment))
               return (
                 <li key={idx} className="mt-10">
                   <p className="mb-2 font-extrabold ">{valueData}</p>
 
-                  {/* <p>
-                    {equipment.device[0][keyData] &&
-                    typeof equipment.device[0][keyData] === 'string'
-                      ? equipment.device[0][keyData]
-                      : equipment.device[0][keyData].name}
-                  </p> */}
+                  <p>
+                    {equipment?.device[0] &&
+                      (typeof equipment.device[0][keyData] === 'string'
+                        ? equipment.device[0][keyData]
+                        : equipment.device[0][keyData].name)}
+                  </p>
                 </li>
               )
             })}
