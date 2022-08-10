@@ -1,32 +1,43 @@
-import axios from 'axios'
-import { useEffect } from 'react'
+import { Observer } from 'mobx-react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import DetailInfo from '../../components/detailInfo/DetailInfo'
+import DetailList from '../../components/detailList/DetailList'
+import Modal from '../../components/modal/modal'
+import useStore from '../../useStore'
+import DeviceEdit from '../deviceDetail/components/DeviceEdit'
+
+interface onModalType {
+  clicked: boolean
+  childrun: null | any
+}
 
 const DeviceDetail = () => {
-  fetch('http://192.168.0.90:8000/equipment/91?repaired_sort_id=1')
-    .then((res) => {
-      console.log(res)
-    })
-    .then((res) => {
-      res.then()
-    })
-    .then((result) => console.log(reuslt))
+  const [deviceData, setDeviceData] = useState({})
+  const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 
-  //
-  const requestUserInfoCheckToServer = async () => {
-    try {
-      const response = await axios
-        .get('http://192.168.0.90:8000/equipment/30?repaired_sort_id=1')
-        .then((res) => console.log(res))
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  const { usersInfo } = useStore()
 
   useEffect(() => {
-    requestUserInfoCheckToServer()
+    fetch('/public/data/equipment_detail.json')
+      .then((res) => res.json())
+      .then((result) => setDeviceData(result))
   }, [])
 
-  return <div>Device Detail</div>
+  return (
+    <Observer>
+      {() => (
+        <div className="h-screen w-full overflow-scroll px-3 pt-5">
+          <h1 className="ml-10 mb-[-75px] text-4xl">Device Detail</h1>
+          <DetailInfo usersInfo={usersInfo} setOnModal={setOnModal} EditComp={DeviceEdit} />
+
+          <DetailList usersInfo={usersInfo} setOnModal={setOnModal} fatherComp={'deviceDetail'} />
+          {onModal.clicked && <Modal contents={onModal.childrun} />}
+        </div>
+      )}
+    </Observer>
+  )
 }
 
 export default DeviceDetail
