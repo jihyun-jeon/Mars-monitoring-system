@@ -3,7 +3,7 @@ import { Observer } from 'mobx-react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-<<<<<<< HEAD
+/*
 import EquipInstallLog from '../../pages/equipmentDetail/components/EquipInstallLog'
 import EquipLogAdd from '../../pages/equipmentDetail/components/EquipLogAdd'
 import EquipRepairLog from '../../pages/equipmentDetail/components/EquipRepairLog'
@@ -15,7 +15,8 @@ const DetailList = ({ setOnModal }) => {
   const nowPage = location.includes('equipment')
 
   const { usersInfo } = useStore()
-=======
+  */
+/*
 import DeviceRepairAdd from '../../pages/deviceDetail/components/DeviceRepairAdd'
 import DeviceReplaceAdd from '../../pages/deviceDetail/components/DeviceReplaceAdd'
 import DeleteCheck from '../modal/components/DeleteCheck'
@@ -41,7 +42,7 @@ const DetailList = ({ usersInfo, setOnModal, fatherComp }) => {
           },
     )
   }
->>>>>>> 29002e1... s
+  */
 
   return (
     <Observer>
@@ -49,7 +50,6 @@ const DetailList = ({ usersInfo, setOnModal, fatherComp }) => {
         <div className="px-10">
           <div className="flex justify-between">
             <div className="flex">
-<<<<<<< HEAD
               {titleArr.map((el, idx) => {
                 if (nowPage && idx === titleArr.length - 1) {
                   return
@@ -70,36 +70,6 @@ const DetailList = ({ usersInfo, setOnModal, fatherComp }) => {
                   </button>
                 )
               })}
-=======
-              <button
-                name="repair"
-                onClick={(e) => setTapBtnName((e.target as HTMLButtonElement).name)}
-                className={`${
-                  tapBtnName === 'repair' ? 'bg-[#EFF2F5]' : ''
-                } border-gray my-auto mx-0 rounded-t-lg border-[1px]  px-8 py-4 text-lg`}
-              >
-                수리
-              </button>
-              <button
-                name="replace"
-                onClick={(e) => setTapBtnName((e.target as HTMLButtonElement).name)}
-                className={`${tapBtnName === 'replace' ? 'bg-[#EFF2F5]' : ''} 
-                
-                ${fatherComp === 'deviceDetail' ? 'block' : 'hidden'}
-                border-gray my-auto mx-0 rounded-t-lg border-[1px] px-8 py-4 text-lg`}
-              >
-                교체
-              </button>
-              <button
-                name="install"
-                onClick={(e) => setTapBtnName((e.target as HTMLButtonElement).name)}
-                className={`${
-                  tapBtnName === 'install' ? 'bg-[#EFF2F5]' : ''
-                } border-gray my-auto mx-0 rounded-t-lg border-[1px] px-8 py-4 text-lg`}
-              >
-                설치
-              </button>
->>>>>>> 29002e1... s
             </div>
             {toJS(usersInfo)._isEquipmentControl && (
               <button
@@ -123,11 +93,7 @@ const DetailList = ({ usersInfo, setOnModal, fatherComp }) => {
           )}
 
           {/* page nation */}
-<<<<<<< HEAD
-          <div className="flexCenter relative w-full pb-28 pt-10">
-=======
           <div className="flexCenter relative w-full flex-row py-5 pb-20">
->>>>>>> 29002e1... s
             {/* page select */}
             <div className="">
               <span className="mr-5">Rows per page</span>
