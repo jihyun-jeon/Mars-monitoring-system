@@ -70,7 +70,7 @@ const GoogleMap_ = ({
       }}
     >
       <Marker position={center} />
-
+      {/* 
       {mapData.map((_, idx) => {
         const status = Object.keys(mapData[idx])[0]
         return (
@@ -90,7 +90,7 @@ const GoogleMap_ = ({
             )}
           </MarkerClusterer>
         )
-      })}
+      })} */}
 
       {mapType && (
         <GroundOverlay

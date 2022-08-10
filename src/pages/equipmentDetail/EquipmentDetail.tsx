@@ -1,4 +1,5 @@
 import { useLoadScript } from '@react-google-maps/api'
+import { toJS } from 'mobx'
 import { observer, Observer } from 'mobx-react'
 import { useEffect, useState, useMemo } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
@@ -22,6 +23,8 @@ const EquipmentDetail = observer(() => {
   const { detailDatas, usersInfo } = useStore()
   const { equipment } = detailDatas
 
+  // console.log(toJS(equipment))
+
   const { _isEquipmentControl } = usersInfo
   const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 
@@ -34,8 +37,8 @@ const EquipmentDetail = observer(() => {
     fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
-        detailDatas.setEquipment(result)
+        // console.log(result)
+        detailDatas.setEquipment(result.equipment)
       })
   }, [])
 
@@ -145,9 +148,7 @@ const EquipmentDetail = observer(() => {
             </button>
           </p>
           <div className="px-14 pb-20">
-            <div className=" w-full py-5">
-              {equipment && <EquipmentInfo equipmentData={equipment} />}
-            </div>
+            <div className=" w-full py-5">{equipment && <EquipmentInfo />}</div>
           </div>
         </>
       )}
