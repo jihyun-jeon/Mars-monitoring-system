@@ -15,6 +15,7 @@ import Home from './pages/home/Home'
 
 const MainLayoutRoutes = () => {
   const [toastMessage, setToastMessage] = useState([])
+  const [toastIcon, setToastIcon] = useState([])
 
   return (
     <>
@@ -22,7 +23,7 @@ const MainLayoutRoutes = () => {
         <SideNav />
         <div className="flex w-full flex-col pr-4">
           <TopNav />
-          <AppContext.Provider value={{ toastMessage, setToastMessage }}>
+          <AppContext.Provider value={{ toastMessage, setToastMessage, toastIcon, setToastIcon }}>
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/equipmentList" element={<EquipmentList />} />
@@ -32,7 +33,12 @@ const MainLayoutRoutes = () => {
               <Route path="/adminMapping" element={<AdminMapping />} />
               <Route path="/adminHistory" element={<AdminHistory />} />
             </Routes>
-            <Toast toastMessage={toastMessage} setToastMessage={setToastMessage} />
+            <Toast
+              toastMessage={toastMessage}
+              setToastMessage={setToastMessage}
+              toastIcon={toastIcon}
+              setToastIcon={setToastIcon}
+            />
           </AppContext.Provider>
         </div>
       </div>
