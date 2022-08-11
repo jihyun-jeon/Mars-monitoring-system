@@ -26,7 +26,7 @@ const EquipLogAdd = ({ setOnModal }) => {
     <div className="relative h-[40rem] w-[40rem] rounded-lg  bg-white px-16 pt-5">
       <h1 className="flexCenter pb-10 text-2xl"> Add Repair log</h1>
 
-      <div className="flexCenter mb-10 h-[70%] w-full bg-fuchsia-400">
+      <div className="flexCenter mb-10 h-[70%] w-full bg-fuchsia-200">
         <MakeInput
           id="date"
           label={'Date'}
@@ -94,7 +94,7 @@ const EquipLogAdd = ({ setOnModal }) => {
               .then((result) => console.log(result))
 
             //<get요청>
-            fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
+            fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
               .then((res) => res.json())
               .then((result) => detailDatas.setEquipment(result.equipment))
           }}

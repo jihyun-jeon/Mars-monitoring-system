@@ -63,7 +63,7 @@ const EquipmentInfo = () => {
               {Title_Data.driverTitle.map((obj, idx) => {
                 const keyData = Object.keys(obj)[0] //obj 키
                 const valueData = obj[keyData] // obj 값
-                const value = equipment?.driver[0][keyData]
+                const value = equipment?.driver[0][keyData] // 버그2
                 return (
                   <li key={idx} className="mt-8 flex">
                     <p className="mb-2 w-1/2 font-extrabold ">{valueData}</p>
@@ -119,9 +119,9 @@ const Title_Data = {
   ],
   driverTitle: [{ name: 'Name' }, { level: 'level' }, { company: 'Driver Company' }],
   deviceTitle: [
-    { serialNumber: 'serialNumber' },
-    { lastLogTime: 'lastLogTime' },
-    { battery: 'battery' },
+    { serialNumber: 'Serial Number' },
+    { lastLogTime: 'Last Log Time' },
+    { battery: 'Battery' },
     { manager: 'Manager' },
     { company: 'Company' },
   ],

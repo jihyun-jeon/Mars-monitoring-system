@@ -32,7 +32,7 @@ const EquipmentDetail = observer(() => {
   const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
 
   useEffect(() => {
-    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
+    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
       .then((res) => res.json())
       .then((result) => {
         // console.log(result)

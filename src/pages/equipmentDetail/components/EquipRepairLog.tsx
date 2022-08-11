@@ -13,8 +13,6 @@ const EquipRepairLog = observer(({ setOnModal }) => {
 
   const { id } = useParams()
 
-  // console.log('log', toJS(equipment?.repaired_history), logId)
-
   const deleteRequest = (deleteLogId) => {
     fetch(`${SERVER_ADDRESS}equipment/${id}/delete`, {
       method: 'DELETE',
@@ -26,7 +24,7 @@ const EquipRepairLog = observer(({ setOnModal }) => {
       .then((res) => res.json())
       .then((result) => console.log(result))
     //<get요청>
-    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
+    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
       .then((res) => res.json())
       .then((result) => detailDatas.setEquipment(result.equipment))
   }
@@ -48,7 +46,6 @@ const EquipRepairLog = observer(({ setOnModal }) => {
           })}
         </tr>
         {equipment?.repaired_history.map((data) => {
-          // console.log('logdata', toJS(data))
           return (
             <tr key={data.id} id={data.id}>
               <td className="pl-4">
@@ -86,4 +83,4 @@ const EquipRepairLog = observer(({ setOnModal }) => {
 
 export default EquipRepairLog
 
-const equipRepairTitle = ['Repair Date', 'manager', 'Company', 'Repair purpose', 'Content']
+const equipRepairTitle = ['Repair Date', 'Manager', 'Company', 'Repair purpose', 'Content']

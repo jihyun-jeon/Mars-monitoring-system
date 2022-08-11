@@ -26,6 +26,7 @@ const MakeInput = ({ id, label, value, style, type = 'text', onChange }: MakeInp
       <input
         ref={inputEl}
         type={type}
+        lang="ja"
         id={id}
         className={`${style} rounded-md border-2 pt-1 pl-2`}
         onChange={(e) => {
