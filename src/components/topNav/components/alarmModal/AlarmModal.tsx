@@ -22,30 +22,26 @@ const AlarmModal = observer(() => {
 
   const alarmCombineData = messageData.rowBattery.concat(messageData.networkError)
 
-  const readingId = (event: any) => {
-    const { value } = event.target
-    setMessageSendId(value)
-    requestToServerDeleteId()
-  }
-
   const requestToServerDeleteId = async () => {
-    const address = `${SERVER_ADDRESS}user/alert`
+    const getAddress = `${SERVER_ADDRESS}user/alert`
+    const deleteAddress = `${SERVER_ADDRESS}user/alert/delete?alert_id=${messageSendId}`
     let response: any
     try {
-      await axios.delete(address, {
+      await axios(deleteAddress, {
+        method: 'delete',
         headers: {
           Authorization: `${localStorage.getItem('accessToken')}`,
         },
-        data: {
-          alertId: messageSendId,
+      })
+      response = await axios.get(getAddress, {
+        headers: {
+          Authorization: `${localStorage.getItem('accessToken')}`,
         },
       })
-      if (response.data.message === 'ALERT_DELETE') {
-        response = await axios.get(address)
-        listDatas.setAlarmData(response.data)
-        appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
-        appContext.setToastMessage(['Complete Deleted'])
-      }
+      setMessageSendId('')
+      listDatas.setAlarmData(response.data)
+      appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
+      appContext.setToastMessage(['Complete Deleted'])
     } catch (error: any) {
       if (error.response) {
         appContext.setToastIcon([<FcHighPriority key="1" className="text-2xl" />])
@@ -56,6 +52,14 @@ const AlarmModal = observer(() => {
       }
     }
   }
+
+  const readingId = async (event: any) => {
+    const { value } = event.target
+    setMessageSendId(value)
+    requestToServerDeleteId()
+  }
+
+  console.log(messageSendId)
 
   if (usersInfo.isAlarmData) {
     return (

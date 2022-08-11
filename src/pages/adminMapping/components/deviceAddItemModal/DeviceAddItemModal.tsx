@@ -80,7 +80,13 @@ const DeviceAddItemModal = () => {
   return (
     <DeviceAddItemModalLayout>
       <h2 className="mb-8 flex justify-center text-3xl font-bold">Device Add</h2>
-      <h3 className="mb-2 text-2xl font-bold text-gray-400">General Infomation</h3>
+      <h3 className="mb-2 text-2xl font-bold text-gray-400">
+        General Infomation
+        <span className="text-lg">{`(`}</span>
+        <span className="ml-1 mr-1 text-lg text-[#ff0000]">*</span>
+        <span className="mr-1 text-xl">{`Required`}</span>
+        <span className="text-lg">{`)`}</span>
+      </h3>
       {deviceInputData.map((el) => (
         <div key={el.id} className="mb-2">
           <label className="mb-1 block text-lg font-bold text-textPrimary" htmlFor={el.inputId}>

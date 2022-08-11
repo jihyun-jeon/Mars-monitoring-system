@@ -101,7 +101,7 @@ const EquipmentMappingList = observer(
               </tbody>
             ))}
         </table>
-        <div className="relative flex">
+        <div className="relative flex items-start">
           <button
             onClick={() => addItemToggle.setIsEquipmentAddModal(true)}
             value="equipment"

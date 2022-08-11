@@ -2,6 +2,7 @@ const equipmentFilterOption = [
   {
     title: 'Equipment',
     name: 'EquipmentType',
+    selectName: 'Equipment Type',
     option: [
       {
         queryTitle: '',
@@ -42,6 +43,7 @@ const equipmentFilterOption = [
     ],
   },
   {
+    selectName: 'Company',
     name: 'Company',
     option: [
       {
@@ -59,6 +61,7 @@ const equipmentFilterOption = [
     ],
   },
   {
+    selectName: 'Matched Status',
     name: 'MatchedStatus',
     option: [
       {
