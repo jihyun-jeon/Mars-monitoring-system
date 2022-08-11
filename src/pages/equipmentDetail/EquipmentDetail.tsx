@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 
 import GoogleMap_ from '../../../src/components/googleMap/GoogleMap_'
 import DetailList from '../../components/detailList/DetailList'
+import DeleteCheck from '../../components/modal/components/DeleteCheck'
 import Modal from '../../components/modal/modal'
 import useStore from '../../useStore'
 import { SERVER_ADDRESS } from '.././../config'
@@ -21,24 +22,19 @@ interface onModalType {
 
 const EquipmentDetail = observer(() => {
   const { detailDatas, usersInfo } = useStore()
-  const { equipment } = detailDatas
-
-  const { _isEquipmentControl } = usersInfo
   const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 
+  const { equipment } = detailDatas
   const { id } = useParams()
 
+  const { _isEquipmentControl } = usersInfo
   const mapKey = import.meta.env.VITE_GOOGLE_MAP_KEY
-  const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
 
-  useEffect(() => {
-    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
-      .then((res) => res.json())
-      .then((result) => {
-        // console.log(result)
-        detailDatas.setEquipment(result.equipment)
-      })
-  }, [])
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: mapKey,
+  })
+
+  const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
 
   // useEffect(() => {
   //   fetch(`/data/equipmentDetail.json`)
@@ -48,9 +44,22 @@ const EquipmentDetail = observer(() => {
   //     })
   // }, [])
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: mapKey,
-  })
+  useEffect(() => {
+    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
+      .then((res) => res.json())
+      .then((result) => {
+        detailDatas.setEquipment(result.equipment)
+      })
+  }, [])
+
+  const unMatchRequest = () => {
+    fetch(`${SERVER_ADDRESS}equipment/match/delete?equipment_id=${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: localStorage.getItem('accessToken') },
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result))
+  }
 
   return (
     <div className="h-screen w-full overflow-scroll pl-10  pt-5">
@@ -131,6 +140,12 @@ const EquipmentDetail = observer(() => {
             <button
               type="button"
               className="mt-10 mr-3 h-10 w-32 rounded-lg bg-primary text-xl text-white"
+              onClick={(e) => {
+                setOnModal({
+                  clicked: true,
+                  childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={unMatchRequest} />,
+                })
+              }}
             >
               Unmatched
             </button>

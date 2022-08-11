@@ -1,22 +1,13 @@
-import { toJS } from 'mobx'
-import { useEffect } from 'react'
-import { CgTrash } from 'react-icons/cg'
-import { useParams } from 'react-router'
+import { observer } from 'mobx-react'
 
-import DeleteCheck from '../../../components/modal/components/DeleteCheck'
-import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
-const EquipInstallLog = ({ setOnModal }) => {
-  const { detailDatas, usersInfo } = useStore()
+const EquipInstallLog = observer(() => {
+  const { detailDatas } = useStore()
   const { equipment } = detailDatas
 
-  const { id } = useParams()
-
-  console.log(toJS(equipment))
-
   return (
-    <>
+    <div>
       <table className="w-full table-fixed border-2">
         <colgroup>
           <col span={1} style={{ width: '3%' }} />
@@ -35,41 +26,38 @@ const EquipInstallLog = ({ setOnModal }) => {
             })}
           </tr>
           {equipment &&
-            equipment.matched_history.map((el, idx) => {
+            equipment.matched_history.map((data) => {
               return (
-                <tr key={idx}>
-                  <td className="pl-4">
-                    {toJS(usersInfo)._isEquipmentControl && (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          const deleteApi = () =>
-                            fetch('/public/data/equipmentList.json')
-                              .then((res) => res.json())
-                              .then((result) => console.log(result))
-
-                          setOnModal({
-                            clicked: true,
-                            childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={deleteApi} />,
-                          })
-                        }}
-                      >
-                        <CgTrash style={{ color: 'red' }} />
-                      </button>
-                    )}
-                  </td>
-                  <td className="py-3 pl-3">{el.lastLogTime}</td>
-                  <td className="py-3 pl-3">{el.serialNumber}</td>
-                  <td className=" py-3 pl-3">{el.manager.name}</td>
-                  <td className=" py-3 pl-3">{el.company.name}</td>
+                <tr key={data.id} id={data.id}>
+                  <td className="pl-4"></td>
+                  <td className="py-3 pl-3">{data.lastLogTime}</td>
+                  <td className="py-3 pl-3">{data.serialNumber}</td>
+                  <td className=" py-3 pl-3">{data.manager.name}</td>
+                  <td className=" py-3 pl-3">{data.company.name}</td>
                 </tr>
               )
             })}
         </tbody>
       </table>
-    </>
+      {/* page nation */}
+      <div className="flexCenter relative w-full pb-28 pt-10">
+        {/* page select */}
+
+        <div className="flex">
+          <button type="button" className="mx-5">
+            &lt;
+          </button>
+          <ul className="flex">
+            <li className="flexCenter w-5">1</li>
+          </ul>
+          <button type="button" className="mx-5">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </div>
   )
-}
+})
 
 export default EquipInstallLog
 

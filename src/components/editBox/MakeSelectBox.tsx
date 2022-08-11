@@ -15,7 +15,7 @@ const MakeSelectBox = ({ list, value, label, style, id, onChange }: MakeSelectBo
   ))
 
   return (
-    <div className={`mt-4 ${label === 'Equipment' && 'mt-10'}`}>
+    <div className={`mb-10  mr-7 ${label === 'Equipment' && 'mt-10'}`}>
       <label className="mb-2 flex flex-col font-semibold" htmlFor={id}>
         {label}
       </label>

@@ -1,4 +1,5 @@
 import { toJS, values } from 'mobx'
+import { observer } from 'mobx-react'
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router'
 
@@ -8,7 +9,7 @@ import MakeSelectBox from '../../../components/editBox/MakeSelectBox'
 import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
-const EquipLogAdd = ({ setOnModal }) => {
+const EquipLogAdd = observer(({ setOnModal }) => {
   const { detailDatas } = useStore()
   const appContext = useContext(AppContext)
   const { id } = useParams()
@@ -23,10 +24,10 @@ const EquipLogAdd = ({ setOnModal }) => {
   console.log(newLog)
 
   return (
-    <div className="relative h-[40rem] w-[40rem] rounded-lg  bg-white px-16 pt-5">
+    <div className="relative h-[20rem] w-[60rem] rounded-lg  bg-white pt-5">
       <h1 className="flexCenter pb-10 text-2xl"> Add Repair log</h1>
 
-      <div className="flexCenter mb-10 h-[70%] w-full bg-fuchsia-200">
+      <div className="mt-5 flex justify-center">
         <MakeInput
           id="date"
           label={'Date'}
@@ -104,7 +105,7 @@ const EquipLogAdd = ({ setOnModal }) => {
       </div>
     </div>
   )
-}
+})
 
 export default EquipLogAdd
 

@@ -70,8 +70,8 @@ const GoogleMap_ = ({
       }}
     >
       <Marker position={center} />
-      {/* 
-      {mapData.map((_, idx) => {
+
+      {/* {mapData.map((_, idx) => {
         const status = Object.keys(mapData[idx])[0]
         return (
           <MarkerClusterer key={idx}>
