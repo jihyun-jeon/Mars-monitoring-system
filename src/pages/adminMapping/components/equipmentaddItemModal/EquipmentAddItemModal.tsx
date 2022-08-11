@@ -173,7 +173,13 @@ const EquipmentAddItemModal = () => {
   return (
     <EquipmentAddItemModalLayout>
       <h2 className="mb-8 flex justify-center text-3xl font-bold">Equipment Add</h2>
-      <h3 className="mb-2 text-2xl font-bold text-gray-400">General Infomation</h3>
+      <h3 className="mb-2 text-2xl font-bold text-gray-400">
+        General Infomation
+        <span className="text-lg">{`(`}</span>
+        <span className="ml-1 mr-1 text-lg text-[#ff0000]">*</span>
+        <span className="mr-1 text-xl">{`Required`}</span>
+        <span className="text-lg">{`)`}</span>
+      </h3>
       <div className="relative mb-2">
         <h4 className="mb-1  text-lg font-bold text-textPrimary">
           Equipment Category
