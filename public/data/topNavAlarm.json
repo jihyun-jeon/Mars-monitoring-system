@@ -1,0 +1,50 @@
+{
+  "result": {
+    "rowBattery": [
+      {
+        "id": 8,
+        "date": "2022-08-10T20:55:38.891",
+        "deviceId": 15,
+        "deviceSerialNumber": "dv-2321",
+        "alert": "rowBattery"
+      },
+      {
+        "id": 12,
+        "date": "2022-08-10T21:11:23.560",
+        "deviceId": 9,
+        "deviceSerialNumber": "dv-4562",
+        "alert": "rowBattery"
+      }
+    ],
+    "networkError": [
+      {
+        "id": 9,
+        "date": "2022-08-10T20:55:38.903",
+        "deviceId": 15,
+        "deviceSerialNumber": "dv-2321",
+        "alert": "networkError"
+      },
+      {
+        "id": 10,
+        "date": "2022-08-10T21:09:34.041",
+        "deviceId": 9,
+        "deviceSerialNumber": "dv-4562",
+        "alert": "networkError"
+      },
+      {
+        "id": 11,
+        "date": "2022-08-10T21:10:32.936",
+        "deviceId": 9,
+        "deviceSerialNumber": "dv-4562",
+        "alert": "networkError"
+      },
+      {
+        "id": 13,
+        "date": "2022-08-10T21:12:52.364",
+        "deviceId": 11,
+        "deviceSerialNumber": "dv-78123",
+        "alert": "networkError"
+      }
+    ]
+  }
+}

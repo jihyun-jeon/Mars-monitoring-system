@@ -300,23 +300,27 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                                   {data.driver[0]?.driver_name ? data.driver[0]?.driver_name : '-'}
                                 </td>
                                 <td className="py-1.5 text-center">
-                                  {data.deviceStatus[0]?.battery.length > 0
+                                  {data.deviceMatched[0]?.isMatched
                                     ? data.deviceStatus[0]?.battery.slice(0, -3) + '%'
                                     : '-'}
                                 </td>
                                 <td className="py-1.5 text-center">
-                                  {data.deviceMatched[0]?.isMatched ? 'Matched' : 'UnMatched'}
+                                  {data.deviceMatched[0]?.isMatched ? 'Matched' : '-'}
                                 </td>
                                 <td className="py-1.5 text-center">
-                                  {data.deviceStatus[0]?.statusContent
+                                  {data.deviceMatched[0]?.isMatched
                                     ? data.deviceStatus[0]?.statusContent
                                     : '-'}
                                 </td>
                                 <td className="flex justify-center py-1.5 text-center text-xl">
-                                  {data.isPower ? (
-                                    <IoPowerSharp className="text-[#00d300]" />
+                                  {data.deviceMatched[0]?.isMatched ? (
+                                    data.isPower ? (
+                                      <IoPowerSharp className="text-[#00d300]" />
+                                    ) : (
+                                      <IoPowerSharp className="text-[#ff0000]" />
+                                    )
                                   ) : (
-                                    <IoPowerSharp className="text-[#ff0000]" />
+                                    '-'
                                   )}
                                 </td>
                               </>
@@ -355,17 +359,15 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
                                 </td>
                                 {/* 데이터 수정 대기 (Matched Status)  */}
                                 <td className="py-1.5 text-center">
-                                  {data.status ? 'Matched' : 'UnMatched'}
+                                  {data.status ? 'Matched' : '-'}
                                 </td>
                                 <td className="py-1.5 text-center">
-                                  {data.matchedEquipment[0]?.matchedEquipmentCategory
+                                  {data.status
                                     ? data.matchedEquipment[0]?.matchedEquipmentCategory
                                     : '-'}
                                 </td>
                                 <td className="py-1.5 text-center">
-                                  {data.matchedEquipment[0]?.matchedEquipmentId
-                                    ? data.matchedEquipment[0]?.matchedEquipmentId
-                                    : '-'}
+                                  {data.status ? data.matchedEquipment[0]?.matchedEquipmentId : '-'}
                                 </td>
                               </>
                             )

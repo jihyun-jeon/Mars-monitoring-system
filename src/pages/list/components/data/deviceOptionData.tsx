@@ -1,5 +1,6 @@
 const deviceOptionData = [
   {
+    selectTitle: 'Battery Status',
     title: 'Device List',
     name: 'BatteryStatus',
     option: [
@@ -14,6 +15,7 @@ const deviceOptionData = [
     ],
   },
   {
+    selectTitle: 'Company',
     name: 'Company',
     option: [
       {
@@ -31,6 +33,7 @@ const deviceOptionData = [
     ],
   },
   {
+    selectTitle: 'Matched Status',
     name: 'MatchedStatus',
     option: [
       {
@@ -39,7 +42,7 @@ const deviceOptionData = [
       },
       {
         queryTitle: false,
-        optionTitle: 'UnMatched',
+        optionTitle: 'Unmatched',
       },
       {
         queryTitle: true,
@@ -48,6 +51,7 @@ const deviceOptionData = [
     ],
   },
   {
+    selectTitle: 'Power Status',
     name: 'PowerStatus',
     option: [
       {
@@ -56,11 +60,11 @@ const deviceOptionData = [
       },
       {
         queryTitle: true,
-        optionTitle: 'ON',
+        optionTitle: 'On',
       },
       {
         queryTitle: false,
-        optionTitle: 'OFF',
+        optionTitle: 'Off',
       },
     ],
   },

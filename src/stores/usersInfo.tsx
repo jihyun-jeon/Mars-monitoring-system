@@ -1,9 +1,15 @@
 import { observable } from 'mobx'
 
 const usersInfo = observable({
+  _userToken: localStorage.getItem('accessToken'),
   _userName: '',
   _isLocationControl: false,
   _isEquipmentControl: true,
+  _inAlarmData: true,
+
+  get userToken() {
+    return this._userToken
+  },
 
   get userName() {
     return this._userName
@@ -17,6 +23,14 @@ const usersInfo = observable({
     return this._isEquipmentControl
   },
 
+  get isAlarmData() {
+    return this._inAlarmData
+  },
+
+  removeUserToken() {
+    return localStorage.removeItem('accessToken')
+  },
+
   getUserName(name: string) {
     return (this._userName = name)
   },
@@ -27,6 +41,10 @@ const usersInfo = observable({
 
   getAuthEquipment(control: boolean) {
     return (this._isEquipmentControl = control)
+  },
+
+  setIsAlarmData(value: boolean) {
+    return (this._inAlarmData = value)
   },
 })
 

@@ -34,7 +34,7 @@ const DeleteCheck = ({ setOnModal, deleteApi }: deleteCheckType) => {
             setOnModal(false)
           }}
         >
-          Cansel
+          Cancel
         </button>
         <button
           type="button"

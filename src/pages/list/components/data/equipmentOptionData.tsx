@@ -2,6 +2,7 @@ const equipmentOptionData = [
   {
     title: 'Equipment List',
     name: 'EquipmentType',
+    selectTitle: 'Equipment Type',
     option: [
       {
         queryTitle: '',
@@ -42,6 +43,7 @@ const equipmentOptionData = [
     ],
   },
   {
+    selectTitle: 'Power Status',
     name: 'PowerStatus',
     option: [
       {
@@ -59,6 +61,7 @@ const equipmentOptionData = [
     ],
   },
   {
+    selectTitle: 'Device Status',
     name: 'DeviceStatus',
     option: [
       {
@@ -67,11 +70,11 @@ const equipmentOptionData = [
       },
       {
         queryTitle: 1,
-        optionTitle: 'Power On',
+        optionTitle: 'Network On',
       },
       {
         queryTitle: 2,
-        optionTitle: 'Power Off',
+        optionTitle: 'Network Off',
       },
       {
         queryTitle: 3,
@@ -81,6 +84,7 @@ const equipmentOptionData = [
   },
 
   {
+    selectTitle: 'Battery Status',
     name: 'BatteryPercentage',
     option: [
       {
@@ -95,6 +99,7 @@ const equipmentOptionData = [
   },
 
   {
+    selectTitle: 'Matched Status',
     name: 'MatchedStatus',
     option: [
       {

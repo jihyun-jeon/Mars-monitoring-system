@@ -85,11 +85,12 @@ const DeviceAddItemModal = () => {
         <div key={el.id} className="mb-2">
           <label className="mb-1 block text-lg font-bold text-textPrimary" htmlFor={el.inputId}>
             {el.labelTitle}
+            <span className="ml-2 text-[#ff0000]">*</span>
           </label>
           <input
             onChange={handleUserSelector}
             id={el.inputId}
-            className="block w-full rounded border-2 border-solid bg-red-100 p-1 py-1.5"
+            className="block w-full rounded border-2 border-solid bg-btnActionSelect p-1 py-1.5"
             name={el.name}
             type={el.type}
             placeholder={el.placeHolder}
@@ -102,7 +103,7 @@ const DeviceAddItemModal = () => {
         <select
           name={CompanyValueArr.title}
           onChange={handleUserSelector}
-          className="mb-2 block w-full rounded border border-gray-300 bg-red-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          className="mb-2 block w-full rounded border border-gray-300 bg-btnActionSelect p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         >
           {CompanyValueArr.results.map((el: any, idx: number) => (
             <option value={el.value} key={idx}>
@@ -117,7 +118,7 @@ const DeviceAddItemModal = () => {
           onClick={() => addItemToggle.setIsDeviceAddModal(false)}
           className="w-1/2 rounded-bl bg-[#000] py-2 font-bold text-[#fff] opacity-60"
         >
-          Cansel
+          Cancel
         </button>
         <button
           onClick={requestToServerAdd}

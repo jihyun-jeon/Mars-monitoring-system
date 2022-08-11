@@ -175,11 +175,15 @@ const EquipmentAddItemModal = () => {
       <h2 className="mb-8 flex justify-center text-3xl font-bold">Equipment Add</h2>
       <h3 className="mb-2 text-2xl font-bold text-gray-400">General Infomation</h3>
       <div className="relative mb-2">
-        <h4 className="mb-1 block text-lg font-bold text-textPrimary">Equipment Category</h4>
+        <h4 className="mb-1  text-lg font-bold text-textPrimary">
+          Equipment Category
+          <span className="ml-2 text-[#ff0000]">*</span>
+        </h4>
         <select
+          required
           name={equipmentCategorySelectboxList.title}
           onChange={handleUserSelector}
-          className="mb-2 block w-full rounded border border-gray-300 bg-red-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          className="mb-2 block w-full rounded border border-gray-300 bg-btnActionSelect p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         >
           {equipmentCategorySelectboxList.results.map((el: any, idx: number) => (
             <option value={el.value} key={idx}>
@@ -189,11 +193,14 @@ const EquipmentAddItemModal = () => {
         </select>
       </div>
       <div className="mb-2">
-        <h4 className="mb-1 block text-lg font-bold text-textPrimary">Equipment Type</h4>
+        <h4 className="mb-1 block text-lg font-bold text-textPrimary">
+          Equipment Type
+          <span className="ml-2 text-[#ff0000]">*</span>
+        </h4>
         <select
           name={TypeValueArr.title}
           onChange={handleUserSelector}
-          className="mb-2 block w-full rounded border border-gray-300 bg-red-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          className="mb-2 block w-full rounded border border-gray-300 bg-btnActionSelect p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         >
           {TypeValueArr.results.map((el: any, idx: number) => (
             <option value={el.value} key={idx}>
@@ -206,11 +213,12 @@ const EquipmentAddItemModal = () => {
         <div key={el.id} className="mb-2">
           <label className="mb-1 block text-lg font-bold text-textPrimary" htmlFor={el.inputId}>
             {el.labelTitle}
+            <span className="ml-2 text-[#ff0000]">*</span>
           </label>
           <input
             onChange={handleUserSelector}
             id={el.inputId}
-            className="block w-full rounded border-2 border-solid bg-red-100 p-1 py-1.5"
+            className="block w-full rounded border-2 border-solid bg-btnActionSelect p-1 py-1.5"
             name={el.name}
             type={el.type}
             placeholder={el.placeHolder}
@@ -218,26 +226,15 @@ const EquipmentAddItemModal = () => {
           />
         </div>
       ))}
-      <div className="mb-2">
-        <h4 className="mb-1 block text-lg font-bold text-textPrimary">Company</h4>
-        <select
-          name={CompanyValueArr.title}
-          onChange={handleUserSelector}
-          className="mb-2 block w-full rounded border border-gray-300 bg-red-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-        >
-          {CompanyValueArr.results.map((el: any, idx: number) => (
-            <option value={el.value} key={idx}>
-              {el.name}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className="mb-4">
-        <h4 className="mb-1 block text-lg font-bold text-textPrimary">Unit</h4>
+        <h4 className="mb-1 block text-lg font-bold text-textPrimary">
+          Unit
+          <span className="ml-2 text-[#ff0000]">*</span>
+        </h4>
         <select
           name={UnitValueArr.title}
           onChange={handleUserSelector}
-          className="mb-2 block w-full rounded border border-gray-300 bg-red-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          className="mb-2 block w-full rounded border border-gray-300 bg-btnActionSelect p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         >
           {UnitValueArr.results.map((el: any, idx: number) => (
             <option value={el.value} key={idx}>
@@ -247,11 +244,31 @@ const EquipmentAddItemModal = () => {
         </select>
       </div>
       <div className="mb-2">
-        <h4 className="mb-1 block text-lg font-bold text-textPrimary">Driver</h4>
+        <h4 className="mb-1 block text-lg font-bold text-textPrimary">
+          Company
+          <span className="ml-2 text-[#ff0000]">*</span>
+        </h4>
+        <select
+          name={CompanyValueArr.title}
+          onChange={handleUserSelector}
+          className="mb-2 block w-full rounded border border-gray-300 bg-btnActionSelect p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+        >
+          {CompanyValueArr.results.map((el: any, idx: number) => (
+            <option value={el.value} key={idx}>
+              {el.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-2">
+        <h4 className="mb-1 block text-lg font-bold text-textPrimary">
+          Driver
+          <span className="ml-2 text-[#ff0000]">*</span>
+        </h4>
         <select
           name={DriverValueArr.title}
           onChange={handleUserSelector}
-          className="mb-2 block w-full rounded border border-gray-300 bg-red-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+          className="mb-2 block w-full rounded border border-gray-300 bg-btnActionSelect p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         >
           {DriverValueArr.results.map((el: any, idx: number) => (
             <option value={el.value} key={idx}>
@@ -283,7 +300,7 @@ const EquipmentAddItemModal = () => {
           onClick={() => addItemToggle.setIsEquipmentAddModal(false)}
           className="w-1/2 rounded-bl bg-[#000] py-2 font-bold text-[#fff] opacity-60"
         >
-          Cansel
+          Cancel
         </button>
         <button
           onClick={requestToServerAdd}
