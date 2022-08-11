@@ -215,7 +215,7 @@ const NestingFilter = ({ pathName, setIsLoading }: Props) => {
           {pathCheckerOptionData().map((data: any, idx: number) => (
             <div key={idx}>
               <h3 className="mb-1 block text-sm font-semibold text-gray-900 dark:text-gray-400">
-                {data.name}
+                {data.selectTitle}
               </h3>
               <select
                 value={resetOption ? data.id : '0'}

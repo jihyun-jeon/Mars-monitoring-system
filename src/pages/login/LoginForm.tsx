@@ -7,7 +7,7 @@ import { SERVER_ADDRESS } from '../../config'
 import useStore from '../../useStore'
 
 const LoginForm = () => {
-  const { usersInfo } = useStore()
+  const { usersInfo, listDatas } = useStore()
 
   const [userLoginInfo, setUserLoginInfo] = useState({
     userId: '',
@@ -93,9 +93,9 @@ const LoginForm = () => {
         identity: userId,
         password: userPw,
       })
+
       if (response.data.accessToken) {
         localStorage.setItem('accessToken', response.data.accessToken)
-        localStorage.setItem('isAuthenticated', 'true')
         usersInfo.getAuthLocation(response.data.isLocationControl)
         usersInfo.getAuthEquipment(response.data.isEquipmentControl)
         usersInfo.getUserName(response.data.name)

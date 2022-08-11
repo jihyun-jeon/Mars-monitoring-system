@@ -18,6 +18,8 @@ const DeviceMappingList = observer(
   ({ isLoading, isDeviceChecked, deviceCheckedValue, deviceCheckHandler }: Props) => {
     const { listDatas, addItemToggle } = useStore()
 
+    const resetChecked: any = React.useRef<HTMLInputElement>(null)
+
     const renderData = toJS(listDatas.adminMappingDeviceListData)
 
     const [limit, setLimit] = useState(10)
@@ -73,6 +75,7 @@ const DeviceMappingList = observer(
                           >
                             <input
                               id={`2${idx}`}
+                              ref={resetChecked}
                               disabled={
                                 data.id === Number(deviceCheckedValue.join())
                                   ? !isDeviceChecked
@@ -105,7 +108,7 @@ const DeviceMappingList = observer(
             Add
           </button>
           <Pagination
-            total={renderData.results.equipment.length}
+            total={renderData.results.equipmentGpsTracker.length}
             limit={limit}
             page={page}
             setPage={setPage}

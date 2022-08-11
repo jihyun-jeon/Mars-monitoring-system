@@ -1,8 +1,11 @@
 import { useLoadScript } from '@react-google-maps/api'
 import axios from 'axios'
+import { observer } from 'mobx-react'
 import { useEffect, useState } from 'react'
 
+import AlarmData from './components/alarmData/AlarmData'
 import Map from './components/Map'
+
 interface ForcastData {
   city: string
   list: {
@@ -115,7 +118,7 @@ interface ForcastData {
 //   }
 // }
 
-const Home = () => {
+const Home = observer(() => {
   const [homeData, setHomeData] = useState<any | undefined>()
   const [weatherData, setWeatherData] = useState<ForcastData>()
 
@@ -168,213 +171,205 @@ const Home = () => {
   })
 
   return (
-    <div className="grid h-full grid-cols-2 gap-8 bg-bgDefault  px-8 pt-[50px] pb-10">
-      <div className="map"> {!isLoaded ? 'Loading...' : <Map mapData={homeData.mapData} />}</div>
-
-      <div className="w-full overflow-x-auto">
-        {hourlyWeathers && (
-          <div className="mb-7 flex flex-col rounded-xl bg-[lightgray] ">
-            <ul className=" flex border-b border-slate-400">
-              <li className="flexCenter w-20">
-                <img
-                  src={`http://openweathermap.org/img/wn/${hourlyWeathers[0].icon}@2x.png`}
-                  className="w-16"
-                />
-              </li>
-              <li className="flexCenter w-20 text-2xl">{hourlyWeathers[0].temp}°C</li>
-              <li className="flexCenter w-24 text-2xl">{hourlyWeathers[0].main}</li>
-              <li className="ml-auto mr-8 flex items-center text-2xl">
-                Korea , {weatherData?.city}
-              </li>
-            </ul>
-
-            <div className="grid w-full auto-cols-[7rem] grid-flow-col grid-cols-[7rem] overflow-x-scroll pb-3 pt-1">
-              {hourlyWeathers.map((el, idx) => {
-                return (
-                  <div key={idx} className={`mr-2 h-full w-full rounded-lg  text-lg`}>
-                    <p className={`flexCenter m-3 h-6 rounded-xl ${el.md && 'bg-blue-400'}`}>
-                      {el.md}
-                    </p>
-                    <p className="flexCenter">
-                      {el.hour}
-                      {+el.hour < 12 ? 'AM' : 'PM'}
-                    </p>
-                    <p className="flexCenter">
-                      <img
-                        src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
-                        className="w-16"
-                      />
-                    </p>
-                    <p className="flexCenter">{el.temp}°C</p>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
-
-        <div className="flex flex-col justify-around gap-8">
-          {homeData && (
-            <div className="row">
-              <p className="mb-4 text-2xl font-semibold">Equipment</p>
-              <div className="grid grid-cols-3 gap-8">
-                {homeData.count.map((data, idx) => {
-                  const name = Object.keys(data)[0]
-                  console.log(name)
+    <>
+      <div className="grid h-full grid-cols-2 gap-8 bg-bgDefault  px-8 pt-[50px] pb-10">
+        <div className="map"> {!isLoaded ? 'Loading...' : <Map mapData={homeData.mapData} />}</div>
+        <div className="w-full overflow-x-auto">
+          {hourlyWeathers && (
+            <div className="mb-7 flex flex-col rounded-xl bg-[lightgray] ">
+              <ul className=" flex border-b border-slate-400">
+                <li className="flexCenter w-20">
+                  <img
+                    src={`http://openweathermap.org/img/wn/${hourlyWeathers[0].icon}@2x.png`}
+                    className="w-16"
+                  />
+                </li>
+                <li className="flexCenter w-20 text-2xl">{hourlyWeathers[0].temp}°C</li>
+                <li className="flexCenter w-24 text-2xl">{hourlyWeathers[0].main}</li>
+                <li className="ml-auto mr-8 flex items-center text-2xl">
+                  Korea , {weatherData?.city}
+                </li>
+              </ul>
+              <div className="grid w-full auto-cols-[7rem] grid-flow-col grid-cols-[7rem] overflow-x-scroll pb-3 pt-1">
+                {hourlyWeathers.map((el, idx) => {
                   return (
-                    <div
-                      key={idx}
-                      className="flex flex-col rounded-xl bg-[#036db7] pt-2 shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]"
-                    >
-                      <p className="mt-3 ml-4 text-2xl font-bold text-white">
-                        {DashBoardData[name]}
-                        {DashBoardData[name] === 'BRP' && (
-                          <span className="ml-1 text-base">(Battery Replace Period)</span>
-                        )}
+                    <div key={idx} className={`mr-2 h-full w-full rounded-lg  text-lg`}>
+                      <p className={`flexCenter m-3 h-6 rounded-xl ${el.md && 'bg-blue-400'}`}>
+                        {el.md}
                       </p>
-                      <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                        {data[name].map((el, idx) => {
-                          const title = Object.keys(el)[0]
-                          const value = el[title] >= 0 ? el[title] : el[title].count
-                          return (
-                            <p key={idx}>
-                              <span className="inline-block w-3/4">{title}</span>
-                              <span className="inline-block w-1/4">{`${value}`}</span>
-                            </p>
-                          )
-                        })}
-                      </div>
+                      <p className="flexCenter">
+                        {el.hour}
+                        {+el.hour < 12 ? 'AM' : 'PM'}
+                      </p>
+                      <p className="flexCenter">
+                        <img
+                          src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
+                          className="w-16"
+                        />
+                      </p>
+                      <p className="flexCenter">{el.temp}°C</p>
                     </div>
                   )
                 })}
               </div>
             </div>
           )}
-        </div>
-
-        {/* <div className="flex flex-col justify-around gap-8">
-          {homeData && (
-            <div className="row">
-              <p className="mb-4 text-2xl font-semibold">Equipment</p>
-
-              <div className="grid grid-cols-3 gap-8">
-                <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
-                  <p className="mt-3 ml-4 text-2xl font-semibold text-white">Active</p>
-                  <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                    <p>
-                      <span className="inline-block w-3/4">active</span>
-                      <span className="inline-block w-1/4">{homeData.active.False}</span>
-                    </p>
-                    <p>
-                      <span className="inline-block w-3/4"> inactive</span>
-                      <span className="inline-block w-1/4">{homeData.active.True}</span>
-                    </p>
-                    <p>
-                      <span className="inline-block w-3/4"> Total</span>
-                      <span className="inline-block w-1/4">{homeData.active.Total}</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
-                  <p className="mt-3 ml-4 text-2xl font-semibold text-white">Online</p>
-                  <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                    <p>
-                      <span className="inline-block w-3/4">on</span>
-                      <span className="inline-block w-1/4">{homeData.online.False}</span>
-                    </p>
-                    <p>
-                      <span className="inline-block w-3/4">off</span>
-                      <span className="inline-block w-1/4">{homeData.online.True}</span>
-                    </p>
-                    <p>
-                      <span className="inline-block w-3/4">Total</span>
-                      <span className="inline-block w-1/4">{homeData.online.Total}</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
-                  <p className="mt-3 ml-4 text-2xl font-semibold text-white">
-                    BRP<span className="text-base"> (Battery Replace Period)</span>
-                  </p>
-
-                  <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                    <p>
-                      <span className="inline-block w-3/4">unexpired</span>
-                      <span className="inline-block w-1/4">{homeData.brp.False}</span>
-                    </p>
-                    <p>
-                      <span className="inline-block w-3/4">expired</span>
-                      <span className="inline-block w-1/4">{homeData.brp.True}</span>
-                    </p>
-                    <p>
-                      <span className="inline-block w-3/4">Total</span>
-                      <span className="inline-block w-1/4">{homeData.brp.Total}</span>
-                    </p>
-                  </div>
+          <div className="flex flex-col justify-around gap-8">
+            {homeData && (
+              <div className="row">
+                <p className="mb-4 text-2xl font-semibold">Equipment</p>
+                <div className="grid grid-cols-3 gap-8">
+                  {homeData.count.map((data, idx) => {
+                    const name = Object.keys(data)[0]
+                    console.log(name)
+                    return (
+                      <div
+                        key={idx}
+                        className="flex flex-col rounded-xl bg-[#036db7] pt-2 shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]"
+                      >
+                        <p className="mt-3 ml-4 text-2xl font-bold text-white">
+                          {DashBoardData[name]}
+                          {DashBoardData[name] === 'BRP' && (
+                            <span className="ml-1 text-base">(Battery Replace Period)</span>
+                          )}
+                        </p>
+                        <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                          {data[name].map((el, idx) => {
+                            const title = Object.keys(el)[0]
+                            const value = el[title] >= 0 ? el[title] : el[title].count
+                            return (
+                              <p key={idx}>
+                                <span className="inline-block w-3/4">{title}</span>
+                                <span className="inline-block w-1/4">{`${value}`}</span>
+                              </p>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
-
+            )}
+          </div>
+          {/* <div className="flex flex-col justify-around gap-8">
+            {homeData && (
               <div className="row">
-                <p className="my-4 text-2xl font-semibold">Device</p>
+                <p className="mb-4 text-2xl font-semibold">Equipment</p>
                 <div className="grid grid-cols-3 gap-8">
                   <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
-                    <p className="mt-3 ml-4 text-2xl font-semibold text-white">Match</p>
+                    <p className="mt-3 ml-4 text-2xl font-semibold text-white">Active</p>
                     <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
                       <p>
-                        <span className="inline-block w-3/4">Matched</span>
-                        <span className="inline-block w-1/4">{homeData.devices.matched}</span>
+                        <span className="inline-block w-3/4">active</span>
+                        <span className="inline-block w-1/4">{homeData.active.False}</span>
                       </p>
                       <p>
-                        <span className="inline-block w-3/4">Unmatched</span>
-                        <span className="inline-block w-1/4">{homeData.devices.unMatched}</span>
+                        <span className="inline-block w-3/4"> inactive</span>
+                        <span className="inline-block w-1/4">{homeData.active.True}</span>
+                      </p>
+                      <p>
+                        <span className="inline-block w-3/4"> Total</span>
+                        <span className="inline-block w-1/4">{homeData.active.Total}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
+                    <p className="mt-3 ml-4 text-2xl font-semibold text-white">Online</p>
+                    <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                      <p>
+                        <span className="inline-block w-3/4">on</span>
+                        <span className="inline-block w-1/4">{homeData.online.False}</span>
+                      </p>
+                      <p>
+                        <span className="inline-block w-3/4">off</span>
+                        <span className="inline-block w-1/4">{homeData.online.True}</span>
                       </p>
                       <p>
                         <span className="inline-block w-3/4">Total</span>
-                        <span className="inline-block w-1/4">{homeData.devices.Total}</span>
+                        <span className="inline-block w-1/4">{homeData.online.Total}</span>
                       </p>
                     </div>
                   </div>
-
                   <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
-                    <p className="mt-3 ml-4 text-2xl font-semibold text-white">Battery</p>
+                    <p className="mt-3 ml-4 text-2xl font-semibold text-white">
+                      BRP<span className="text-base"> (Battery Replace Period)</span>
+                    </p>
                     <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
                       <p>
-                        <span className="inline-block w-3/4"> Low battery</span>
-                        <span className="inline-block w-1/4">
-                          {homeData.devices.LowBattery.count}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
-                    <p className="mt-3 ml-4 text-2xl font-semibold text-white">RSSI</p>
-                    <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                      <p>
-                        <span className="inline-block w-3/4"> Strong</span>
-                        <span className="inline-block w-1/4"> {homeData.devices.strong}</span>
+                        <span className="inline-block w-3/4">unexpired</span>
+                        <span className="inline-block w-1/4">{homeData.brp.False}</span>
                       </p>
                       <p>
-                        <span className="inline-block w-3/4"> Normal</span>
-                        <span className="inline-block w-1/4">{homeData.devices.normal}</span>
+                        <span className="inline-block w-3/4">expired</span>
+                        <span className="inline-block w-1/4">{homeData.brp.True}</span>
                       </p>
                       <p>
-                        <span className="inline-block w-3/4"> Week</span>
-                        <span className="inline-block w-1/4">{homeData.devices.weak}</span>
+                        <span className="inline-block w-3/4">Total</span>
+                        <span className="inline-block w-1/4">{homeData.brp.Total}</span>
                       </p>
                     </div>
                   </div>
                 </div>
+                <div className="row">
+                  <p className="my-4 text-2xl font-semibold">Device</p>
+                  <div className="grid grid-cols-3 gap-8">
+                    <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
+                      <p className="mt-3 ml-4 text-2xl font-semibold text-white">Match</p>
+                      <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                        <p>
+                          <span className="inline-block w-3/4">Matched</span>
+                          <span className="inline-block w-1/4">{homeData.devices.matched}</span>
+                        </p>
+                        <p>
+                          <span className="inline-block w-3/4">Unmatched</span>
+                          <span className="inline-block w-1/4">{homeData.devices.unMatched}</span>
+                        </p>
+                        <p>
+                          <span className="inline-block w-3/4">Total</span>
+                          <span className="inline-block w-1/4">{homeData.devices.Total}</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
+                      <p className="mt-3 ml-4 text-2xl font-semibold text-white">Battery</p>
+                      <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                        <p>
+                          <span className="inline-block w-3/4"> Low battery</span>
+                          <span className="inline-block w-1/4">
+                            {homeData.devices.LowBattery.count}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col rounded-xl bg-[#036db7] shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]">
+                      <p className="mt-3 ml-4 text-2xl font-semibold text-white">RSSI</p>
+                      <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                        <p>
+                          <span className="inline-block w-3/4"> Strong</span>
+                          <span className="inline-block w-1/4"> {homeData.devices.strong}</span>
+                        </p>
+                        <p>
+                          <span className="inline-block w-3/4"> Normal</span>
+                          <span className="inline-block w-1/4">{homeData.devices.normal}</span>
+                        </p>
+                        <p>
+                          <span className="inline-block w-3/4"> Week</span>
+                          <span className="inline-block w-1/4">{homeData.devices.weak}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
-        </div> */}
+            )}
+          </div> */}
+        </div>
       </div>
-    </div>
+      {<AlarmData />}
+    </>
   )
-}
+})
 
 export default Home
 

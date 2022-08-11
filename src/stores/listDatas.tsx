@@ -6,6 +6,7 @@ const listDatas = observable({
   _adminHistoryListData: [],
   _adminMappingEquipmentListData: [],
   _adminMappingDeviceListData: [],
+  _alarmData: [],
 
   get equipmentListData() {
     return this._equipmentListData
@@ -27,6 +28,10 @@ const listDatas = observable({
     return this._adminMappingDeviceListData
   },
 
+  get alarmData() {
+    return this._alarmData
+  },
+
   setEquipmentListData(value: []) {
     return (this._equipmentListData = value)
   },
@@ -45,6 +50,10 @@ const listDatas = observable({
 
   setAdminMappingDeviceListData(value: []) {
     return (this._adminMappingDeviceListData = value)
+  },
+
+  setAlarmData(value: []) {
+    return (this._alarmData = value)
   },
 })
 

@@ -2,9 +2,9 @@
   "results": [
     {
       "id": 1,
-      "company": "AAE",
-      "equipmentId": 6,
-      "equipmentType": "welding machine",
+      "company": "SECL",
+      "equipmentId": 2,
+      "equipmentType": "Assistance Equipment",
       "deviceMatched": [
         {
           "isMatched": true
@@ -12,18 +12,18 @@
       ],
       "deviceStatus": [
         {
-          "battery": "26.18",
-          "statusId": 3,
-          "statusContent": "Network error"
+          "battery": "45.28",
+          "statusId": 2,
+          "statusContent": "Power off"
         }
       ],
       "isPower": false,
-      "originalId": "eq-1234",
-      "qrCode": "",
+      "originalId": "eq-9712",
+      "qrCode": "787831",
       "driver": [
         {
-          "id": 1,
-          "name": "Luca"
+          "driver_id": 3,
+          "driver_name": "River"
         }
       ]
     },
@@ -31,7 +31,7 @@
       "id": 2,
       "company": "AAE",
       "equipmentId": 6,
-      "equipmentType": "welding machine",
+      "equipmentType": "Earth Work Equipment",
       "deviceMatched": [
         {
           "isMatched": true
@@ -39,18 +39,18 @@
       ],
       "deviceStatus": [
         {
-          "battery": "16.35",
-          "statusId": 2,
-          "statusContent": "Power off"
+          "battery": "38.65",
+          "statusId": 1,
+          "statusContent": "Power on"
         }
       ],
       "isPower": true,
       "originalId": "eq-1235",
-      "qrCode": "",
+      "qrCode": null,
       "driver": [
         {
-          "id": 2,
-          "name": "Jayden"
+          "driver_id": 1,
+          "driver_name": "Luca"
         }
       ]
     },
@@ -58,88 +58,7 @@
       "id": 3,
       "company": "AAE",
       "equipmentId": 5,
-      "equipmentType": "Conveyor belt",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "41.52",
-          "statusId": 1,
-          "statusContent": "Power on"
-        }
-      ],
-      "isPower": false,
-      "originalId": "eq-1236",
-      "qrCode": "",
-      "driver": [
-        {
-          "id": 3,
-          "name": "River"
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "company": "AAE",
-      "equipmentId": 5,
-      "equipmentType": "Conveyor belt",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "30.08",
-          "statusId": 3,
-          "statusContent": "Network error"
-        }
-      ],
-      "isPower": true,
-      "originalId": "eq-1237",
-      "qrCode": "",
-      "driver": [
-        {
-          "id": 4,
-          "name": "Alex"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "company": "AAE",
-      "equipmentId": 4,
-      "equipmentType": "Scissors lift",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "35.48",
-          "statusId": 2,
-          "statusContent": "Power off"
-        }
-      ],
-      "isPower": false,
-      "originalId": "eq-1238",
-      "qrCode": "",
-      "driver": [
-        {
-          "id": 5,
-          "name": "Andrea"
-        }
-      ]
-    },
-    {
-      "id": 6,
-      "company": "AAE",
-      "equipmentId": 4,
-      "equipmentType": "Scissors lift",
+      "equipmentType": "Concrete Equipment",
       "deviceMatched": [
         {
           "isMatched": true
@@ -152,13 +71,86 @@
           "statusContent": "Power on"
         }
       ],
-      "isPower": true,
-      "originalId": "eq-1239",
-      "qrCode": "",
+      "isPower": false,
+      "originalId": "eq-1236",
+      "qrCode": null,
       "driver": [
         {
-          "id": 6,
-          "name": "Remi"
+          "driver_id": 2,
+          "driver_name": "Jayden"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "company": "AAE",
+      "equipmentId": 5,
+      "equipmentType": "Concrete Equipment",
+      "deviceMatched": [
+        {
+          "isMatched": true
+        }
+      ],
+      "deviceStatus": [
+        {
+          "battery": "31.65",
+          "statusId": 3,
+          "statusContent": "Network error"
+        }
+      ],
+      "isPower": true,
+      "originalId": "eq-1237",
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 2,
+          "driver_name": "Jayden"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "company": "AAE",
+      "equipmentId": 4,
+      "equipmentType": "Transportaion Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": false,
+      "originalId": "eq-1238",
+      "qrCode": null,
+      "driver": []
+    },
+    {
+      "id": 6,
+      "company": "AAE",
+      "equipmentId": 4,
+      "equipmentType": "Transportaion Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": true,
+      "originalId": "eq-1239",
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 3,
+          "driver_name": "River"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "company": "AAE",
+      "equipmentId": 2,
+      "equipmentType": "Assistance Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": false,
+      "originalId": "eq-1240",
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 3,
+          "driver_name": "River"
         }
       ]
     },
@@ -166,215 +158,248 @@
       "id": 8,
       "company": "AAE",
       "equipmentId": 2,
-      "equipmentType": "Verti boring machine",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "33.38",
-          "statusId": 2,
-          "statusContent": "Power off"
-        }
-      ],
+      "equipmentType": "Assistance Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": true,
       "originalId": "eq-1241",
-      "qrCode": "",
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 4,
+          "driver_name": "Alex"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "company": "AAE",
+      "equipmentId": 6,
+      "equipmentType": "Earth Work Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": false,
+      "originalId": "eq-1242",
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 4,
+          "driver_name": "Alex"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "company": "AAE",
+      "equipmentId": 6,
+      "equipmentType": "Earth Work Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": true,
+      "originalId": "eq-1243",
+      "qrCode": null,
       "driver": []
     },
     {
       "id": 11,
       "company": "SECL",
       "equipmentId": 5,
-      "equipmentType": "Conveyor belt",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "35.52",
-          "statusId": 1,
-          "statusContent": "Power on"
-        }
-      ],
+      "equipmentType": "Concrete Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": false,
       "originalId": "eq-1244",
-      "qrCode": "",
-      "driver": []
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 5,
+          "driver_name": "Andrea"
+        }
+      ]
     },
     {
       "id": 12,
       "company": "SECL",
       "equipmentId": 5,
-      "equipmentType": "Conveyor belt",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "27.90",
-          "statusId": 2,
-          "statusContent": "Power off"
-        }
-      ],
+      "equipmentType": "Concrete Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": true,
       "originalId": "eq-1245",
-      "qrCode": "",
-      "driver": []
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 5,
+          "driver_name": "Andrea"
+        }
+      ]
     },
     {
       "id": 13,
       "company": "SECL",
       "equipmentId": 4,
-      "equipmentType": "Scissors lift",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "36.22",
-          "statusId": 3,
-          "statusContent": "Network error"
-        }
-      ],
+      "equipmentType": "Transportaion Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": false,
       "originalId": "eq-1246",
-      "qrCode": "",
-      "driver": []
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 5,
+          "driver_name": "Andrea"
+        }
+      ]
     },
     {
       "id": 14,
       "company": "SECL",
       "equipmentId": 4,
-      "equipmentType": "Scissors lift",
+      "equipmentType": "Transportaion Equipment",
       "deviceMatched": [],
       "deviceStatus": [],
       "isPower": true,
       "originalId": "eq-1247",
-      "qrCode": "",
+      "qrCode": null,
       "driver": []
     },
     {
       "id": 15,
       "company": "SECL",
       "equipmentId": 2,
-      "equipmentType": "Verti boring machine",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "35.52",
-          "statusId": 1,
-          "statusContent": "Power on"
-        }
-      ],
+      "equipmentType": "Assistance Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": false,
       "originalId": "eq-1248",
-      "qrCode": "",
+      "qrCode": null,
       "driver": []
     },
     {
       "id": 16,
       "company": "SECL",
       "equipmentId": 2,
-      "equipmentType": "Verti boring machine",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "34.58",
-          "statusId": 2,
-          "statusContent": "Power off"
-        }
-      ],
+      "equipmentType": "Assistance Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": true,
       "originalId": "eq-1249",
-      "qrCode": "",
-      "driver": []
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 6,
+          "driver_name": "Remi"
+        }
+      ]
     },
     {
       "id": 17,
       "company": "SECL",
       "equipmentId": 6,
-      "equipmentType": "welding machine",
-      "deviceMatched": [
-        {
-          "isMatched": true
-        }
-      ],
-      "deviceStatus": [
-        {
-          "battery": "42.30",
-          "statusId": 3,
-          "statusContent": "Network error"
-        }
-      ],
+      "equipmentType": "Earth Work Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
       "isPower": false,
       "originalId": "eq-1250",
-      "qrCode": "",
-      "driver": []
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 6,
+          "driver_name": "Remi"
+        }
+      ]
     },
     {
       "id": 18,
       "company": "SECL",
       "equipmentId": 6,
-      "equipmentType": "welding machine",
+      "equipmentType": "Earth Work Equipment",
       "deviceMatched": [],
       "deviceStatus": [],
       "isPower": true,
       "originalId": "eq-1251",
-      "qrCode": "",
+      "qrCode": null,
       "driver": []
     },
     {
       "id": 19,
       "company": "SECL",
       "equipmentId": 5,
-      "equipmentType": "Conveyor belt",
+      "equipmentType": "Concrete Equipment",
       "deviceMatched": [],
       "deviceStatus": [],
       "isPower": false,
       "originalId": "eq-1252",
-      "qrCode": "",
+      "qrCode": null,
+      "driver": [
+        {
+          "driver_id": 7,
+          "driver_name": "Rowan"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "company": "SECL",
+      "equipmentId": 5,
+      "equipmentType": "Concrete Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": true,
+      "originalId": "eq-1253",
+      "qrCode": null,
       "driver": []
+    },
+    {
+      "id": 21,
+      "company": "SECL",
+      "equipmentId": 2,
+      "equipmentType": "Assistance Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": false,
+      "originalId": "eq-9711",
+      "qrCode": "7812783_",
+      "driver": [
+        {
+          "driver_id": 3,
+          "driver_name": "River"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "company": "SECL",
+      "equipmentId": 2,
+      "equipmentType": "Assistance Equipment",
+      "deviceMatched": [],
+      "deviceStatus": [],
+      "isPower": false,
+      "originalId": "eq-97901",
+      "qrCode": "7812783",
+      "driver": [
+        {
+          "driver_id": 3,
+          "driver_name": "River"
+        }
+      ]
     },
     {
       "id": 23,
       "company": "SECL",
       "equipmentId": 2,
-      "equipmentType": "Verti boring machine",
+      "equipmentType": "Assistance Equipment",
       "deviceMatched": [],
       "deviceStatus": [],
       "isPower": false,
-      "originalId": "eq-98765",
-      "qrCode": "78787523",
-      "driver": []
-    },
-    {
-      "id": 24,
-      "company": "SECL",
-      "equipmentId": 2,
-      "equipmentType": "Verti boring machine",
-      "deviceMatched": [],
-      "deviceStatus": [],
-      "isPower": false,
-      "originalId": "eq-987",
-      "qrCode": "787873",
-      "driver": []
+      "originalId": "eq-979012",
+      "qrCode": "783",
+      "driver": [
+        {
+          "driver_id": 3,
+          "driver_name": "River"
+        }
+      ]
     }
   ]
 }
