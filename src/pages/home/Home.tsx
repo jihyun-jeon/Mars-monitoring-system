@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 import { SERVER_ADDRESS } from '../../config'
+import AlarmData from './components/alarmData/AlarmData'
 import Map from './components/Map'
 
 interface ForcastData {
@@ -98,130 +99,126 @@ const Home = () => {
   })
 
   return (
-    <div className="grid h-full grid-cols-2 gap-8 bg-bgDefault  px-8 pt-[50px] pb-10">
-      <div className="map"> {!isLoaded ? 'Loading...' : <Map mapData={mapData} />}</div>
-      {/* // 버그 */}
-
-      <div className="w-full overflow-x-auto">
-        {hourlyWeathers && (
-          <div className="mb-7 flex flex-col rounded-xl bg-[lightgray] ">
-            <ul className=" flex border-b border-slate-400">
-              <li className="flexCenter w-20">
-                <img
-                  src={`http://openweathermap.org/img/wn/${hourlyWeathers[0].icon}@2x.png`}
-                  className="w-16"
-                />
-              </li>
-              <li className="flexCenter w-20 text-2xl">{hourlyWeathers[0].temp}°C</li>
-              <li className="flexCenter w-24 text-2xl">{hourlyWeathers[0].main}</li>
-              <li className="ml-auto mr-8 flex items-center text-2xl">
-                Catarrh , {weatherData?.city}
-              </li>
-            </ul>
-
-            <div className="grid w-full auto-cols-[7rem] grid-flow-col grid-cols-[7rem] overflow-x-scroll pb-3 pt-1">
-              {hourlyWeathers.map((el, idx) => {
-                return (
-                  <div key={idx} className={`mr-2 h-full w-full rounded-lg  text-lg`}>
-                    <p className={`flexCenter m-3 h-6 rounded-xl ${el.md && 'bg-blue-400'}`}>
-                      {el.md}
-                    </p>
-                    <p className="flexCenter">
-                      {el.hour}
-                      {+el.hour < 12 ? 'AM' : 'PM'}
-                    </p>
-                    <p className="flexCenter">
-                      <img
-                        src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
-                        className="w-16"
-                      />
-                    </p>
-                    <p className="flexCenter">{el.temp}°C</p>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
-
-        <div className="flex flex-col justify-around gap-8">
-          {homeData && (
-            <div className="row">
-              <p className="mb-4 text-2xl font-semibold">Equipment</p>
-              <div className="grid grid-cols-3 gap-8">
-                {DashBoardData.slice(0, 3).map((data, idx) => {
-                  const key = Object.keys(data)[0]
-                  const title = data[key]
-
+    <>
+      <div className="grid h-full grid-cols-2 gap-8 bg-bgDefault  px-8 pt-[50px] pb-10">
+        <div className="map"> {!isLoaded ? 'Loading...' : <Map mapData={mapData} />}</div>
+        {/* // 버그 */}
+        <div className="w-full overflow-x-auto">
+          {hourlyWeathers && (
+            <div className="mb-7 flex flex-col rounded-xl bg-[lightgray] ">
+              <ul className=" flex border-b border-slate-400">
+                <li className="flexCenter w-20">
+                  <img
+                    src={`http://openweathermap.org/img/wn/${hourlyWeathers[0].icon}@2x.png`}
+                    className="w-16"
+                  />
+                </li>
+                <li className="flexCenter w-20 text-2xl">{hourlyWeathers[0].temp}°C</li>
+                <li className="flexCenter w-24 text-2xl">{hourlyWeathers[0].main}</li>
+                <li className="ml-auto mr-8 flex items-center text-2xl">
+                  Catarrh , {weatherData?.city}
+                </li>
+              </ul>
+              <div className="grid w-full auto-cols-[7rem] grid-flow-col grid-cols-[7rem] overflow-x-scroll pb-3 pt-1">
+                {hourlyWeathers.map((el, idx) => {
                   return (
-                    <div
-                      key={idx}
-                      className="flex flex-col rounded-xl bg-[#036db7] pt-2 shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]"
-                    >
-                      <p className="mt-3 ml-4 text-2xl font-bold text-white">
-                        {title}
-                        {title === 'BRP' && (
-                          <span className="ml-1 text-base">(Battery Replace Period)</span>
-                        )}
+                    <div key={idx} className={`mr-2 h-full w-full rounded-lg  text-lg`}>
+                      <p className={`flexCenter m-3 h-6 rounded-xl ${el.md && 'bg-blue-400'}`}>
+                        {el.md}
                       </p>
-
-                      <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                        {homeData[key].map((el, idx) => {
-                          const title = Object.keys(el)[0]
-                          const upperTitle = title.charAt(0).toUpperCase() + title.slice(1)
-                          const value = el[title] >= 0 ? el[title] : el[title].count
-                          return (
-                            <p key={idx}>
-                              <span className="inline-block w-3/4">{upperTitle}</span>
-                              <span className="inline-block w-1/4">{`${value}`}</span>
-                            </p>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <p className="mb-4 mt-7 text-2xl font-semibold">Device</p>
-              <div className="grid grid-cols-3 gap-8">
-                {DashBoardData.slice(3).map((data, idx) => {
-                  const key = Object.keys(data)[0]
-                  const title = data[key]
-
-                  return (
-                    <div
-                      key={idx}
-                      className="flex flex-col rounded-xl bg-[#036db7] pt-2 shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]"
-                    >
-                      <p className="mt-3 ml-4 text-2xl font-bold text-white">
-                        {title}
-                        {title === 'BRP' && (
-                          <span className="ml-1 text-base">(Battery Replace Period)</span>
-                        )}
+                      <p className="flexCenter">
+                        {el.hour}
+                        {+el.hour < 12 ? 'AM' : 'PM'}
                       </p>
-
-                      <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
-                        {homeData[key].map((el, idx) => {
-                          const title = Object.keys(el)[0]
-                          const upperTitle = title.charAt(0).toUpperCase() + title.slice(1)
-                          const value = el[title] >= 0 ? el[title] : el[title].count
-                          return (
-                            <p key={idx}>
-                              <span className="inline-block w-3/4">{upperTitle}</span>
-                              <span className="inline-block w-1/4">{`${value}`}</span>
-                            </p>
-                          )
-                        })}
-                      </div>
+                      <p className="flexCenter">
+                        <img
+                          src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
+                          className="w-16"
+                        />
+                      </p>
+                      <p className="flexCenter">{el.temp}°C</p>
                     </div>
                   )
                 })}
               </div>
             </div>
           )}
+          <div className="flex flex-col justify-around gap-8">
+            {homeData && (
+              <div className="row">
+                <p className="mb-4 text-2xl font-semibold">Equipment</p>
+                <div className="grid grid-cols-3 gap-8">
+                  {DashBoardData.slice(0, 3).map((data, idx) => {
+                    const key = Object.keys(data)[0]
+                    const title = data[key]
+                    return (
+                      <div
+                        key={idx}
+                        className="flex flex-col rounded-xl bg-[#036db7] pt-2 shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]"
+                      >
+                        <p className="mt-3 ml-4 text-2xl font-bold text-white">
+                          {title}
+                          {title === 'BRP' && (
+                            <span className="ml-1 text-base">(Battery Replace Period)</span>
+                          )}
+                        </p>
+                        <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                          {homeData[key].map((el, idx) => {
+                            const title = Object.keys(el)[0]
+                            const upperTitle = title.charAt(0).toUpperCase() + title.slice(1)
+                            const value = el[title] >= 0 ? el[title] : el[title].count
+                            return (
+                              <p key={idx}>
+                                <span className="inline-block w-3/4">{upperTitle}</span>
+                                <span className="inline-block w-1/4">{`${value}`}</span>
+                              </p>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+                <p className="mb-4 mt-7 text-2xl font-semibold">Device</p>
+                <div className="grid grid-cols-3 gap-8">
+                  {DashBoardData.slice(3).map((data, idx) => {
+                    const key = Object.keys(data)[0]
+                    const title = data[key]
+                    return (
+                      <div
+                        key={idx}
+                        className="flex flex-col rounded-xl bg-[#036db7] pt-2 shadow-[1px_1px_5px_0_rgba(0,0,0,0.25)]"
+                      >
+                        <p className="mt-3 ml-4 text-2xl font-bold text-white">
+                          {title}
+                          {title === 'BRP' && (
+                            <span className="ml-1 text-base">(Battery Replace Period)</span>
+                          )}
+                        </p>
+                        <div className="flex flex-col gap-2 py-10 px-8 text-[1.3rem] text-white">
+                          {homeData[key].map((el, idx) => {
+                            const title = Object.keys(el)[0]
+                            const upperTitle = title.charAt(0).toUpperCase() + title.slice(1)
+                            const value = el[title] >= 0 ? el[title] : el[title].count
+                            return (
+                              <p key={idx}>
+                                <span className="inline-block w-3/4">{upperTitle}</span>
+                                <span className="inline-block w-1/4">{`${value}`}</span>
+                              </p>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <AlarmData />
+    </>
   )
 }
 
