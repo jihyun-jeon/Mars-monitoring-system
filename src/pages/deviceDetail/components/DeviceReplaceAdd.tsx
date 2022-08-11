@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FcOk } from 'react-icons/fc'
 
 import AppContext from '../../../AppContext'
 
@@ -94,6 +95,7 @@ const DeviceReplaceAdd = ({ setOnModal }) => {
           className="h-10 w-1/2  bg-primary"
           onClick={() => {
             appContext.setToastMessage(['등록이 완료되었습니다.'])
+            appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
           }}
         >

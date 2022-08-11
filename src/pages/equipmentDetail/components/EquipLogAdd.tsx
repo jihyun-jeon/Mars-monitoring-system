@@ -1,6 +1,8 @@
 import { toJS, values } from 'mobx'
+import { observer } from 'mobx-react'
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router'
+import { FcOk } from 'react-icons/fc'
 
 import AppContext from '../../../AppContext'
 import MakeInput from '../../../components/editBox/MakeInput'
@@ -8,26 +10,25 @@ import MakeSelectBox from '../../../components/editBox/MakeSelectBox'
 import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
-const EquipLogAdd = ({ setOnModal }) => {
-  const {
-    detailDatas: { equipment },
-  } = useStore()
+const EquipLogAdd = observer(({ setOnModal }) => {
+  const { detailDatas } = useStore()
   const appContext = useContext(AppContext)
+  const { id } = useParams()
 
   const [newLog, setNewLog] = useState({
     content: '',
     date: '',
-    repaired_manager_id: null,
-    repaired_purpose_id: null,
+    repaired_manager_id: 1,
+    repaired_purpose_id: 1,
   })
 
   console.log(newLog)
 
   return (
-    <div className="relative h-[40rem] w-[40rem] rounded-lg  bg-white px-16 pt-5">
+    <div className="relative h-[20rem] w-[60rem] rounded-lg  bg-white pt-5">
       <h1 className="flexCenter pb-10 text-2xl"> Add Repair log</h1>
 
-      <div className="flexCenter mb-10 h-[70%] w-full bg-fuchsia-400">
+      <div className="mt-5 flex justify-center">
         <MakeInput
           id="date"
           label={'Date'}
@@ -83,25 +84,22 @@ const EquipLogAdd = ({ setOnModal }) => {
           className="h-10 w-1/2  bg-primary"
           onClick={() => {
             appContext.setToastMessage(['등록이 완료되었습니다.'])
+            appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
-            // < post요청  > <- 다시 처리해야 함!!!!
-            fetch(`${SERVER_ADDRESS}equipment/1/post`, {
+            console.log(newLog)
+            // < post요청  >
+            fetch(`${SERVER_ADDRESS}equipment/${id}/post`, {
               method: 'POST',
               headers: { Authorization: localStorage.getItem('accessToken') },
-              body: JSON.stringify({
-                content: 'test5',
-                date: '2022-07-24',
-                repaired_manager_id: 1,
-                repaired_purpose_id: 3,
-              }),
+              body: JSON.stringify(newLog),
             })
               .then((res) => res.json())
               .then((result) => console.log(result))
 
             //<get요청>
-            fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
+            fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
               .then((res) => res.json())
-              .then((result) => detailDatas.setEquipment(result))
+              .then((result) => detailDatas.setEquipment(result.equipment))
           }}
         >
           Add
@@ -109,7 +107,7 @@ const EquipLogAdd = ({ setOnModal }) => {
       </div>
     </div>
   )
-}
+})
 
 export default EquipLogAdd
 

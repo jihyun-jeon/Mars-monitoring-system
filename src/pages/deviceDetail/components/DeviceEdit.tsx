@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FcOk } from 'react-icons/fc'
 
 import AppContext from '../../../AppContext'
 
@@ -6,26 +7,25 @@ const DeviceEdit = ({ setOnModal }) => {
   const appContext = useContext(AppContext)
 
   return (
-    <div className="relative h-[34rem] w-[60rem] rounded-lg  bg-white px-16 pt-5">
-      <h1 className="flexCenter pb-8 text-2xl">Device Edit</h1>
-      <h3 className="pb-8 text-2xl">eq-78900</h3>
+    <div className="relative h-[20rem] w-[55rem] rounded-lg  bg-white px-16 pt-5">
+      <h1 className="flexCenter  text-2xl">Device Edit</h1>
 
-      <div className=" flex flex-col">
+      <div className="mt-10 flex flex-col px-10">
         <div className="mb-10 flex justify-between">
-          <label className="mb-2 flex w-44 flex-col">
+          {/* <label className="mb-2 flex w-44 flex-col">
             <span className=" ">Plate Number</span>
             <select className="rounded-md border-2">
               <option>DUMMY64</option>
               <option>DUMMY64</option>
             </select>
-          </label>
+          </label> */}
 
-          <label className="mb-2 flex  w-44 flex-col ">
+          {/* <label className="mb-2 flex  w-44 flex-col ">
             Manufacture Date
             <input type="text" className="rounded-md border-2 pl-2 " value="2022-04-26" />
-          </label>
+          </label> */}
 
-          <label className="mb-2 flex  w-44 flex-col">
+          {/* <label className="mb-2 flex  w-44 flex-col">
             Capacity
             <div>
               <select className="w-1/2 rounded-md border-2">
@@ -37,49 +37,43 @@ const DeviceEdit = ({ setOnModal }) => {
                 <option>M3</option>
               </select>
             </div>
-          </label>
+          </label> */}
 
-          <label className="mb-2 flex  w-44 flex-col">
+          {/* <label className="mb-2 flex  w-44 flex-col">
             Equipment
             <select className="rounded-md border-2">
               <option>Drill machine</option>
               <option>Drill machine</option>
             </select>
-          </label>
+          </label>*/}
         </div>
 
         <div className="mb-10 flex justify-between">
-          <label className="mb-2 flex  w-44 flex-col">
-            Type
-            <select className="rounded-md border-2">
-              <option>Crawler drill machine</option>
-              <option>Crawler drill machine</option>
-            </select>
+          <label className="flex w-44 flex-col pb-5 font-semibold">
+            Serial Number
+            <input type="text" className="border-1 mt-2 border" />
           </label>
 
-          <label className="mb-2 flex  w-44 flex-col">
+          <label className="mb-2 flex w-44 flex-col font-semibold">
             QR Code
-            <select className="rounded-md border-2">
-              <option>a</option>
-              <option>aa</option>
-            </select>
+            <input type="text" className="border-1 mt-2 border" />
           </label>
 
-          <label className="mb-2 flex  w-44 flex-col">
+          <label className="mb-2 flex w-44 flex-col font-semibold">
             Company
             <select className="rounded-md border-2">
-              <option>Sed</option>
-              <option>Sed</option>
+              <option>AAE</option>
+              <option>SECL</option>
             </select>
           </label>
 
-          <label className="mb-2 flex  w-44 flex-col">
+          {/* <label className="mb-2 flex  w-44 flex-col">
             Maintenance_id?
             <select className="rounded-md border-2">
               <option>1</option>
               <option>1</option>
             </select>
-          </label>
+          </label> */}
         </div>
       </div>
       <div className="absolute bottom-0 left-0 w-full">
@@ -95,6 +89,7 @@ const DeviceEdit = ({ setOnModal }) => {
           className="h-10 w-1/2  bg-primary"
           onClick={() => {
             appContext.setToastMessage(['수정이 완료되었습니다.'])
+            appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
           }}
         >

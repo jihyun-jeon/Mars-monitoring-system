@@ -1,6 +1,6 @@
 import { useLoadScript } from '@react-google-maps/api'
 import { toJS } from 'mobx'
-import { observer, Observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { useEffect, useState, useMemo } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
 import { useParams } from 'react-router'
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 
 import GoogleMap_ from '../../../src/components/googleMap/GoogleMap_'
 import DetailList from '../../components/detailList/DetailList'
+import DeleteCheck from '../../components/modal/components/DeleteCheck'
 import Modal from '../../components/modal/modal'
 import useStore from '../../useStore'
 import { SERVER_ADDRESS } from '.././../config'
@@ -21,27 +22,27 @@ interface onModalType {
 
 const EquipmentDetail = observer(() => {
   const { detailDatas, usersInfo } = useStore()
-  const { equipment } = detailDatas
-
-  // console.log(toJS(equipment))
-
-  const { _isEquipmentControl } = usersInfo
   const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 
+  const { equipment } = detailDatas
   const { id } = useParams()
 
+  // const someData = equipment && [
+  //   equipment.id,
+  //   equipment.equipmentCategory,
+  //   true,
+  //   equipment.device[0].latitude,
+  //   equipment.device[0].longitude,
+  // ]
+
+  const { _isEquipmentControl } = usersInfo
   const mapKey = import.meta.env.VITE_GOOGLE_MAP_KEY
-  const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
 
-  useEffect(() => {
-    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=1`)
-      .then((res) => res.json())
-      .then((result) => {
-        // console.log(result)
-        detailDatas.setEquipment(result.equipment)
-      })
-  }, [])
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: mapKey,
+  })
 
+  const center = useMemo(() => ({ lat: 24.983367, lng: 51.170926 }), [])
   // useEffect(() => {
   //   fetch(`/data/equipmentDetail.json`)
   //     .then((res) => res.json())
@@ -50,9 +51,22 @@ const EquipmentDetail = observer(() => {
   //     })
   // }, [])
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: mapKey,
-  })
+  useEffect(() => {
+    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
+      .then((res) => res.json())
+      .then((result) => {
+        detailDatas.setEquipment(result.equipment)
+      })
+  }, [])
+
+  const unMatchRequest = () => {
+    fetch(`${SERVER_ADDRESS}equipment/match/delete?equipment_id=${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: localStorage.getItem('accessToken') },
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result))
+  }
 
   return (
     <div className="h-screen w-full overflow-scroll pl-10  pt-5">
@@ -133,6 +147,12 @@ const EquipmentDetail = observer(() => {
             <button
               type="button"
               className="mt-10 mr-3 h-10 w-32 rounded-lg bg-primary text-xl text-white"
+              onClick={(e) => {
+                setOnModal({
+                  clicked: true,
+                  childrun: <DeleteCheck setOnModal={setOnModal} deleteApi={unMatchRequest} />,
+                })
+              }}
             >
               Unmatched
             </button>
@@ -163,14 +183,21 @@ const EquipmentDetail = observer(() => {
 export default EquipmentDetail
 
 const mapData = [
-  { lat: 33.440689, lng: 126.920708, name: 'welding', active: true, error: true },
-  { lat: 33.349512, lng: 126.611391, name: 'dump', active: false, error: false },
-  { lat: 33.494913, lng: 126.897931, name: 'conveyer', active: true, error: true },
-  { lat: 33.242565, lng: 126.553494, name: 'crain', active: true, error: false },
-  { lat: 33.476915, lng: 126.805685, name: 'welding', active: false, error: false },
-  { lat: 33.338557, lng: 126.459511, name: 'dump', active: true, error: true },
-  { lat: 33.462374, lng: 126.742381, name: 'conveyer', active: true, error: false },
-  { lat: 33.246541, lng: 126.401018, name: 'crain', active: false, error: false },
+  {
+    powerOn: [
+      {
+        equipment: [
+          {
+            equipmentId: 6,
+            equipmentType: 'Earth Work Equipment',
+            isPower: true,
+          },
+        ],
+        latitude: '24.982925',
+        longitude: '51.171043',
+      },
+    ],
+  },
 ]
 
 const CardTitle = [

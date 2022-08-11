@@ -1,0 +1,186 @@
+{
+  "result": {
+    "powerOn": [
+      {
+        "equipment": [
+          {
+            "equipmentId": 1,
+            "equipmentType": "Aerial Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.985053",
+        "longitude": "51.172631"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 2,
+            "equipmentType": "Assistance Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.984664",
+        "longitude": "51.173049"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 3,
+            "equipmentType": "Lifting Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.982767",
+        "longitude": "51.168607"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 4,
+            "equipmentType": "Transportation Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.982991",
+        "longitude": "51.171526"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 5,
+            "equipmentType": "Concrete Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.983876",
+        "longitude": "51.169648"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 6,
+            "equipmentType": "Earth Work Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.983925",
+        "longitude": "51.171043"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 7,
+            "equipmentType": "Pavement Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.981941",
+        "longitude": "51.170614"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 8,
+            "equipmentType": "Pilling Digging Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.983322",
+        "longitude": "51.169863"
+      }
+    ],
+    "networkError": [
+      {
+        "equipment": [
+          {
+            "equipmentId": 9,
+            "equipmentType": "Aerial Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.982709",
+        "longitude": "51.170292"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 10,
+            "equipmentType": "Assistance Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.984887",
+        "longitude": "51.171493"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 11,
+            "equipmentType": "Lifting Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.983565300233774",
+        "longitude": "51.17263118447046"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 12,
+            "equipmentType": "Transportation Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.982417",
+        "longitude": "51.172824"
+      }
+    ],
+    "networkOff": [
+      {
+        "equipment": [
+          {
+            "equipmentId": 13,
+            "equipmentType": "Concrete Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.983905",
+        "longitude": "51.169155"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 14,
+            "equipmentType": "Earth Work Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.984887",
+        "longitude": "51.170946"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 15,
+            "equipmentType": "Pavement Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.981270195886378",
+        "longitude": "51.16978804290076"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 16,
+            "equipmentType": "Pilling Digging Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "24.981425",
+        "longitude": "51.171665"
+      }
+    ]
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "results": [
+    {
+      "id": 24,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-10T12:15:06.985"
+    },
+    {
+      "id": 23,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-10T12:14:11.176"
+    },
+    {
+      "id": 22,
+      "date": "2021-12-12T00:00:00",
+      "repaired_manager_name": "Leonard",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T14:15:54.802"
+    },
+    {
+      "id": 20,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:18:31.369"
+    },
+    {
+      "id": 19,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:18:30.836"
+    },
+    {
+      "id": 18,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:18:30.346"
+    },
+    {
+      "id": 17,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:18:29.692"
+    },
+    {
+      "id": 16,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:18:28.584"
+    },
+    {
+      "id": 15,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:18:26.187"
+    },
+    {
+      "id": 13,
+      "date": "2020-01-03T00:00:00",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "1"
+        }
+      ],
+      "battery": "17.00",
+      "lastLogTime": "2022-08-09T13:14:30.717"
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "result": {
+    "count": [
+      {
+        "equipmentActive": [
+          {
+            "activate": 6
+          },
+          {
+            "inactivate": 0
+          },
+          {
+            "Total": 6
+          }
+        ],
+        "equipmentOnline": [
+          {
+            "success": 1
+          },
+          {
+            "fail": 5
+          },
+          {
+            "Total": 6
+          }
+        ],
+        "batteryReplacePeriod": [
+          {
+            "unexpired": 2
+          },
+          {
+            "expired": 4
+          },
+          {
+            "Total": 6
+          }
+        ],
+        "deviceMatch": [
+          {
+            "matched": 6
+          },
+          {
+            "unMatched": 3
+          },
+          {
+            "Total": 9
+          }
+        ],
+        "deviceBattery": [
+          {
+            "LowBattery": 6
+          }
+        ],
+        "RSSI": [
+          {
+            "strong": 2
+          },
+          {
+            "normal": 5
+          },
+          {
+            "weak": 2
+          }
+        ]
+      }
+    ],
+    "powerOn": [
+      {
+        "equipment": [
+          {
+            "equipmentId": 3,
+            "equipmentType": "Concrete Equipment",
+            "isPower": true
+          },
+          {
+            "equipmentId": 5,
+            "equipmentType": "Transportaion Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "0E-14",
+        "longitude": "0E-14"
+      }
+    ],
+    "networkError": [
+      {
+        "equipment": [
+          {
+            "equipmentId": 6,
+            "equipmentType": "Transportaion Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "541.00000000000000",
+        "longitude": "540.00000000000000"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 7,
+            "equipmentType": "Assistance Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "0E-14",
+        "longitude": "0E-14"
+      }
+    ],
+    "networkOff": [
+      {
+        "equipment": [
+          {
+            "equipmentId": 9,
+            "equipmentType": "Earth Work Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "0E-14",
+        "longitude": "0E-14"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 10,
+            "equipmentType": "Earth Work Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "0E-14",
+        "longitude": "0E-14"
+      },
+      {
+        "equipment": [
+          {
+            "equipmentId": 11,
+            "equipmentType": "Concrete Equipment",
+            "isPower": true
+          }
+        ],
+        "latitude": "0E-14",
+        "longitude": "0E-14"
+      }
+    ]
+  }
+}
