@@ -2,6 +2,7 @@ import { toJS, values } from 'mobx'
 import { observer } from 'mobx-react'
 import { useContext, useState } from 'react'
 import { useParams } from 'react-router'
+import { FcOk } from 'react-icons/fc'
 
 import AppContext from '../../../AppContext'
 import MakeInput from '../../../components/editBox/MakeInput'
@@ -83,6 +84,7 @@ const EquipLogAdd = observer(({ setOnModal }) => {
           className="h-10 w-1/2  bg-primary"
           onClick={() => {
             appContext.setToastMessage(['등록이 완료되었습니다.'])
+            appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
             console.log(newLog)
             // < post요청  >

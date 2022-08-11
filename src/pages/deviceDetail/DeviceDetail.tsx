@@ -19,17 +19,16 @@ const DeviceDetail = observer(() => {
 
   const { usersInfo } = useStore()
 
-  useEffect(() => {
-    fetch('/public/data/equipment_detail.json')
-      .then((res) => res.json())
-      .then((result) => setDeviceData(result))
-  }, [])
+  // useEffect(() => {
+  //   fetch('/public/data/equipment_detail.json')
+  //     .then((res) => res.json())
+  //     .then((result) => setDeviceData(result))
+  // }, [])
 
   return (
     <div className="h-screen w-full overflow-scroll px-3 pt-5">
       <h1 className="ml-10 mb-[-75px] text-4xl">Device Detail</h1>
-      {/* <DetailInfo usersInfo={usersInfo} setOnModal={setOnModal} EditComp={DeviceEdit} /> */}
-
+      <DetailInfo usersInfo={usersInfo} setOnModal={setOnModal} EditComp={DeviceEdit} />
       <DetailList usersInfo={usersInfo} setOnModal={setOnModal} fatherComp={'deviceDetail'} />
       {onModal.clicked && <Modal contents={onModal.childrun} />}
     </div>

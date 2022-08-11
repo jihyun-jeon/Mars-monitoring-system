@@ -1,0 +1,95 @@
+{
+  "results": [
+    {
+      "id": 13,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    },
+    {
+      "id": 15,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    },
+    {
+      "id": 16,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    },
+    {
+      "id": 17,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    },
+    {
+      "id": 18,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    },
+    {
+      "id": 19,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    },
+    {
+      "id": 20,
+      "repaired_sort_content": "Installation",
+      "repaired_manager_name": "Martin",
+      "equipment_gps_tracker": [
+        {
+          "serial_number": "dv-12789"
+        }
+      ],
+      "repaired_purpose_content": "Battery replacement",
+      "content": "100",
+      "date": "2020-01-03T00:00:00"
+    }
+  ]
+}

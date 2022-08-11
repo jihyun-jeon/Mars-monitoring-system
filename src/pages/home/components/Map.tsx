@@ -4,23 +4,9 @@ import GoogleMap_ from '../../../../src/components/googleMap/GoogleMap_'
 
 function Map({ mapData }) {
   const [mapType, setMapType] = useState(true)
-  const center = useMemo(() => ({ lat: 33.402374, lng: 126.582381 }), [])
+  const center = useMemo(() => ({ lat: 24.983367, lng: 51.170926 }), [])
 
   const mapOption = mapType ? google.maps.MapTypeId.ROADMAP : google.maps.MapTypeId.SATELLITE
-
-  const [onShow, setOnShow] = useState<{
-    latitude: number
-    longitude: number
-    equipmentType: string
-  } | null>(null)
-
-  const markerClick = (el) => {
-    if (el.latitude === onShow?.latitude && el.longitude === onShow?.longitude) {
-      setOnShow(null)
-      return
-    }
-    setOnShow(el)
-  }
 
   return (
     <div className="relative h-full w-full">
@@ -51,8 +37,6 @@ function Map({ mapData }) {
         mapType={mapType}
         center={center}
         mapOption={mapOption}
-        onShow={onShow}
-        markerClick={markerClick}
         mapContainerStyle={{
           position: 'absolute',
           top: 0,

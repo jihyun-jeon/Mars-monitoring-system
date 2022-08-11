@@ -1,0 +1,25 @@
+{
+  "results": {
+    "id": 3,
+    "serialNumber": "dv-6789",
+    "qrCode": "8970",
+    "company": "AAE",
+    "device_other_info": [
+      {
+        "status": "Power on",
+        "lastUpdateTime": "2022-08-04T00:00:00",
+        "error": "Low Battery",
+        "statellitesUsed": 2,
+        "lowBattery": "1.00",
+        "latitude": "11111.00000000000000",
+        "longitude": "22222.00000000000000"
+      }
+    ],
+    "matchedEquipment": [
+      {
+        "matchedEquipmentOriginalId": "eq-1236",
+        "matchedEquipmentCategory": "mechanical handling equipment"
+      }
+    ]
+  }
+}

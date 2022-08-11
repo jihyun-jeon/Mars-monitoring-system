@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "id": 15,
+      "lastUpdateTime": "2022-08-09T11:48:54.994",
+      "deviceSerialNumber": "dv-12789",
+      "equipmentSerialNumber": "eq-1240",
+      "matchedUserId": "Mu001",
+      "matchedStatus": true
+    },
+    {
+      "id": 14,
+      "lastUpdateTime": "2022-08-09T11:48:47.775",
+      "deviceSerialNumber": "dv-12789",
+      "equipmentSerialNumber": "eq-1238",
+      "matchedUserId": "Mu001",
+      "matchedStatus": true
+    },
+    {
+      "id": 13,
+      "lastUpdateTime": "2022-08-09T11:41:30.904",
+      "deviceSerialNumber": "dv-12789",
+      "equipmentSerialNumber": "eq-1237",
+      "matchedUserId": "Mu001",
+      "matchedStatus": true
+    },
+    {
+      "id": 10,
+      "lastUpdateTime": "2022-08-09T11:40:53.535",
+      "deviceSerialNumber": "dv-12789",
+      "equipmentSerialNumber": "eq-1237",
+      "matchedUserId": "Mu001",
+      "matchedStatus": false
+    }
+  ]
+}

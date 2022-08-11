@@ -1,6 +1,7 @@
 import { toJS } from 'mobx'
-import { observer, Observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import { useContext, useState } from 'react'
+import { FcOk } from 'react-icons/fc'
 
 import MakeInput from '../../../../src/components/editBox/MakeInput'
 import MakeSelectBox from '../../../../src/components/editBox/MakeSelectBox'
@@ -187,6 +188,7 @@ const EquipEdit = observer(({ setOnModal }) => {
                 .then((res) => res.json())
                 .then((result) => detailDatas.setEquipment(result.equipment))
               appContext.setToastMessage(['수정이 완료되었습니다.'])
+              appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
               setOnModal({ clicked: false, content: '' })
             }}
           >
