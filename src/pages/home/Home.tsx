@@ -54,18 +54,18 @@ const Home = () => {
   })
 
   // <데쉬보드 get요청>
-  useEffect(() => {
-    axios(`${SERVER_ADDRESS}equipment`).then((result) => {
-      setHomeData(result.data.result.count[0])
-    })
-  }, [])
-
-  // // < mockdata GET -test용 >
   // useEffect(() => {
-  //   axios('/public/data/homeUpdate.json').then((result) => {
+  //   axios(`${SERVER_ADDRESS}equipment`).then((result) => {
   //     setHomeData(result.data.result.count[0])
   //   })
   // }, [])
+
+  // // < mockdata GET -test용 >
+  useEffect(() => {
+    axios('/public/data/homeUpdate.json').then((result) => {
+      setHomeData(result.data.result.count[0])
+    })
+  }, [])
 
   // // < mockdata GET - 지도는 mock data활용 >
   useEffect(() => {

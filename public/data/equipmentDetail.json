@@ -1,31 +1,31 @@
 {
   "equipment": {
-    "id": 1,
+    "id": 2,
     "company": {
-      "id": 1,
-      "name": "AAE"
+      "id": 2,
+      "name": "SECL"
     },
-    "maintenance_company": "AEE",
-    "maintenance_manager_name": "Max",
-    "maintenance_manager_phone_number": "010-1234-1234",
-    "maintenance_manager_department": "Management",
+    "maintenance_company": "CCe3",
+    "maintenance_manager_name": "sindy",
+    "maintenance_manager_phone_number": "010-0000-1111",
+    "maintenance_manager_department": "maintenance_team",
     "unit": {
       "id": 2,
       "name": "Ton"
     },
-    "capacity": 98,
+    "capacity": 18,
     "equipmentType": {
-      "id": 6,
-      "name": "Earth Work Equipment"
+      "id": 2,
+      "name": "Assistance Equipment"
     },
     "equipmentCategory": {
-      "id": 6,
-      "name": "welding machine",
-      "imageUrl": "https://velog.velcdn.com/images/jiminnote/post/f90ffaee-f2ee-49c1-90c9-d0431c1b4bec/image.png"
+      "id": 2,
+      "name": "Boring machine",
+      "imageUrl": "https://velog.velcdn.com/images/jiminnote/post/ae95e86b-aa3a-432c-9ead-621fa8c8a4d1/image.png"
     },
     "repaired_history": [
       {
-        "id": 4,
+        "id": 5,
         "sort": {
           "id": 3,
           "content": "Repaired"
@@ -35,19 +35,112 @@
           "name": "Martin",
           "company": "BBB"
         },
-        "repairedPurpose": {
-          "id": 1,
-          "content": "Battery replacement"
-        },
+        "repairedPurpose": [
+          {
+            "id": 1,
+            "content": "Battery replacement"
+          }
+        ],
         "date": "2022-07-28T00:00:00",
         "content": "test8"
       }
     ],
     "matched_history": [
       {
-        "id": 4,
-        "lastLogTime": "2022-08-09T15:09:57.606",
-        "serialNumber": "dv-1238",
+        "id": 5,
+        "lastLogTime": "2022-08-10T14:44:58.147",
+        "serialNumber": "dv-1289",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 6,
+        "lastLogTime": "2022-08-10T14:19:23.018",
+        "serialNumber": "dv-12789",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 8,
+        "lastLogTime": "2022-08-10T11:17:29.714",
+        "serialNumber": "dv-6765",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 5,
+        "lastLogTime": "2022-08-10T14:44:58.147",
+        "serialNumber": "dv-1289",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 6,
+        "lastLogTime": "2022-08-10T14:19:23.018",
+        "serialNumber": "dv-12789",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 5,
+        "lastLogTime": "2022-08-10T14:44:58.147",
+        "serialNumber": "dv-1289",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 6,
+        "lastLogTime": "2022-08-10T14:19:23.018",
+        "serialNumber": "dv-12789",
+        "manager": {
+          "id": 1,
+          "name": "Harry"
+        },
+        "company": {
+          "id": 1,
+          "name": "AAE"
+        }
+      },
+      {
+        "id": 5,
+        "lastLogTime": "2022-08-10T14:44:58.147",
+        "serialNumber": "dv-1289",
         "manager": {
           "id": 1,
           "name": "Harry"
@@ -58,15 +151,14 @@
         }
       }
     ],
-    "driver": [],
     "device": [
       {
-        "id": 4,
-        "battery": "45.28",
-        "lastLogTime": "2022-08-07T17:47:20.026",
+        "id": 5,
+        "battery": "42.28",
+        "lastLogTime": "2022-08-10T10:40:26.967",
         "longitude": "0E-14",
         "latitude": "0E-14",
-        "serialNumber": "dv-1238",
+        "serialNumber": "dv-1289",
         "manager": {
           "id": 1,
           "name": "Harry"
@@ -77,10 +169,18 @@
         }
       }
     ],
-    "plateNumber": "9876-01-01",
-    "manufactureDate": "2022-05-23T00:00:00",
-    "qrCode": null,
-    "isPower": false,
-    "originalId": "eq-1234"
+    "plateNumber": "878-894",
+    "manufactureDate": "2022-05-06T00:00:00",
+    "qrCode": "787831",
+    "isPower": true,
+    "originalId": "eq-9712",
+    "driver": [
+      {
+        "id": 3,
+        "name": "River",
+        "level": "Foreman",
+        "company": "Lmm"
+      }
+    ]
   }
 }

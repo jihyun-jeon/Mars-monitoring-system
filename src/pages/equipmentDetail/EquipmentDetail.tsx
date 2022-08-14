@@ -203,6 +203,6 @@ const mapData = [
 const CardTitle = [
   { equipmentCategory: 'Equipment' },
   { equipmentType: 'Type' },
-  { qr_code: 'Qr code' },
+  { qrCode: 'Qr code' },
   { isPower: 'Power' },
 ]

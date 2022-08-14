@@ -186,7 +186,10 @@ const EquipEdit = observer(({ setOnModal }) => {
               // // <get요청>
               fetch(`${SERVER_ADDRESS}equipment/${pathId}?offset=0`)
                 .then((res) => res.json())
-                .then((result) => detailDatas.setEquipment(result.equipment))
+                .then((result) => {
+                  console.log(result)
+                  detailDatas.setEquipment(result.equipment)
+                })
               appContext.setToastMessage(['수정이 완료되었습니다.'])
               appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
               setOnModal({ clicked: false, content: '' })
