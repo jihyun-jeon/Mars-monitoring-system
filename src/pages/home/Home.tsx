@@ -40,10 +40,10 @@ const Home = () => {
     const date = new Date(obj.dt_txt)
     const md = `${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`
     const mdValue = day === md ? '' : md
-
-    if (day !== md) {
+    if (day !== mdValue) {
       day = md
     }
+
     return {
       md: mdValue,
       hour: obj.dt_txt.split(' ')[1].slice(0, 2),
@@ -53,21 +53,21 @@ const Home = () => {
     }
   })
 
-  // <데쉬보드 get요청>
-  // useEffect(() => {
-  //   axios(`${SERVER_ADDRESS}equipment`).then((result) => {
-  //     setHomeData(result.data.result.count[0])
-  //   })
-  // }, [])
-
-  // // < mockdata GET -test용 >
+  // < 데쉬보드 get요청>
   useEffect(() => {
-    axios('/public/data/homeUpdate.json').then((result) => {
+    axios(`${SERVER_ADDRESS}equipment`).then((result) => {
       setHomeData(result.data.result.count[0])
     })
   }, [])
 
-  // // < mockdata GET - 지도는 mock data활용 >
+  // // < 데쉬보드 mockdata GET -test용 >
+  // useEffect(() => {
+  //   axios('/public/data/homeUpdate.json').then((result) => {
+  //     setHomeData(result.data.result.count[0])
+  //   })
+  // }, [])
+
+  // // < 지도 mockdata GET - 지도는 mock data활용 >
   useEffect(() => {
     axios('/public/data/mapData.json').then((result) => {
       setMapData([
@@ -77,8 +77,6 @@ const Home = () => {
       ])
     })
   }, [])
-
-  console.log(mapData)
 
   // < 날씨 api >
   useEffect(() => {
@@ -147,6 +145,7 @@ const Home = () => {
             {homeData && (
               <div className="row">
                 <p className="mb-4 text-2xl font-semibold">Equipment</p>
+
                 <div className="grid grid-cols-3 gap-8">
                   {DashBoardData.slice(0, 3).map((data, idx) => {
                     const key = Object.keys(data)[0]
@@ -179,7 +178,9 @@ const Home = () => {
                     )
                   })}
                 </div>
+
                 <p className="mb-4 mt-7 text-2xl font-semibold">Device</p>
+
                 <div className="grid grid-cols-3 gap-8">
                   {DashBoardData.slice(3).map((data, idx) => {
                     const key = Object.keys(data)[0]
