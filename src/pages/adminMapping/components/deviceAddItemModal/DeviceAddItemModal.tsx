@@ -39,7 +39,7 @@ const DeviceAddItemModal = () => {
 
   const requestData = {
     company_id: Number(company),
-    qr_code: Number(qrCode),
+    qrCode: Number(qrCode),
     serial_number: serialNumber,
   }
 
