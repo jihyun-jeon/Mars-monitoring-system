@@ -7,6 +7,9 @@ import { pwVisibilityToggle } from './stores/login/pwVisibilityToggle'
 import { validMessageToggle } from './stores/login/validMessageToggle'
 import { mappingFilterOption } from './stores/mappingFilterOption'
 import { pathNumbers } from './stores/pathNumbers'
+import { isSideNavToggle } from './stores/sideNav/isSideNavToggle'
+import { isTopNavIsToggle } from './stores/topNav/isTopNavIsToggle'
+import { messageId } from './stores/topNav/messageId'
 import { usersInfo } from './stores/usersInfo'
 
 const useStore = () => {
@@ -16,8 +19,13 @@ const useStore = () => {
     enteredUserInfo,
     validMessageToggle,
     pwVisibilityToggle,
-    listDatas,
+    // TopNav - isToggle, messageId, pathNumbers
+    isTopNavIsToggle,
+    messageId,
     pathNumbers,
+    // SideNav - isSideNavToggle
+    isSideNavToggle,
+    listDatas,
     addItemToggle,
     mappingFilterOption,
     equipDetailDatas,

@@ -1,20 +1,17 @@
 import { observer } from 'mobx-react'
-import { AiFillAppstore } from 'react-icons/ai'
-import { GiMineTruck } from 'react-icons/gi'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
-import { RiTaxiWifiLine } from 'react-icons/ri'
 import { VscTools } from 'react-icons/vsc'
-import { NavLink } from 'react-router-dom'
 
 import useStore from '../../../../useStore'
+import contractionMenuTabData from '../../data/contractionMenuTabData'
+import ContractionMenuTab from '../contractionMenuTab/ContractionMenuTab'
 
-type Props = {
-  handleArrowToggle: () => void
-}
+const ContractionNav = observer(() => {
+  const { usersInfo, isSideNavToggle } = useStore()
 
-const ContractionNav = observer(({ handleArrowToggle }: Props) => {
-  const { usersInfo } = useStore()
-  const { isEquipmentControl } = usersInfo
+  const arrowToggleSwitch = () => {
+    isSideNavToggle.setIsArrowToggle(!isSideNavToggle.isArrowToggle)
+  }
 
   return (
     <aside className="mr-4 h-screen w-28">
@@ -22,59 +19,29 @@ const ContractionNav = observer(({ handleArrowToggle }: Props) => {
         <ul className="space-y-2">
           <li className="flex h-[4.5rem] justify-center">
             <MdOutlineKeyboardArrowRight
-              onClick={handleArrowToggle}
+              onClick={arrowToggleSwitch}
               className="relative top-2 cursor-pointer text-3xl text-[#BAC7D5]"
             />
           </li>
-          <li>
-            <NavLink
-              to="/home"
-              className={({ isActive }) =>
-                isActive
-                  ? 'activeDetailIcon'
-                  : 'flex items-center justify-center rounded-lg p-4 text-base font-normal text-bgPaper hover:bg-[#ffffff1a]'
-              }
-            >
-              <AiFillAppstore className="text-2xl" />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/equipmentList"
-              className={({ isActive }) =>
-                isActive
-                  ? 'activeDetailIcon'
-                  : 'flex items-center justify-center rounded-lg p-4 text-base font-normal text-bgPaper hover:bg-[#ffffff1a]'
-              }
-            >
-              <GiMineTruck className="text-2xl" />
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/deviceList"
-              className={({ isActive }) =>
-                isActive
-                  ? 'activeDetailIcon'
-                  : 'flex items-center justify-center rounded-lg p-4 text-base font-normal text-bgPaper hover:bg-[#ffffff1a]'
-              }
-            >
-              <RiTaxiWifiLine className="text-2xl" />
-            </NavLink>
-          </li>
-          {isEquipmentControl && (
-            <li>
-              <NavLink
-                to="/adminMapping"
-                className={({ isActive }) =>
-                  isActive
-                    ? 'activeDetailIcon'
-                    : 'flex items-center justify-center rounded-lg p-4 text-base font-normal text-bgPaper hover:bg-[#ffffff1a]'
-                }
-              >
-                <VscTools className="text-2xl" />
-              </NavLink>
-            </li>
+
+          {contractionMenuTabData.map((menu) => {
+            return (
+              <ContractionMenuTab
+                key={menu.id}
+                connect={menu.to}
+                activeClassName={menu.activeClassName}
+                icon={menu.icon}
+                content={menu.content}
+              />
+            )
+          })}
+          {usersInfo.isEquipmentControl && (
+            <ContractionMenuTab
+              connect="/adminMapping"
+              activeClassName="activeDetailIcon"
+              icon={<VscTools className="text-2xl" />}
+              content={null}
+            />
           )}
         </ul>
       </div>

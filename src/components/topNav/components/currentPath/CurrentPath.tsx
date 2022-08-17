@@ -1,17 +1,14 @@
-import { useState, useEffect } from 'react'
+import { observer } from 'mobx-react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
 import useStore from '../../../../useStore'
 
-const CurrentPath = () => {
+const CurrentPath = observer(() => {
   const { pathNumbers } = useStore()
-  const { equipmentNumber } = pathNumbers
 
   const location = useLocation()
   const pathData = location.pathname.slice(1)
-
-  const [frontPathName, setFrontPathName] = useState(pathData)
-  const [midPathName, setMidPathName] = useState(pathData)
 
   const pathValidator = {
     home: pathData.indexOf('home') !== -1,
@@ -33,54 +30,57 @@ const CurrentPath = () => {
       adminMapping,
       adminHistory,
     } = pathValidator
+
     if (home) {
-      setFrontPathName('Home')
+      pathNumbers.setFrontPathName('Home')
     } else if (equipmentDetail) {
-      setFrontPathName('Equipment')
-      setMidPathName('List')
+      pathNumbers.setFrontPathName('Equipment')
+      pathNumbers.setMidPathName('List')
     } else if (equipmentList) {
-      setFrontPathName('Equipment')
-      setMidPathName('List')
+      pathNumbers.setFrontPathName('Equipment')
+      pathNumbers.setMidPathName('List')
     } else if (deviceDetail) {
-      setFrontPathName('Device')
-      setMidPathName('List')
+      pathNumbers.setFrontPathName('Device')
+      pathNumbers.setMidPathName('List')
     } else if (deviceList) {
-      setFrontPathName('Device')
-      setMidPathName('List')
+      pathNumbers.setFrontPathName('Device')
+      pathNumbers.setMidPathName('List')
     } else if (adminMapping) {
-      setFrontPathName('Admin')
-      setMidPathName('Mapping')
+      pathNumbers.setFrontPathName('Admin')
+      pathNumbers.setMidPathName('Mapping')
     } else if (adminHistory) {
-      setFrontPathName('Admin')
-      setMidPathName('History')
+      pathNumbers.setFrontPathName('Admin')
+      pathNumbers.setMidPathName('History')
     }
   }
 
   useEffect(() => {
+    pathNumbers.setFrontPathName(pathData)
+    pathNumbers.setMidPathName(pathData)
     handlePathName()
   }, [pathData])
 
   return (
     <>
       <span className="mr-2 cursor-default text-[#BAC7D5]">&gt;</span>
-      <span className="cursor-default text-xl">{frontPathName}</span>
+      <span className="cursor-default text-xl">{pathNumbers.frontPathName}</span>
       {!pathValidator.home && (
         <>
           <span className="mx-2 cursor-default text-[#BAC7D5]">&gt;</span>
-          <span className="cursor-default text-xl">{midPathName}</span>
+          <span className="cursor-default text-xl">{pathNumbers.midPathName}</span>
           {(!pathValidator.equipmentList || pathValidator.equipmentDetail) &&
             (!pathValidator.deviceList || pathValidator.deviceDetail) &&
             !pathValidator.adminMapping &&
             !pathValidator.adminHistory && (
               <>
                 <span className="mx-2 cursor-default text-[#BAC7D5]">&gt;</span>
-                <span className="cursor-default text-xl">{equipmentNumber}</span>
+                <span className="cursor-default text-xl">{pathNumbers.equipmentNumber}</span>
               </>
             )}
         </>
       )}
     </>
   )
-}
+})
 
 export default CurrentPath
