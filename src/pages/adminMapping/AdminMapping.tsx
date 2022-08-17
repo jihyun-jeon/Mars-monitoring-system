@@ -72,7 +72,6 @@ const AdminMapping = observer(() => {
           Authorization: `${localStorage.getItem('accessToken')}`,
         },
       })
-      // response = await axios.get(`/data/adminMappingEquipment.json`)
       listDatas.setAdminMappingEquipmentListData(response.data)
       listDatas.setAdminMappingDeviceListData(response.data)
       setIsLoading(false)
@@ -154,8 +153,8 @@ const AdminMapping = observer(() => {
 
   return (
     <>
-      <div className="listWrapper h-screen overflow-y-scroll">
-        <div className="my-4 flex items-center justify-end">
+      <div className="h-screen overflow-y-scroll listWrapper">
+        <div className="flex items-center justify-end my-4">
           <p className="mr-4 text-xl">Please select the Equipment and Device</p>
           <button
             onClick={requestToServerMatching}
@@ -164,7 +163,7 @@ const AdminMapping = observer(() => {
             Mapping
           </button>
         </div>
-        <div className="listWrapper flex gap-4">
+        <div className="flex gap-4 listWrapper">
           <div className="w-1/2 bg-bgDefault ">
             <EquipmentMenu />
             <EquipmentMappingList
