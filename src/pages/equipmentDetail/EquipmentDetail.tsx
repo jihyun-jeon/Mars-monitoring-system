@@ -43,21 +43,21 @@ const EquipmentDetail = observer(() => {
   })
 
   const center = useMemo(() => ({ lat: 24.983367, lng: 51.170926 }), [])
-  // useEffect(() => {
-  //   fetch(`/data/equipmentDetail.json`)
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       detailDatas.setEquipment(result)
-  //     })
-  // }, [])
-
   useEffect(() => {
-    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
+    fetch(`/data/equipmentDetail.json`)
       .then((res) => res.json())
       .then((result) => {
         detailDatas.setEquipment(result.equipment)
       })
   }, [])
+
+  // useEffect(() => {
+  //   fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       detailDatas.setEquipment(result.equipment)
+  //     })
+  // }, [])
 
   const unMatchRequest = () => {
     fetch(`${SERVER_ADDRESS}equipment/match/delete?equipment_id=${id}`, {
@@ -203,6 +203,6 @@ const mapData = [
 const CardTitle = [
   { equipmentCategory: 'Equipment' },
   { equipmentType: 'Type' },
-  { qr_code: 'Qr code' },
+  { qrCode: 'Qr code' },
   { isPower: 'Power' },
 ]

@@ -67,12 +67,12 @@ const AdminMapping = observer(() => {
   const requestToServerListDatas = async () => {
     let response
     try {
-      // response = await axios.get(`${SERVER_ADDRESS}equipment/match/list`, {
-      //   headers: {
-      //     Authorization: `${localStorage.getItem('accessToken')}`,
-      //   },
-      // })
-      response = await axios.get(`/data/adminMappingEquipment.json`)
+      response = await axios.get(`${SERVER_ADDRESS}equipment/match/list`, {
+        headers: {
+          Authorization: `${localStorage.getItem('accessToken')}`,
+        },
+      })
+      // response = await axios.get(`/data/adminMappingEquipment.json`)
       listDatas.setAdminMappingEquipmentListData(response.data)
       listDatas.setAdminMappingDeviceListData(response.data)
       setIsLoading(false)
