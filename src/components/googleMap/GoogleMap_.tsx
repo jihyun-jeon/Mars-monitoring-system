@@ -115,7 +115,7 @@ const GoogleMap_ = ({ mapData, mapType, center, mapOption, mapContainerStyle }: 
       {/* [4] 도면 배경이미지 렌더 */}
       {mapType && (
         <GroundOverlay
-          url="/public/imgs/LSPPlotPlanMain.png"
+          url="/public/imgs/drawing.jpg"
           bounds={{
             north: 24.987664,
             south: 24.97817,

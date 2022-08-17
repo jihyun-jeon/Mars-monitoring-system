@@ -255,126 +255,134 @@ const ListBoard = observer(({ pathName, isLoading }: Props) => {
               <>
                 {pathCheckerOptionData()
                   .results.slice(offset, offset + limit)
-                  .map((data: any, idx: number) => (
-                    <tbody key={data.id} className="border">
-                      <tr
-                        className={
-                          checkedValue.includes(data.id.toString() as never)
-                            ? 'cursor-pointer bg-sky-100'
-                            : 'cursor-pointer'
-                        }
-                        onClick={() => {
-                          navigate(`/${pathName.slice(0, -4) + 'Detail'}/${data.id}`)
-                          if (pathName === 'equipmentList') {
-                            pathNumbers.setEquipmentNumber(data.originalId)
-                          } else {
-                            pathNumbers.setDeviceListNumber(data.serialNumber)
+                  .map((data: any, idx: number) => {
+                    return (
+                      <tbody key={data.id} className="border">
+                        <tr
+                          className={
+                            checkedValue.includes(data.id.toString() as never)
+                              ? 'cursor-pointer bg-sky-100'
+                              : 'cursor-pointer'
                           }
-                        }}
-                      >
-                        {(() => {
-                          if (pathName === 'equipmentList')
-                            return (
-                              <>
-                                <td className="relative py-1.5 text-center">
-                                  {data.originalId}
-                                  {isEquipmentControl && (
-                                    <label
-                                      htmlFor={`1${idx}`}
-                                      className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <input
-                                        id={`1${idx}`}
-                                        onChange={checkHandler}
-                                        value={data.id}
-                                        type="checkbox"
-                                        className="checkCursor"
-                                      />
-                                    </label>
-                                  )}
-                                </td>
-                                <td className="py-1.5 text-center">{data.equipmentType}</td>
-                                <td className="py-1.5 text-center">{data.company}</td>
-                                <td className="py-1.5 text-center">
-                                  {data.driver[0]?.driver_name ? data.driver[0]?.driver_name : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.deviceMatched[0]?.isMatched
-                                    ? data.deviceStatus[0]?.battery.slice(0, -3) + '%'
-                                    : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.deviceMatched[0]?.isMatched ? 'Matched' : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.deviceMatched[0]?.isMatched
-                                    ? data.deviceStatus[0]?.statusContent
-                                    : '-'}
-                                </td>
-                                <td className="flex justify-center py-1.5 text-center text-xl">
-                                  {data.deviceMatched[0]?.isMatched ? (
-                                    data.isPower ? (
+                          onClick={() => {
+                            navigate(`/${pathName.slice(0, -4) + 'Detail'}/${data.id}`)
+                            if (pathName === 'equipmentList') {
+                              pathNumbers.setEquipmentNumber(data.originalId)
+                            } else {
+                              pathNumbers.setDeviceListNumber(data.serialNumber)
+                            }
+                          }}
+                        >
+                          {(() => {
+                            if (pathName === 'equipmentList')
+                              return (
+                                <>
+                                  <td className="relative py-1.5 text-center">
+                                    {data.originalId}
+                                    {isEquipmentControl && (
+                                      <label
+                                        htmlFor={`1${idx}`}
+                                        className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <input
+                                          id={`1${idx}`}
+                                          onChange={checkHandler}
+                                          value={data.id}
+                                          type="checkbox"
+                                          className="checkCursor"
+                                        />
+                                      </label>
+                                    )}
+                                  </td>
+                                  <td className="py-1.5 text-center">{data.equipmentType}</td>
+                                  <td className="py-1.5 text-center">{data.company}</td>
+                                  <td className="py-1.5 text-center">
+                                    {data.driver[0]?.driver_name
+                                      ? data.driver[0]?.driver_name
+                                      : '-'}
+                                  </td>
+                                  <td className="py-1.5 text-center">
+                                    {data.deviceMatched[0]?.isMatched
+                                      ? data.deviceStatus[0]?.battery.slice(0, -3) + '%'
+                                      : '-'}
+                                  </td>
+                                  <td className="py-1.5 text-center">
+                                    {data.deviceMatched[0]?.isMatched ? 'Matched' : '-'}
+                                  </td>
+                                  <td className="py-1.5 text-center">
+                                    {data.deviceMatched[0]?.isMatched
+                                      ? data.deviceStatus[0]?.statusContent
+                                      : '-'}
+                                  </td>
+                                  <td className="flex justify-center py-1.5 text-center text-xl">
+                                    {data.deviceMatched[0]?.isMatched ? (
+                                      data.isPower ? (
+                                        <IoPowerSharp className="text-[#00d300]" />
+                                      ) : (
+                                        <IoPowerSharp className="text-[#ff0000]" />
+                                      )
+                                    ) : (
+                                      '-'
+                                    )}
+                                  </td>
+                                </>
+                              )
+                            if (pathName === 'deviceList')
+                              return (
+                                <>
+                                  <td className="relative py-1.5 text-center">
+                                    {data.serialNumber}
+                                    {isEquipmentControl && (
+                                      <label
+                                        htmlFor={`1${idx}`}
+                                        className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        <input
+                                          id={`1${idx}`}
+                                          onChange={checkHandler}
+                                          value={data.id}
+                                          type="checkbox"
+                                          className="checkCursor"
+                                        />
+                                      </label>
+                                    )}
+                                  </td>
+                                  <td className="flex justify-center py-1.5 text-center">
+                                    {data.status ? (
                                       <IoPowerSharp className="text-[#00d300]" />
                                     ) : (
                                       <IoPowerSharp className="text-[#ff0000]" />
-                                    )
-                                  ) : (
-                                    '-'
-                                  )}
-                                </td>
-                              </>
-                            )
-                          if (pathName === 'deviceList')
-                            return (
-                              <>
-                                <td className="relative py-1.5 text-center">
-                                  {data.serialNumber}
-                                  {isEquipmentControl && (
-                                    <label
-                                      htmlFor={`1${idx}`}
-                                      className="checkCursor absolute left-6 top-1/2 flex -translate-x-1/2 -translate-y-1/2 justify-center px-4 py-2.5"
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      <input
-                                        id={`1${idx}`}
-                                        onChange={checkHandler}
-                                        value={data.id}
-                                        type="checkbox"
-                                        className="checkCursor"
-                                      />
-                                    </label>
-                                  )}
-                                </td>
-                                <td className="flex justify-center py-1.5 text-center">
-                                  {data.status ? (
-                                    <IoPowerSharp className="text-[#00d300]" />
-                                  ) : (
-                                    <IoPowerSharp className="text-[#ff0000]" />
-                                  )}
-                                </td>
-                                <td className="py-1.5 text-center">{data.company}</td>
-                                <td className="py-1.5 text-center">
-                                  {data.battery.length > 0 ? data.battery.slice(0, -3) + '%' : '-'}
-                                </td>
-                                {/* 데이터 수정 대기 (Matched Status)  */}
-                                <td className="py-1.5 text-center">
-                                  {data.status ? 'Matched' : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.status
-                                    ? data.matchedEquipment[0]?.matchedEquipmentCategory
-                                    : '-'}
-                                </td>
-                                <td className="py-1.5 text-center">
-                                  {data.status ? data.matchedEquipment[0]?.matchedEquipmentId : '-'}
-                                </td>
-                              </>
-                            )
-                        })()}
-                      </tr>
-                    </tbody>
-                  ))}
+                                    )}
+                                  </td>
+                                  <td className="py-1.5 text-center">{data.company}</td>
+                                  <td className="py-1.5 text-center">
+                                    {data.battery.length > 0
+                                      ? data.battery.slice(0, -3) + '%'
+                                      : '-'}
+                                  </td>
+                                  {/* 데이터 수정 대기 (Matched Status)  */}
+                                  <td className="py-1.5 text-center">
+                                    {data.matchedStatus ? 'Matched' : '-'}
+                                  </td>
+                                  <td className="py-1.5 text-center">
+                                    {data.status
+                                      ? data.matchedEquipment[0]?.matchedEquipmentCategory
+                                      : '-'}
+                                  </td>
+                                  <td className="py-1.5 text-center">
+                                    {data.status
+                                      ? data.matchedEquipment[0]?.matchedEquipmentId
+                                      : '-'}
+                                  </td>
+                                </>
+                              )
+                          })()}
+                        </tr>
+                      </tbody>
+                    )
+                  })}
               </>
             )
           if (pathName === 'adminHistory')

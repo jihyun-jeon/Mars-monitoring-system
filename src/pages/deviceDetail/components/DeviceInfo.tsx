@@ -16,8 +16,6 @@ const DetailInfo = observer(({ setOnModal }) => {
   } = useStore()
   const { id } = useParams()
 
-  console.log(toJS(deviceData))
-
   const equipId = deviceData?.matchedEquipment[0]?.id
 
   const unMatchRequest = async () => {

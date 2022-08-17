@@ -7,14 +7,16 @@ type LogoutModalProps = {
 }
 
 const LogoutModal = ({ checkLogoutOnModal }: LogoutModalProps) => {
-  const { usersInfo } = useStore()
+  const { usersInfo, isTopNavIsToggle } = useStore()
 
   const navigate = useNavigate()
 
   const logout = () => {
     usersInfo.removeUserToken()
+    isTopNavIsToggle.setIsCheckLogout(false)
     navigate('/')
   }
+
   return (
     <div>
       <div
