@@ -1,107 +1,113 @@
-import axios from 'axios'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { FcHighPriority, FcOk } from 'react-icons/fc'
-import ReactLoading from 'react-loading'
 
 import AppContext from '../../../../AppContext'
-import { SERVER_ADDRESS } from '../../../../config'
+import { instance } from '../../../../config'
 import useStore from '../../../../useStore'
 
 import './AlarmModal.css'
 
+type AlarmMessageData = {
+  deviceSerialNumber: string
+  alert: string
+  date: string
+  id: number
+}
+
 const AlarmModal = observer(() => {
-  const { usersInfo, listDatas } = useStore()
+  const { listDatas, isTopNavIsToggle, messageId } = useStore()
 
   const appContext = useContext(AppContext)
 
-  const [messageSendId, setMessageSendId] = useState('')
+  const messageData = toJS(listDatas.alarmData)
 
-  const messageData = toJS(listDatas.alarmData.result)
+  const requestToServerDeleteMessage = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    const { value } = event.target as HTMLButtonElement
+    messageId.setMessageSendId(value)
 
-  const alarmCombineData = messageData.rowBattery.concat(messageData.networkError)
+    const getAddress = 'user/alert'
+    const deleteAddress = `user/alert/delete?alert_id=${messageId.messageSendId}`
 
-  const requestToServerDeleteId = async () => {
-    const getAddress = `${SERVER_ADDRESS}user/alert`
-    const deleteAddress = `${SERVER_ADDRESS}user/alert/delete?alert_id=${messageSendId}`
-    let response: any
     try {
-      await axios(deleteAddress, {
+      await instance(deleteAddress, {
         method: 'delete',
         headers: {
           Authorization: `${localStorage.getItem('accessToken')}`,
         },
       })
-      response = await axios.get(getAddress, {
+      const userAlarmData = await instance(getAddress, {
+        method: 'get',
         headers: {
           Authorization: `${localStorage.getItem('accessToken')}`,
         },
       })
-      setMessageSendId('')
-      listDatas.setAlarmData(response.data)
+      messageId.setMessageSendId('')
+      listDatas.setAlarmData(
+        userAlarmData.data.result.rowBattery.concat(userAlarmData.data.result.networkError),
+      )
       appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
       appContext.setToastMessage(['Complete Deleted'])
-    } catch (error: any) {
-      if (error.response) {
+    } catch (error) {
+      if (error) {
         appContext.setToastIcon([<FcHighPriority key="1" className="text-2xl" />])
         appContext.setToastMessage(['Deletion Failed'])
       } else {
         appContext.setToastIcon([<FcHighPriority key="1" className="text-2xl" />])
-        appContext.setToastMessage(['Request Error'])
+        appContext.setToastMessage(['Lost connection to server'])
       }
     }
-  }
-
-  const readingId = async (event: any) => {
-    const { value } = event.target
-    setMessageSendId(value)
-    requestToServerDeleteId()
-  }
-
-  console.log(messageSendId)
-
-  if (usersInfo.isAlarmData) {
-    return (
-      <div className="fixed top-0 left-0 h-screen w-screen bg-slate-200 opacity-60">
-        <ReactLoading
-          width={'10%'}
-          height={'1%'}
-          color={'#036DB7'}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
-      </div>
-    )
   }
 
   return (
     <div className="alarmModalWrapper absolute top-20 right-0 z-40 h-[30rem] w-[26rem] overflow-y-scroll border-2 bg-white">
       <div className="flex h-[96px] items-center justify-between bg-primary px-12">
-        <div className="text-xl text-bgPaper">전체 알림</div>
+        <div className="text-xl font-bold text-bgPaper">전체 알림</div>
       </div>
-      {alarmCombineData.map((data: any, idx: number) => (
-        <div
-          key={idx}
-          className="flex h-[96px] items-center justify-between border-b-2 bg-bgPaper px-8 last:border-b-0"
-        >
-          <div>
-            <span className="mr-2 text-lg">{data.deviceSerialNumber}</span>
-            <span className="text-lg">{`: ${data.alert}`}</span>
-          </div>
-          <div>
-            <span className="mr-2 text-sm text-[#888888]">{data.date.slice(0, -13)}</span>
-          </div>
-          <button onClick={readingId} value={data.id}>
-            X
-          </button>
-        </div>
-      ))}
-      {/* data 유무에 따른 boolean 값 */}
-      {!alarmCombineData.length && (
-        <div className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 text-lg font-semibold text-[#C4C4C4]">
-          No Data
-        </div>
-      )}
+      {(() => {
+        if (isTopNavIsToggle.isAlarmLoadingToggle) {
+          return (
+            <div className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 text-lg font-semibold text-[#C4C4C4]">
+              Lost connection to server
+            </div>
+          )
+        }
+
+        if (!messageData.length) {
+          return (
+            <div className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 text-lg font-semibold text-[#C4C4C4]">
+              No Data
+            </div>
+          )
+        }
+
+        if (messageData.length) {
+          return (
+            <>
+              {messageData.map((data: AlarmMessageData) => (
+                <div
+                  key={data.id}
+                  className="flex h-[96px] items-center justify-between border-b-2 bg-bgPaper px-8 last:border-b-0"
+                >
+                  <div>
+                    <span className="mr-2 text-lg">{data.deviceSerialNumber}</span>
+                    <span className="text-lg">{`${data.alert}`}</span>
+                  </div>
+                  <div>
+                    <span className="mr-2 text-sm text-[#888888]">{data.date.slice(0, -13)}</span>
+                  </div>
+                  <button onClick={requestToServerDeleteMessage} value={data.id}>
+                    X
+                  </button>
+                </div>
+              ))}
+            </>
+          )
+        }
+      })()}
     </div>
   )
 })
