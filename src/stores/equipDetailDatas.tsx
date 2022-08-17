@@ -1,11 +1,11 @@
 import { observable } from 'mobx'
 
-interface DetailDatas {
+interface DetailDatasType {
   equipment: null | Equipment
   setEquipment: (data: Equipment) => void
 }
 
-const detailDatas = observable<DetailDatas>({
+const equipDetailDatas = observable<DetailDatasType>({
   equipment: null,
 
   setEquipment(data: Equipment) {
@@ -13,7 +13,7 @@ const detailDatas = observable<DetailDatas>({
   },
 })
 
-export { detailDatas }
+export { equipDetailDatas }
 
 interface Company {
   id: number

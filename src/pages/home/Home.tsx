@@ -1,9 +1,11 @@
 import { useLoadScript } from '@react-google-maps/api'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { FcOk, FcHighPriority } from 'react-icons/fc'
 
+import AppContext from '../../AppContext'
 import { SERVER_ADDRESS } from '../../config'
-import AlarmData from './components/alarmData/AlarmData'
+import useStore from '../../useStore'
 import Map from './components/Map'
 
 interface ForcastData {
@@ -28,6 +30,20 @@ const Home = () => {
   const [homeData, setHomeData] = useState<any | undefined>()
   const [mapData, setMapData] = useState<(any | never)[]>([])
   const [weatherData, setWeatherData] = useState<ForcastData>()
+
+  const appContext = useContext(AppContext)
+  const { usersInfo } = useStore()
+
+  const hasToken = useRef<string | null>()
+  hasToken.current = usersInfo._userToken
+
+  useEffect(() => {
+    if (hasToken.current) {
+      appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
+      appContext.setToastMessage(['Login success'])
+      hasToken.current = null
+    }
+  }, [])
 
   const myKey = import.meta.env.VITE_WEATHER_KEY
   const mapKey = import.meta.env.VITE_GOOGLE_MAP_KEY
@@ -218,7 +234,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <AlarmData />
     </>
   )
 }

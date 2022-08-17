@@ -1,5 +1,4 @@
 import { useLoadScript } from '@react-google-maps/api'
-import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 import { useEffect, useState, useMemo } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
@@ -21,19 +20,11 @@ interface onModalType {
 }
 
 const EquipmentDetail = observer(() => {
-  const { detailDatas, usersInfo } = useStore()
+  const { equipDetailDatas, usersInfo } = useStore()
+  const { equipment } = equipDetailDatas
+
   const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
-
-  const { equipment } = detailDatas
   const { id } = useParams()
-
-  // const someData = equipment && [
-  //   equipment.id,
-  //   equipment.equipmentCategory,
-  //   true,
-  //   equipment.device[0].latitude,
-  //   equipment.device[0].longitude,
-  // ]
 
   const { _isEquipmentControl } = usersInfo
   const mapKey = import.meta.env.VITE_GOOGLE_MAP_KEY
@@ -43,29 +34,27 @@ const EquipmentDetail = observer(() => {
   })
 
   const center = useMemo(() => ({ lat: 24.983367, lng: 51.170926 }), [])
+
   useEffect(() => {
-    fetch(`/data/equipmentDetail.json`)
+    // fetch(`/data/equipmentDetail.json`)
+    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
       .then((res) => res.json())
       .then((result) => {
-        detailDatas.setEquipment(result.equipment)
+        equipDetailDatas.setEquipment(result.equipment)
       })
   }, [])
 
-  // useEffect(() => {
-  //   fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       detailDatas.setEquipment(result.equipment)
-  //     })
-  // }, [])
-
-  const unMatchRequest = () => {
-    fetch(`${SERVER_ADDRESS}equipment/match/delete?equipment_id=${id}`, {
+  const unMatchRequest = async () => {
+    await fetch(`${SERVER_ADDRESS}equipment/match/delete?equipment_id=${id}`, {
       method: 'DELETE',
       headers: { Authorization: localStorage.getItem('accessToken') },
     })
+
+    await fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`) // 0 1 2
       .then((res) => res.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        equipDetailDatas.setEquipment(result.equipment)
+      })
   }
 
   return (

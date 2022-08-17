@@ -28,7 +28,7 @@ const MakeInput = ({ id, label, value, style, type = 'text', onChange }: MakeInp
         type={type}
         lang="ja"
         id={id}
-        maxLength="10"
+        maxLength={10}
         placeholder="Within 10 characters"
         className={`${style} rounded-md border-2 pt-1 pl-2`}
         onChange={(e) => {

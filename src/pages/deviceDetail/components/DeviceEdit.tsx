@@ -1,10 +1,24 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FcOk } from 'react-icons/fc'
 
 import AppContext from '../../../AppContext'
+import MakeInput from '../../../components/editBox/MakeInput'
+import MakeSelectBox from '../../../components/editBox/MakeSelectBox'
+import { SERVER_ADDRESS } from '../../../config'
+import useStore from '../../../useStore'
 
 const DeviceEdit = ({ setOnModal }) => {
   const appContext = useContext(AppContext)
+
+  const { deviceDetailData } = useStore()
+  const { deviceData } = deviceDetailData
+  const pathId = deviceData?.id
+
+  const [putData, setPutData] = useState({
+    company_id: 1,
+    serial_number: deviceData?.serialNumber,
+    qr_code: deviceData?.qrCode,
+  })
 
   return (
     <div className="relative h-[20rem] w-[55rem] rounded-lg  bg-white px-16 pt-5">
@@ -12,70 +26,30 @@ const DeviceEdit = ({ setOnModal }) => {
 
       <div className="mt-10 flex flex-col px-10">
         <div className="mb-10 flex justify-between">
-          {/* <label className="mb-2 flex w-44 flex-col">
-            <span className=" ">Plate Number</span>
-            <select className="rounded-md border-2">
-              <option>DUMMY64</option>
-              <option>DUMMY64</option>
-            </select>
-          </label> */}
+          <MakeInput
+            id="serial_number"
+            label="Serial Number"
+            value={putData.serial_number}
+            onChange={(value) => setPutData((prev) => ({ ...prev, serial_number: value }))}
+          />
 
-          {/* <label className="mb-2 flex  w-44 flex-col ">
-            Manufacture Date
-            <input type="text" className="rounded-md border-2 pl-2 " value="2022-04-26" />
-          </label> */}
+          <MakeInput
+            id="qr_code"
+            label="QR Code"
+            value={putData.qr_code}
+            onChange={(value) => setPutData((prev) => ({ ...prev, qr_code: value }))}
+          />
 
-          {/* <label className="mb-2 flex  w-44 flex-col">
-            Capacity
-            <div>
-              <select className="w-1/2 rounded-md border-2">
-                <option>100</option>
-                <option>100</option>
-              </select>
-              <select className="w-1/2 rounded-md border-2">
-                <option>M3</option>
-                <option>M3</option>
-              </select>
-            </div>
-          </label> */}
-
-          {/* <label className="mb-2 flex  w-44 flex-col">
-            Equipment
-            <select className="rounded-md border-2">
-              <option>Drill machine</option>
-              <option>Drill machine</option>
-            </select>
-          </label>*/}
-        </div>
-
-        <div className="mb-10 flex justify-between">
-          <label className="flex w-44 flex-col pb-5 font-semibold">
-            Serial Number
-            <input type="text" className="border-1 mt-2 border" />
-          </label>
-
-          <label className="mb-2 flex w-44 flex-col font-semibold">
-            QR Code
-            <input type="text" className="border-1 mt-2 border" />
-          </label>
-
-          <label className="mb-2 flex w-44 flex-col font-semibold">
-            Company
-            <select className="rounded-md border-2">
-              <option>AAE</option>
-              <option>SECL</option>
-            </select>
-          </label>
-
-          {/* <label className="mb-2 flex  w-44 flex-col">
-            Maintenance_id?
-            <select className="rounded-md border-2">
-              <option>1</option>
-              <option>1</option>
-            </select>
-          </label> */}
+          <MakeSelectBox
+            list={CompanyValueArr}
+            value={putData.company_id}
+            label={'Company'}
+            id={'company_id'}
+            onChange={(value) => setPutData((prev) => ({ ...prev, company_id: value.value }))}
+          />
         </div>
       </div>
+
       <div className="absolute bottom-0 left-0 w-full">
         <button
           type="button"
@@ -87,8 +61,23 @@ const DeviceEdit = ({ setOnModal }) => {
         <button
           type="button"
           className="h-10 w-1/2  bg-primary"
-          onClick={() => {
-            appContext.setToastMessage(['수정이 완료되었습니다.'])
+          onClick={async () => {
+            // console.log(putData)
+            // <patch>
+            await fetch(`${SERVER_ADDRESS}device/detail/${pathId}`, {
+              method: 'PATCH',
+              headers: { Authorization: localStorage.getItem('accessToken') },
+              body: JSON.stringify(putData),
+            })
+
+            // <get요청>
+            await fetch(`${SERVER_ADDRESS}device/detail/${pathId}`)
+              .then((res) => res.json())
+              .then((result) => {
+                deviceDetailData.setDeviceData(result.results)
+              })
+
+            appContext.setToastMessage(['Completed Edit'])
             appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
           }}
@@ -101,3 +90,8 @@ const DeviceEdit = ({ setOnModal }) => {
 }
 
 export default DeviceEdit
+
+const CompanyValueArr = [
+  { text: 'AAE', value: 1 },
+  { text: 'SECL', value: 2 },
+]

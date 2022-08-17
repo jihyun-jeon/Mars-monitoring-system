@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router'
 
-import DetailInfo from '../../components/detailInfo/DetailInfo'
 import DetailList from '../../components/detailList/DetailList'
 import Modal from '../../components/modal/modal'
+import { SERVER_ADDRESS } from '../../config'
 import useStore from '../../useStore'
-import DeviceEdit from '../deviceDetail/components/DeviceEdit'
+import DetailInfo from './components/DeviceInfo'
 
 interface onModalType {
   clicked: boolean
@@ -14,22 +14,27 @@ interface onModalType {
 }
 
 const DeviceDetail = observer(() => {
-  const [deviceData, setDeviceData] = useState({})
   const [onModal, setOnModal] = useState<onModalType>({ clicked: false, childrun: null })
 
-  const { usersInfo } = useStore()
+  const { deviceDetailData } = useStore()
+  const { id } = useParams()
 
-  // useEffect(() => {
-  //   fetch('/public/data/equipment_detail.json')
-  //     .then((res) => res.json())
-  //     .then((result) => setDeviceData(result))
-  // }, [])
+  useEffect(() => {
+    // fetch('/public/data/deviceDetail/gps_tracker.json')
+    fetch(`${SERVER_ADDRESS}device/detail/${id}`)
+      .then((res) => res.json())
+      .then((result) => {
+        // console.log(result)
+        deviceDetailData.setDeviceData(result.results)
+      })
+  }, [])
 
   return (
     <div className="h-screen w-full overflow-scroll px-3 pt-5">
       <h1 className="ml-10 mb-[-75px] text-4xl">Device Detail</h1>
-      <DetailInfo usersInfo={usersInfo} setOnModal={setOnModal} EditComp={DeviceEdit} />
-      <DetailList usersInfo={usersInfo} setOnModal={setOnModal} fatherComp={'deviceDetail'} />
+      <DetailInfo setOnModal={setOnModal} />
+      {deviceDetailData.deviceData && <DetailList setOnModal={setOnModal} />}
+
       {onModal.clicked && <Modal contents={onModal.childrun} />}
     </div>
   )

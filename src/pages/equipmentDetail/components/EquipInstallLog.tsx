@@ -1,10 +1,11 @@
+import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 
 import useStore from '../../../useStore'
 
 const EquipInstallLog = observer(() => {
-  const { detailDatas } = useStore()
-  const { equipment } = detailDatas
+  const { equipDetailDatas } = useStore()
+  const { equipment } = equipDetailDatas
 
   return (
     <div>
@@ -26,9 +27,9 @@ const EquipInstallLog = observer(() => {
             })}
           </tr>
           {equipment &&
-            equipment.matched_history.map((data) => {
+            equipment.matched_history.map((data, idx) => {
               return (
-                <tr key={data.id} id={data.id}>
+                <tr key={idx} id={data.id}>
                   <td className="pl-4"></td>
                   <td className="py-3 pl-3">{data.lastLogTime}</td>
                   <td className="py-3 pl-3">{data.serialNumber}</td>
