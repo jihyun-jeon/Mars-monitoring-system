@@ -6,10 +6,10 @@ import { enteredUserInfo } from './stores/login/enteredUserInfo'
 import { pwVisibilityToggle } from './stores/login/pwVisibilityToggle'
 import { validMessageToggle } from './stores/login/validMessageToggle'
 import { mappingFilterOption } from './stores/mappingFilterOption'
-import { pathNumbers } from './stores/pathNumbers'
 import { isSideNavToggle } from './stores/sideNav/isSideNavToggle'
 import { isTopNavIsToggle } from './stores/topNav/isTopNavIsToggle'
 import { messageId } from './stores/topNav/messageId'
+import { pathNumbers } from './stores/topNav/pathNumbers'
 import { usersInfo } from './stores/usersInfo'
 
 const useStore = () => {
