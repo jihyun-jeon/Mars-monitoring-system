@@ -8,28 +8,26 @@ import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
 const EquipRepairLog = observer(({ setOnModal }) => {
-  const { detailDatas, usersInfo } = useStore()
-  const { equipment } = detailDatas
+  const { equipDetailDatas, usersInfo } = useStore()
+  const { equipment } = equipDetailDatas
 
   const { id } = useParams()
-  // Math.ceil(arr.length / 10);
   const pageNum = Math.ceil(equipment?.repaired_history.length / 10)
-  console.log(pageNum)
 
-  const deleteRequest = (deleteLogId) => {
-    fetch(`${SERVER_ADDRESS}equipment/${id}/delete`, {
+  const deleteRequest = async (deleteLogId) => {
+    await fetch(`${SERVER_ADDRESS}equipment/${id}/delete`, {
       method: 'DELETE',
       headers: { Authorization: localStorage.getItem('accessToken') },
       body: JSON.stringify({
         history_id: deleteLogId,
       }),
     })
-      .then((res) => res.json())
-      .then((result) => console.log(result))
+    // .then((res) => res.json())
+    // .then((result) => console.log(result))
     //<get요청>
-    fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
+    await fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
       .then((res) => res.json())
-      .then((result) => detailDatas.setEquipment(result.equipment))
+      .then((result) => equipDetailDatas.setEquipment(result.equipment))
   }
   return (
     <div>

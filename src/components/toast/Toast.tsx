@@ -32,7 +32,7 @@ const Toast = ({ toastMessage, setToastMessage, toastIcon, setToastIcon }: messa
   return (
     <div
       ref={divEl}
-      className="zIndex-1 transition-duration: 2000ms linear fixed top-[100px] right-10 z-50 flex w-[23rem] flex-row rounded-md bg-[#EEEEEE] py-4 px-4 align-middle text-base shadow-[1px_1px_10px_1px_rgba(0,0,0,0.34)] transition-all"
+      className="zIndex-1 transition-duration: 2000ms linear fixed top-[90px] right-5 z-50 flex w-[23rem] flex-row rounded-md bg-[#EEEEEE] py-3 px-4 align-middle text-base shadow-[1px_1px_10px_1px_rgba(0,0,0,0.34)] transition-all"
     >
       {toastIcon[0]}
       <span className="pl-4">{toastMessage[0]}</span>

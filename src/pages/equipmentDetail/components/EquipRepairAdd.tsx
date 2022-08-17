@@ -1,8 +1,7 @@
-import { toJS, values } from 'mobx'
 import { observer } from 'mobx-react'
 import { useContext, useState } from 'react'
-import { useParams } from 'react-router'
 import { FcOk } from 'react-icons/fc'
+import { useParams } from 'react-router'
 
 import AppContext from '../../../AppContext'
 import MakeInput from '../../../components/editBox/MakeInput'
@@ -11,7 +10,7 @@ import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
 const EquipLogAdd = observer(({ setOnModal }) => {
-  const { detailDatas } = useStore()
+  const { equipDetailDatas } = useStore()
   const appContext = useContext(AppContext)
   const { id } = useParams()
 
@@ -22,11 +21,9 @@ const EquipLogAdd = observer(({ setOnModal }) => {
     repaired_purpose_id: 1,
   })
 
-  console.log(newLog)
-
   return (
     <div className="relative h-[20rem] w-[60rem] rounded-lg  bg-white pt-5">
-      <h1 className="flexCenter pb-10 text-2xl"> Add Repair log</h1>
+      <h1 className="flexCenter pb-10 text-2xl"> Add Equipment Repair log</h1>
 
       <div className="mt-5 flex justify-center">
         <MakeInput
@@ -82,13 +79,13 @@ const EquipLogAdd = observer(({ setOnModal }) => {
         <button
           type="button"
           className="h-10 w-1/2  bg-primary"
-          onClick={() => {
-            appContext.setToastMessage(['등록이 완료되었습니다.'])
+          onClick={async () => {
+            appContext.setToastMessage(['registration completed'])
             appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
-            console.log(newLog)
+            // console.log(newLog)
             // < post요청  >
-            fetch(`${SERVER_ADDRESS}equipment/${id}/post`, {
+            await fetch(`${SERVER_ADDRESS}equipment/${id}/post`, {
               method: 'POST',
               headers: { Authorization: localStorage.getItem('accessToken') },
               body: JSON.stringify(newLog),
@@ -97,9 +94,9 @@ const EquipLogAdd = observer(({ setOnModal }) => {
               .then((result) => console.log(result))
 
             //<get요청>
-            fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
+            await fetch(`${SERVER_ADDRESS}equipment/${id}?offset=0`)
               .then((res) => res.json())
-              .then((result) => detailDatas.setEquipment(result.equipment))
+              .then((result) => equipDetailDatas.setEquipment(result.equipment))
           }}
         >
           Add

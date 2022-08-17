@@ -1,4 +1,3 @@
-import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 import { useContext, useState } from 'react'
 import { FcOk } from 'react-icons/fc'
@@ -10,11 +9,9 @@ import { SERVER_ADDRESS } from '../../../config'
 import useStore from '../../../useStore'
 
 const EquipEdit = observer(({ setOnModal }) => {
-  const { detailDatas } = useStore()
-  const { equipment } = detailDatas
+  const { equipDetailDatas } = useStore()
+  const { equipment } = equipDetailDatas
   const pathId = equipment?.id
-
-  console.log('Edit', toJS(equipment))
 
   const [putData, setPutData] = useState(
     equipment
@@ -38,6 +35,7 @@ const EquipEdit = observer(({ setOnModal }) => {
   )
 
   const appContext = useContext(AppContext)
+
   return (
     equipment && (
       <div className="relative h-[40rem] w-[80rem] rounded-lg  bg-white px-16 pt-5">
@@ -48,7 +46,7 @@ const EquipEdit = observer(({ setOnModal }) => {
             <MakeSelectBox
               id="equipment_category_id"
               label="Equipment"
-              list={equipmentCategorySelectboxList}
+              list={equipmentCategoryList}
               value={equipment.equipmentCategory.id}
               onChange={({ value }) => {
                 setPutData((prev) => ({ ...prev, equipment_category_id: value }))
@@ -173,24 +171,22 @@ const EquipEdit = observer(({ setOnModal }) => {
           <button
             type="button"
             className="h-10 w-1/2  bg-primary"
-            onClick={() => {
+            onClick={async () => {
               // console.log('putData', putData)
-              fetch(`${SERVER_ADDRESS}equipment/${pathId}/edit`, {
+              await fetch(`${SERVER_ADDRESS}equipment/${pathId}/edit`, {
                 method: 'PATCH',
                 headers: { Authorization: localStorage.getItem('accessToken') },
                 body: JSON.stringify(putData),
               })
-                .then((res) => res.json())
-                .then((result) => console.log(result))
 
               // // <get요청>
-              fetch(`${SERVER_ADDRESS}equipment/${pathId}?offset=0`)
+              await fetch(`${SERVER_ADDRESS}equipment/${pathId}?offset=0`)
                 .then((res) => res.json())
                 .then((result) => {
-                  console.log(result)
-                  detailDatas.setEquipment(result.equipment)
+                  equipDetailDatas.setEquipment(result.equipment)
                 })
-              appContext.setToastMessage(['수정이 완료되었습니다.'])
+
+              appContext.setToastMessage(['Edit Completed'])
               appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
               setOnModal({ clicked: false, content: '' })
             }}
@@ -205,7 +201,7 @@ const EquipEdit = observer(({ setOnModal }) => {
 
 export default EquipEdit
 
-const equipmentCategorySelectboxList = [
+const equipmentCategoryList = [
   { text: 'Crane', value: 1 },
   { text: 'Boring machine', value: 2 },
   { text: 'Drill machine', value: 3 },

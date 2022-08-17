@@ -1,30 +1,48 @@
-import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import DeviceInstallLog from '../../pages/deviceDetail/components/DeviceInstallLog'
+import DeviceRepairAdd from '../../pages/deviceDetail/components/DeviceRepairAdd'
 import DeviceRepairLog from '../../pages/deviceDetail/components/DeviceRepairLog'
+import DeviceReplaceAdd from '../../pages/deviceDetail/components/DeviceReplaceAdd'
 import DeviceReplaceLog from '../../pages/deviceDetail/components/DeviceReplaceLog'
 import EquipInstallLog from '../../pages/equipmentDetail/components/EquipInstallLog'
-import EquipLogAdd from '../../pages/equipmentDetail/components/EquipLogAdd'
+import EquipLogAdd from '../../pages/equipmentDetail/components/EquipRepairAdd'
 import EquipRepairLog from '../../pages/equipmentDetail/components/EquipRepairLog'
 import useStore from '../../useStore'
 
 const DetailList = observer(({ setOnModal }) => {
-  let [clicked, setClicked] = useState('0')
+  const [clickedTap, setClickedTap] = useState('0')
   const location = useLocation().pathname
-  const nowPage = location.includes('equipment')
   const nowPageName = location.split('/')[1]
 
   const { usersInfo } = useStore()
+
+  const AddBtnPopup = () => {
+    if (clickedTap === '0') {
+      nowPageName === 'equipmentDetail'
+        ? setOnModal({ clicked: true, childrun: <EquipLogAdd setOnModal={setOnModal} /> })
+        : setOnModal({
+            clicked: true,
+            childrun: <DeviceRepairAdd setOnModal={setOnModal} />,
+          })
+    }
+
+    if (clickedTap === '1') {
+      setOnModal({
+        clicked: true,
+        childrun: <DeviceReplaceAdd setOnModal={setOnModal} />,
+      })
+    }
+  }
 
   return (
     <div className="px-10">
       <div className="flex justify-between">
         <div className="flex">
           {titleArr.map((el, idx) => {
-            if (nowPage && idx === titleArr.length - 1) {
+            if (nowPageName === 'equipmentDetail' && idx === 1) {
               return
             }
             return (
@@ -32,11 +50,10 @@ const DetailList = observer(({ setOnModal }) => {
                 key={idx}
                 value={idx}
                 onClick={(e) => {
-                  clicked = `${(e.target as HTMLButtonElement).value}`
-                  setClicked(clicked)
+                  setClickedTap(`${(e.target as HTMLButtonElement).value}`)
                 }}
                 className={`${
-                  `${idx}` === clicked ? 'bg-[#EFF2F5]' : ''
+                  `${idx}` === clickedTap ? 'bg-[#EFF2F5]' : ''
                 } border-gray my-auto mx-0 rounded-t-lg border-[1px] px-8 py-4 text-lg`}
               >
                 {el}
@@ -44,38 +61,36 @@ const DetailList = observer(({ setOnModal }) => {
             )
           })}
         </div>
-        {toJS(usersInfo)._isEquipmentControl && (
+        {usersInfo._isEquipmentControl && (
           <button
             type="button"
             name="add"
-            disabled={clicked === '1'}
+            disabled={clickedTap === '2'}
             className={`mb-5 mr-2 h-10 w-32 rounded-lg ${
-              clicked === '1' ? 'cursor-not-allowed bg-blue-200' : 'bg-primary'
+              clickedTap === '2' ? 'cursor-not-allowed bg-blue-200' : 'bg-primary'
             } text-xl text-white`}
-            onClick={(e) => {
-              setOnModal({ clicked: true, childrun: <EquipLogAdd setOnModal={setOnModal} /> })
-            }}
+            onClick={AddBtnPopup}
           >
             Add
           </button>
         )}
       </div>
 
-      {/* {nowPageName === 'deviceDetail' && clicked === '0' ? (
-        <DeviceRepairLog setOnModal={setOnModal} />
-      ) : clicked === '1' ? (
-        <DeviceInstallLog />
-      ) : (
-        <DeviceReplaceLog setOnModal={setOnModal} />
-      )}
+      {clickedTap === '0' &&
+        (nowPageName === 'equipmentDetail' ? (
+          <EquipRepairLog setOnModal={setOnModal} />
+        ) : (
+          <DeviceRepairLog setOnModal={setOnModal} />
+        ))}
 
-      {nowPageName !== 'deviceDetail' &&
-        (clicked === '0' ? <EquipRepairLog setOnModal={setOnModal} /> : <EquipInstallLog />)} */}
-      {clicked === '0' ? <EquipRepairLog setOnModal={setOnModal} /> : <EquipInstallLog />}
+      {clickedTap === '1' && <DeviceReplaceLog setOnModal={setOnModal} />}
+
+      {clickedTap === '2' &&
+        (nowPageName === 'equipmentDetail' ? <EquipInstallLog /> : <DeviceInstallLog />)}
     </div>
   )
 })
 
 export default DetailList
 
-const titleArr = ['Repair', 'Install', 'Replace'] // index 1,2번끼리 순서 바꿔야 함
+const titleArr = ['Repair', 'Replace', 'Install']

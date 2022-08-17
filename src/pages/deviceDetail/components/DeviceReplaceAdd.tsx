@@ -1,87 +1,49 @@
-import { useContext } from 'react'
+import { observer } from 'mobx-react-lite'
+import { useContext, useState } from 'react'
 import { FcOk } from 'react-icons/fc'
+import { useParams } from 'react-router'
 
 import AppContext from '../../../AppContext'
+import MakeInput from '../../../components/editBox/MakeInput'
+import MakeSelectBox from '../../../components/editBox/MakeSelectBox'
+import { SERVER_ADDRESS } from '../../../config'
+import useStore from '../../../useStore'
 
-const DeviceReplaceAdd = ({ setOnModal }) => {
+const DeviceReplaceAdd = observer(({ setOnModal }) => {
   const appContext = useContext(AppContext)
+  const { id } = useParams()
+
+  const { deviceDetailData } = useStore()
+  const { deviceReplaceData } = deviceDetailData
+  const [newLog, setNewLog] = useState({
+    repaired_manager_id: '1',
+    date: '',
+  })
 
   return (
-    <div className="relative h-[34rem] w-[60rem] rounded-lg  bg-white px-16 pt-5">
-      <h1 className="flexCenter pb-10 text-2xl"> Device Replace log</h1>
+    <div className="relative h-[18rem] w-[40rem] rounded-lg  bg-white px-16 pt-5">
+      <h1 className="flexCenter pb-12 text-2xl">Add Device Replace log</h1>
 
-      <div className=" flex flex-col">
-        <div className="mb-10 flex justify-between">
-          <label className="mb-2 flex w-44 flex-col">
-            <span className=" ">Plate Number</span>
-            <select className="rounded-md border-2">
-              <option>DUMMY64</option>
-              <option>DUMMY64</option>
-            </select>
-          </label>
+      <div className="mb-10 flex justify-around">
+        <MakeInput
+          id={'date'}
+          label={'Date'}
+          value={newLog.date}
+          style={''}
+          type="date"
+          onChange={(value) => setNewLog((prev) => ({ ...prev, date: value }))}
+        />
 
-          <label className="mb-2 flex  w-44 flex-col ">
-            Manufacture Date
-            <input type="text" className="rounded-md border-2 pl-2 " value="2022-04-26" readOnly />
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            Capacity
-            <div>
-              <select className="w-1/2 rounded-md border-2">
-                <option className="bg-yellow-400">100</option>
-                <option>100</option>
-              </select>
-              <select className="w-1/2 rounded-md border-2">
-                <option>M3</option>
-                <option>M3</option>
-              </select>
-            </div>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            Equipment
-            <select className="rounded-md border-2">
-              <option>Drill machine</option>
-              <option>Drill machine</option>
-            </select>
-          </label>
-        </div>
-
-        <div className="mb-10 flex justify-between">
-          <label className="mb-2 flex  w-44 flex-col">
-            Type
-            <select className="rounded-md border-2">
-              <option>Crawler drill machine</option>
-              <option>Crawler drill machine</option>
-            </select>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            QR Code
-            <select className="rounded-md border-2">
-              <option>a</option>
-              <option>aa</option>
-            </select>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            Company
-            <select className="rounded-md border-2">
-              <option>Sed</option>
-              <option>Sed</option>
-            </select>
-          </label>
-
-          <label className="mb-2 flex  w-44 flex-col">
-            Maintenance_id?
-            <select className="rounded-md border-2">
-              <option>1</option>
-              <option>1</option>
-            </select>
-          </label>
-        </div>
+        <MakeSelectBox
+          list={ManagerList}
+          value={newLog.repaired_manager_id}
+          label={'Repaired Manager'}
+          style={''}
+          id={'repaired_manager_id'}
+          onChange={(value) => setNewLog((prev) => ({ ...prev, repaired_manager_id: value.value }))}
+        />
       </div>
+
       <div className="absolute bottom-0 left-0 w-full">
         <button
           type="button"
@@ -97,6 +59,24 @@ const DeviceReplaceAdd = ({ setOnModal }) => {
             appContext.setToastMessage(['등록이 완료되었습니다.'])
             appContext.setToastIcon([<FcOk key="1" className="text-2xl" />])
             setOnModal({ clicked: false, content: '' })
+            console.log('replace post', newLog)
+
+            // < post요청  >
+            fetch(`${SERVER_ADDRESS}device/battery/${id}`, {
+              method: 'POST',
+              headers: { Authorization: localStorage.getItem('accessToken') },
+              body: JSON.stringify(newLog),
+            })
+              .then((res) => res.json())
+              .then((result) => console.log(result))
+
+            //<get요청>
+            fetch(`${SERVER_ADDRESS}device/battery/list/${id}?order=latestUpdate`)
+              .then((res) => res.json())
+              .then((result) => {
+                console.log('post->get', result)
+                deviceDetailData.setDeviceReplaceData(result.results)
+              })
           }}
         >
           Add
@@ -104,6 +84,12 @@ const DeviceReplaceAdd = ({ setOnModal }) => {
       </div>
     </div>
   )
-}
+})
 
 export default DeviceReplaceAdd
+
+const ManagerList = [
+  { value: 1, text: 'Leonard' },
+  { value: 2, text: 'Martin' },
+  { value: 3, text: 'Paul' },
+]

@@ -9,7 +9,7 @@ interface MakeSelectBoxProp {
 
 const MakeSelectBox = ({ list, value, label, style, id, onChange }: MakeSelectBoxProp) => {
   const optionEl = list.map((item) => (
-    <option key={item.value} value={item.value} selected={value === item.value}>
+    <option key={item.value} value={item.value}>
       {item.text}
     </option>
   ))
@@ -22,9 +22,9 @@ const MakeSelectBox = ({ list, value, label, style, id, onChange }: MakeSelectBo
       <select
         name={id}
         id={id}
+        defaultValue={value}
         onChange={(e) => {
           const found = list.find(({ value }) => `${value}` === e.target.value) // value는 숫자고 e.target.value는 문자다
-          console.log(found)
 
           if (found) {
             onChange && onChange(found) // {}
