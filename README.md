@@ -41,7 +41,7 @@
     - Monitoring(Home) : Equipment, Device를 모니터링을 할 수 있습니다
       ✏︎ Equipment의 현재 위치 모니터링
       ✏︎ Device의 이상징후, 고장 및 정비에 대한 통계
-      ✏︎ 현장의 날씨 확인
+      ✏︎ 해당 지역에 대한 날씨 확인
     - Management(Detail) : Equipment Controller가 Equipment, Device를 관리할 수 있습니다
       ✏︎ Equipment, Device에 대한 전반적인 관리
       ✏︎ 수리, 교체, 설치 이력 관리
@@ -73,7 +73,7 @@
 
 2. Trello
 
-<img src=""/>
+<img src="https://user-images.githubusercontent.com/90183279/185532611-55df683d-4df3-4e8c-a0f0-c6028a1aae9d.png"/>
 
 Sprint 목표와 전반적인 업무 진행을 파악하기 위한 Tool로 Trello를 사용했습니다.
 
@@ -82,3 +82,20 @@ Sprint 목표와 전반적인 업무 진행을 파악하기 위한 Tool로 Trell
 - In progress : 현재 개발 중인 업무 티켓을 가리킵니다.
 - Discussion : 추가 기능 구현을 제외한 필수 기능을 구현한 티켓을 가리킵니다.
 - Done : merge가 완료되고 정상적으로 작동하는 기능을 가리킵니다.
+
+<br />
+
+3. Notion
+
+- 구현기록 : F/E, B/E 간의 request, response 전달, API End Point, 데이터 건의 및 공유를 위해 사용했습니다.
+  <img src="https://user-images.githubusercontent.com/90183279/185533039-d237f902-167a-4bf0-9498-c05bd7bbd8b5.png"/>
+- 회의록 : 매일 진행되는 회의를 기록했습니다.
+- 게시판
+  - F/E 구성원 간의 컨벤션을 관리했습니다.
+  - Response Data를 검증하였습니다.
+  - 재사용 컴포넌트를 공유하거나 Update를 관리했습니다.
+    <img src="https://user-images.githubusercontent.com/90183279/185535833-ecaf6250-4e29-4a0a-a8bc-ba19b970c60f.png"/>
+
+<br />
+
+4. Slack
