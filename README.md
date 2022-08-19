@@ -39,19 +39,29 @@
 
   - 전지현
     - Monitoring(Home) : Equipment, Device를 모니터링을 할 수 있습니다
+      <br />
       ✏︎ Equipment의 현재 위치 모니터링
+      <br />
       ✏︎ Device의 이상징후, 고장 및 정비에 대한 통계
+      <br />
       ✏︎ 해당 지역에 대한 날씨 확인
+      <br />
     - Management(Detail) : Equipment Controller가 Equipment, Device를 관리할 수 있습니다
+      <br />
       ✏︎ Equipment, Device에 대한 전반적인 관리
+      <br />
       ✏︎ 수리, 교체, 설치 이력 관리
+      <br />
   - 김민석
     - Sign-in
     - Navigation(Nav) : Equipment Controller가 담당 Device의 이상징후에 대한 알람을 받을 수 있도록 관리합니다.
     - Search(List) : Equipment, Device에 대한 메타 데이터를 조회할 수 있습니다.
     - Mapping : Equipment와 Device를 Matching 하는 페이지 입니다.
+      <br />
       ✏︎ Equipment와 Device를 Matching
+      <br />
       ✏︎ Equipment, Device의 초기 정보 등록
+      <br />
     - History(List) : Equipment, Device의 모든 이력을 조회할 수 있습니다.
 
 - [백엔드 github 링크](https://github.com/jiminnote/Mars_project)
@@ -73,9 +83,9 @@
 
 2. Trello
 
-<img src="https://user-images.githubusercontent.com/90183279/185532611-55df683d-4df3-4e8c-a0f0-c6028a1aae9d.png"/>
-
 Sprint 목표와 전반적인 업무 진행을 파악하기 위한 Tool로 Trello를 사용했습니다.
+
+<img src="https://user-images.githubusercontent.com/90183279/185532611-55df683d-4df3-4e8c-a0f0-c6028a1aae9d.png"/>
 
 - Backlog : 프로젝트 미팅을 하며 전체 업무를 기능별로 세분화하여 전체 티켓을 발행했습니다.
 - This Sprint : 일주일을 기준으로 진행해야 할 업무 티켓을 가리킵니다.
@@ -99,3 +109,8 @@ Sprint 목표와 전반적인 업무 진행을 파악하기 위한 Tool로 Trell
 <br />
 
 4. Slack
+
+간단한 요청사항이나 일정조율, API Server 주소 공유를 위해 사용하였습니다.
+<br />
+
+## ☀️ 구현 기능
