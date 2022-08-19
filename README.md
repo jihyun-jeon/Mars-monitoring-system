@@ -26,7 +26,7 @@
   - Equipment, Device 매칭
   - 각종 장비 수리이력 관리
 
-## ☀️ 개발 인원 및 기간, 기술 스택
+## ☀️ 개발 인원 및 기간
 
 - 개발기간: 2022/07/18 ~ 2022/08/11
 
@@ -38,20 +38,20 @@
 - 담당 파트
 
   - 전지현
-    - Home : Equipment, Device를 모니터링을 할 수 있습니다
+    - Monitoring(Home) : Equipment, Device를 모니터링을 할 수 있습니다
       - Equipment의 현재 위치 모니터링
       - Device의 이상징후, 고장 및 정비에 대한 통계
       - 현장의 날씨 확인
-    - Detail : Equipment Controller가 Equipment, Device를 관리할 수 있습니다
+    - Management(Detail) : Equipment Controller가 Equipment, Device를 관리할 수 있습니다
       - Equipment, Device에 대한 전반적인 관리
       - 수리, 교체, 설치 이력 관리
   - 김민석
     - Sign-in
-    - Nav : Equipment Controller가 담당 Device의 이상징후에 대한 알람을 받을 수 있도록 관리합니다
-    - List : Equipment, Device에 대한 메타 데이터를 조회하기 위한 페이지입니다
+    - Navigation(Nav) : Equipment Controller가 담당 Device의 이상징후에 대한 알람을 받을 수 있도록 관리합니다
+    - Search(List) : Equipment, Device에 대한 메타 데이터를 조회하기 위한 페이지입니다
     - Mapping : Equipment와 Device를 Matching 하는 페이지 입니다.
       - 부가적으로 Equipment, Device에 대한 등록을 할 수 있습니다.
-    - History : Equipment, Device의 모든 이력을 조회할 수 있습니다.
+    - History(List) : Equipment, Device의 모든 이력을 조회할 수 있습니다.
 
 - [백엔드 github 링크](https://github.com/jiminnote/Mars_project)
 
@@ -61,10 +61,6 @@
 
 <img src="https://img.shields.io/badge/react-61DAFB?style=flat-square&logo=react&logoColor=white"/> 
 <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white"/> 
-<br />
-상태관리 : <img src="https://img.shields.io/badge/MobX-FF9955?style=flat-square&logo=MobX&logoColor=white"/>
-<br />
-라우팅 : <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=flat-square&logo=ReactRouter&logoColor=white"/>
-<br />
-CSS : <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white"/>
-<br />
+<img src="https://img.shields.io/badge/MobX-FF9955?style=flat-square&logo=MobX&logoColor=white"/>
+<img src="https://img.shields.io/badge/ReactRouter-CA4245?style=flat-square&logo=ReactRouter&logoColor=white"/>
+<img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white"/>
